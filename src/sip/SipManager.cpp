@@ -248,6 +248,14 @@ void SipManager::hangupCall(int callId, int code)
     }
 }
 
+void SipManager::hangupAllCalls()
+{
+    QMutexLocker locker(&m_mutex);
+    for (auto *call : std::as_const(m_calls)) {
+        call->hangup();
+    }
+}
+
 void SipManager::holdCall(int callId)
 {
     SipCall *call = findCall(callId);

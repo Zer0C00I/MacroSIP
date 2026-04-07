@@ -9,6 +9,7 @@
 #include "models/Settings.h"
 #include "utils/CallHistoryStore.h"
 #include "utils/ContactStore.h"
+#include "headset/HeadsetManager.h"
 #include <QTabWidget>
 #include <QStatusBar>
 #include <QMenuBar>
@@ -31,6 +32,7 @@ MainWindow::MainWindow(QWidget *parent)
     setupTrayIcon();
     setupPersistence();
     setupSip();
+    setupHeadset();
     connectSignals();
 }
 
@@ -159,6 +161,11 @@ void MainWindow::onIncomingCall(int callId, const QString &from,
                                 const QString &name)
 {
     showRingingDialog(callId, name, from);
+
+    // Signal headset: ring LED on
+    if (m_headset != nullptr) {
+        m_headset->setRing(true);
+    }
 }
 
 void MainWindow::onCallStateChanged(int callId, CallState state)
@@ -168,9 +175,17 @@ void MainWindow::onCallStateChanged(int callId, CallState state)
     switch (state) {
     case CallState::Confirmed:
         updateStatusBar(tr("Call active"));
+        if (m_headset != nullptr) {
+            m_headset->setOffhook(true);
+            m_headset->setRing(false);
+        }
         break;
     case CallState::Disconnected: {
         updateStatusBar(tr("Call ended"));
+        if (m_headset != nullptr) {
+            m_headset->setOffhook(false);
+            m_headset->setRing(false);
+        }
 
         // Record the completed call in history
         SipCall *call = m_sipManager != nullptr ? m_sipManager->findCall(callId) : nullptr;
@@ -205,6 +220,9 @@ void MainWindow::onCallStateChanged(int callId, CallState state)
     }
     case CallState::Calling:
         updateStatusBar(tr("Calling..."));
+        if (m_headset != nullptr) {
+            m_headset->setOffhook(true);
+        }
         break;
     case CallState::Incoming:
         updateStatusBar(tr("Incoming call"));
@@ -269,10 +287,7 @@ void MainWindow::onHangupRequested()
         return;
     }
 
-    // Hang up all active calls via the dialer's current number context
-    // The SIP manager manages call lifecycle
-    const QString currentNumber = m_dialer != nullptr ? m_dialer->currentNumber() : QString();
-    Q_UNUSED(currentNumber)
+    m_sipManager->hangupAllCalls();
 }
 
 void MainWindow::setupUi()
@@ -386,6 +401,66 @@ void MainWindow::setupSip()
     const Account &acct = AppSettings::instance().account;
     if (acct.isValid()) {
         m_sipManager->addAccount(acct);
+    }
+}
+
+void MainWindow::setupHeadset()
+{
+    if (!AppSettings::instance().headsetSupport) {
+        return;
+    }
+
+    m_headset = new HeadsetManager(this);
+
+    // Hook switch on → answer incoming or initiate call
+    connect(m_headset, &HeadsetManager::hookSwitchOn, this, [this]() {
+        if (m_sipManager == nullptr) {
+            return;
+        }
+        // If there is a ringing incoming call, answer it
+        // Otherwise initiate a call with the dialer's current number
+        if (m_dialer != nullptr) {
+            const QString num = m_dialer->currentNumber();
+            if (!num.isEmpty()) {
+                makeCall(num);
+            }
+        }
+    });
+
+    // Hook switch off → hang up all active calls
+    connect(m_headset, &HeadsetManager::hookSwitchOff, this, [this]() {
+        if (m_sipManager != nullptr) {
+            m_sipManager->hangupAllCalls();
+        }
+        if (m_headset != nullptr) {
+            m_headset->setOffhook(false);
+        }
+    });
+
+    // Mute toggled from headset → mirror to SIP
+    connect(m_headset, &HeadsetManager::muteToggled, this, [this](bool muted) {
+        if (m_sipManager != nullptr) {
+            m_sipManager->setMuteInput(muted);
+        }
+    });
+
+    // Redial → call the last dialed number (first outgoing in history)
+    connect(m_headset, &HeadsetManager::redialPressed, this, [this]() {
+        for (const CallRecord &rec : std::as_const(m_callRecords)) {
+            if (rec.type == CallType::Outgoing && !rec.number.isEmpty()) {
+                makeCall(rec.number);
+                break;
+            }
+        }
+    });
+
+    // Device disconnected
+    connect(m_headset, &HeadsetManager::deviceLost, this, [this]() {
+        updateStatusBar(tr("Headset disconnected"));
+    });
+
+    if (m_headset->openDevice()) {
+        updateStatusBar(tr("Headset connected"));
     }
 }
 

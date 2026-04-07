@@ -21,6 +21,7 @@ class MessagesDialog;
 class SettingsDialog;
 class CallHistoryStore;
 class ContactStore;
+class HeadsetManager;
 
 class MainWindow : public QMainWindow {
     Q_OBJECT
@@ -60,6 +61,7 @@ private:
     void setupTrayIcon();
     void setupSip();
     void setupPersistence();
+    void setupHeadset();
     void connectSignals();
     void updateStatusBar(const QString &text);
     void updateTrayIcon(RegistrationState state);
@@ -81,6 +83,9 @@ private:
     ContactStore *m_contactStore = nullptr;
     QList<Contact> m_contactList;
     QList<CallRecord> m_callRecords;
+
+    // Headset HID
+    HeadsetManager *m_headset = nullptr;
 };
 
 } // namespace macrosip

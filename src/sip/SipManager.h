@@ -32,6 +32,7 @@ public:
     SipCall *findCall(int callId) const;
     void answerCall(int callId, int code = 200);
     void hangupCall(int callId, int code = 0);
+    void hangupAllCalls();
     void holdCall(int callId);
     void unholdCall(int callId);
     void transferCall(int callId, const QString &target);
