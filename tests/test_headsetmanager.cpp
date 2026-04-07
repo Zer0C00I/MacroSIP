@@ -13,6 +13,10 @@ private slots:
     void testSetOffhookNoDevice();
     void testSetRingNoDevice();
     void testSetMuteNoDevice();
+    void testSignalHookSwitch();
+    void testSignalMuteToggled();
+    void testSignalRedialPressed();
+    void testSignalDeviceLost();
 };
 
 void TestHeadsetManager::testConstruction()
@@ -64,6 +68,36 @@ void TestHeadsetManager::testSetMuteNoDevice()
     HeadsetManager mgr;
     mgr.setMute(true);
     mgr.setMute(false);
+}
+
+void TestHeadsetManager::testSignalHookSwitch()
+{
+    HeadsetManager mgr;
+    QSignalSpy spyOn(&mgr, &HeadsetManager::hookSwitchOn);
+    QSignalSpy spyOff(&mgr, &HeadsetManager::hookSwitchOff);
+    QVERIFY(spyOn.isValid());
+    QVERIFY(spyOff.isValid());
+}
+
+void TestHeadsetManager::testSignalMuteToggled()
+{
+    HeadsetManager mgr;
+    QSignalSpy spy(&mgr, &HeadsetManager::muteToggled);
+    QVERIFY(spy.isValid());
+}
+
+void TestHeadsetManager::testSignalRedialPressed()
+{
+    HeadsetManager mgr;
+    QSignalSpy spy(&mgr, &HeadsetManager::redialPressed);
+    QVERIFY(spy.isValid());
+}
+
+void TestHeadsetManager::testSignalDeviceLost()
+{
+    HeadsetManager mgr;
+    QSignalSpy spy(&mgr, &HeadsetManager::deviceLost);
+    QVERIFY(spy.isValid());
 }
 
 QTEST_GUILESS_MAIN(TestHeadsetManager)

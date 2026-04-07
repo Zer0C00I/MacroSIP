@@ -14,6 +14,9 @@ private slots:
     void testSetStatusText();
     void testCallSignal();
     void testHangupSignal();
+    void testDtmfPressedSignal();
+    void testCallButtonClick();
+    void testHangupButtonClick();
 };
 
 void TestDialerWidget::testDefaultState()
@@ -62,9 +65,6 @@ void TestDialerWidget::testCallSignal()
     QVERIFY(spy.isValid());
 
     w.setNumber(QStringLiteral("100"));
-    // Simulate call button click via the exposed slot mechanism
-    // The call button emits callRequested when clicked
-    // We test that the signal exists and is connectable
     QCOMPARE(spy.count(), 0);
 }
 
@@ -74,6 +74,57 @@ void TestDialerWidget::testHangupSignal()
     QSignalSpy spy(&w, &DialerWidget::hangupRequested);
     QVERIFY(spy.isValid());
     QCOMPARE(spy.count(), 0);
+}
+
+void TestDialerWidget::testDtmfPressedSignal()
+{
+    DialerWidget w;
+    QSignalSpy spy(&w, &DialerWidget::dtmfPressed);
+    QVERIFY(spy.isValid());
+}
+
+void TestDialerWidget::testCallButtonClick()
+{
+    DialerWidget w;
+    QSignalSpy spy(&w, &DialerWidget::callRequested);
+
+    // Find the Call/Hangup buttons by text
+    const auto buttons = w.findChildren<QPushButton *>();
+    QPushButton *callBtn = nullptr;
+    for (QPushButton *btn : buttons) {
+        if (btn->text() == QObject::tr("Call"))
+            callBtn = btn;
+    }
+
+    if (callBtn != nullptr) {
+        // Empty number → no signal
+        QTest::mouseClick(callBtn, Qt::LeftButton);
+        QCOMPARE(spy.count(), 0);
+
+        // With number → signal
+        w.setNumber(QStringLiteral("12345"));
+        QTest::mouseClick(callBtn, Qt::LeftButton);
+        QCOMPARE(spy.count(), 1);
+        QCOMPARE(spy.at(0).at(0).toString(), QStringLiteral("12345"));
+    }
+}
+
+void TestDialerWidget::testHangupButtonClick()
+{
+    DialerWidget w;
+    QSignalSpy spy(&w, &DialerWidget::hangupRequested);
+
+    const auto buttons = w.findChildren<QPushButton *>();
+    QPushButton *hangupBtn = nullptr;
+    for (QPushButton *btn : buttons) {
+        if (btn->text() == QObject::tr("Hangup"))
+            hangupBtn = btn;
+    }
+
+    if (hangupBtn != nullptr) {
+        QTest::mouseClick(hangupBtn, Qt::LeftButton);
+        QCOMPARE(spy.count(), 1);
+    }
 }
 
 QTEST_MAIN(TestDialerWidget)

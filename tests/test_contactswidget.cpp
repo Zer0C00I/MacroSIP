@@ -14,6 +14,8 @@ private slots:
     void testUpdatePresence();
     void testCallContactSignal();
     void testDeleteContactSignal();
+    void testContactSelectedSignal();
+    void testEditContactSignal();
 };
 
 void TestContactsWidget::testDefaultState()
@@ -93,6 +95,20 @@ void TestContactsWidget::testDeleteContactSignal()
 {
     ContactsWidget w;
     QSignalSpy spy(&w, &ContactsWidget::deleteContact);
+    QVERIFY(spy.isValid());
+}
+
+void TestContactsWidget::testContactSelectedSignal()
+{
+    ContactsWidget w;
+    QSignalSpy spy(&w, &ContactsWidget::contactSelected);
+    QVERIFY(spy.isValid());
+}
+
+void TestContactsWidget::testEditContactSignal()
+{
+    ContactsWidget w;
+    QSignalSpy spy(&w, &ContactsWidget::editContact);
     QVERIFY(spy.isValid());
 }
 

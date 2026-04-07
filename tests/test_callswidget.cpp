@@ -12,6 +12,7 @@ private slots:
     void testAddCall();
     void testClearHistory();
     void testRedialSignal();
+    void testCallSelectedSignal();
 };
 
 void TestCallsWidget::testDefaultState()
@@ -78,6 +79,13 @@ void TestCallsWidget::testRedialSignal()
 {
     CallsWidget w;
     QSignalSpy spy(&w, &CallsWidget::redial);
+    QVERIFY(spy.isValid());
+}
+
+void TestCallsWidget::testCallSelectedSignal()
+{
+    CallsWidget w;
+    QSignalSpy spy(&w, &CallsWidget::callSelected);
     QVERIFY(spy.isValid());
 }
 

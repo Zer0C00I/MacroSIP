@@ -11,6 +11,7 @@ private slots:
     void testAddClosableTab();
     void testSetTabIcon();
     void testTabCloseSignal();
+    void testTabCloseRequested();
 };
 
 void TestClosableTabWidget::testConstruction()
@@ -51,6 +52,22 @@ void TestClosableTabWidget::testTabCloseSignal()
     ClosableTabWidget tw;
     QSignalSpy spy(&tw, &ClosableTabWidget::tabCloseClicked);
     QVERIFY(spy.isValid());
+}
+
+void TestClosableTabWidget::testTabCloseRequested()
+{
+    ClosableTabWidget tw;
+    auto *w1 = new QWidget();
+    auto *w2 = new QWidget();
+    tw.addClosableTab(w1, QStringLiteral("Tab 1"));
+    tw.addClosableTab(w2, QStringLiteral("Tab 2"));
+
+    QSignalSpy spy(&tw, &ClosableTabWidget::tabCloseClicked);
+
+    // Simulate tab close request via the tabCloseRequested signal from QTabWidget
+    emit tw.tabCloseRequested(0);
+    QCOMPARE(spy.count(), 1);
+    QCOMPARE(spy.at(0).at(0).toInt(), 0);
 }
 
 QTEST_MAIN(TestClosableTabWidget)

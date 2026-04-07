@@ -13,6 +13,12 @@ private slots:
     void testAppendMessage();
     void testCloseTab();
     void testSetCallState();
+    void testSignalMessageSent();
+    void testSignalHoldRequested();
+    void testSignalTransferRequested();
+    void testSignalRecordRequested();
+    void testSignalHangupRequested();
+    void testSignalConferenceRequested();
 };
 
 void TestMessagesDialog::testConstruction()
@@ -68,6 +74,48 @@ void TestMessagesDialog::testSetCallState()
     // Non-existent should not crash
     dlg.setCallState(QStringLiteral("999"), CallState::Idle);
     QVERIFY(true);
+}
+
+void TestMessagesDialog::testSignalMessageSent()
+{
+    MessagesDialog dlg;
+    QSignalSpy spy(&dlg, &MessagesDialog::messageSent);
+    QVERIFY(spy.isValid());
+}
+
+void TestMessagesDialog::testSignalHoldRequested()
+{
+    MessagesDialog dlg;
+    QSignalSpy spy(&dlg, &MessagesDialog::holdRequested);
+    QVERIFY(spy.isValid());
+}
+
+void TestMessagesDialog::testSignalTransferRequested()
+{
+    MessagesDialog dlg;
+    QSignalSpy spy(&dlg, &MessagesDialog::transferRequested);
+    QVERIFY(spy.isValid());
+}
+
+void TestMessagesDialog::testSignalRecordRequested()
+{
+    MessagesDialog dlg;
+    QSignalSpy spy(&dlg, &MessagesDialog::recordRequested);
+    QVERIFY(spy.isValid());
+}
+
+void TestMessagesDialog::testSignalHangupRequested()
+{
+    MessagesDialog dlg;
+    QSignalSpy spy(&dlg, &MessagesDialog::hangupRequested);
+    QVERIFY(spy.isValid());
+}
+
+void TestMessagesDialog::testSignalConferenceRequested()
+{
+    MessagesDialog dlg;
+    QSignalSpy spy(&dlg, &MessagesDialog::conferenceRequested);
+    QVERIFY(spy.isValid());
 }
 
 QTEST_MAIN(TestMessagesDialog)

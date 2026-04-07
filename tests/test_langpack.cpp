@@ -13,6 +13,7 @@ private slots:
     void testDefaultValue();
     void testMissingKey();
     void testCommentsAndBlanks();
+    void testCurrentLanguage();
 };
 
 static QString writeLangFile(const QString &content)
@@ -116,6 +117,16 @@ void TestLangPack::testCommentsAndBlanks()
     QCOMPARE(lp.translate(QStringLiteral("# This is a comment")),
              QStringLiteral("# This is a comment"));
 
+    QFile::remove(path);
+}
+
+void TestLangPack::testCurrentLanguage()
+{
+    const QString path = writeLangFile(QStringLiteral("key=value\n"));
+    LangPack &lp = LangPack::instance();
+    QVERIFY(lp.load(path));
+    // currentLanguage() returns the filename stem of the loaded file
+    QVERIFY(!lp.currentLanguage().isEmpty());
     QFile::remove(path);
 }
 

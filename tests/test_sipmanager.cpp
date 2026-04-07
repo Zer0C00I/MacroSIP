@@ -21,6 +21,12 @@ private slots:
     void testSetVolume();
     void testAudioDevices();
     void testCodecs();
+    void testMergeConference();
+    void testPresence();
+    void testSetCodecPriority();
+    void testSignalInitialized();
+    void testSignalCallStateChanged();
+    void testSignalRegistrationStateChanged();
 };
 
 void TestSipManager::testInitShutdown()
@@ -231,6 +237,105 @@ void TestSipManager::testCodecs()
     QVERIFY(codecs.isEmpty() || !codecs.isEmpty());
 
     mgr.setCodecPriority(QStringLiteral("PCMA/8000/1"), 200);
+
+    mgr.shutdown();
+}
+
+void TestSipManager::testMergeConference()
+{
+    SipManager mgr;
+    mgr.initialize();
+
+    SipCall *call1 = mgr.makeCall(QStringLiteral("100"));
+    SipCall *call2 = mgr.makeCall(QStringLiteral("200"));
+    QVERIFY(call1 != nullptr);
+    QVERIFY(call2 != nullptr);
+
+    // Should not crash
+    mgr.mergeConference(call1->callId(), call2->callId());
+    // Invalid IDs should not crash
+    mgr.mergeConference(9999, 8888);
+
+    mgr.shutdown();
+}
+
+void TestSipManager::testPresence()
+{
+    SipManager mgr;
+    mgr.initialize();
+
+    // All presence operations should not crash in stub mode
+    mgr.subscribePresence(QStringLiteral("sip:user@example.com"));
+    mgr.unsubscribePresence(QStringLiteral("sip:user@example.com"));
+    mgr.publishPresence(PresenceStatus::Online);
+    mgr.publishPresence(PresenceStatus::Away);
+    mgr.publishPresence(PresenceStatus::Busy);
+
+    mgr.shutdown();
+}
+
+void TestSipManager::testSetCodecPriority()
+{
+    SipManager mgr;
+    mgr.initialize();
+
+    QStringList codecs = mgr.availableCodecs();
+    // Set priority should not crash
+    mgr.setCodecPriority(QStringLiteral("PCMA/8000/1"), 255);
+    mgr.setCodecPriority(QStringLiteral("PCMU/8000/1"), 0);
+    mgr.setCodecPriority(QStringLiteral("nonexistent"), 100);
+
+    mgr.shutdown();
+}
+
+void TestSipManager::testSignalInitialized()
+{
+    SipManager mgr;
+    QSignalSpy spy(&mgr, &SipManager::initialized);
+    QVERIFY(spy.isValid());
+
+    mgr.initialize();
+    // In stub mode, initialized signal should fire
+    QVERIFY(spy.count() >= 1);
+
+    mgr.shutdown();
+}
+
+void TestSipManager::testSignalCallStateChanged()
+{
+    SipManager mgr;
+    mgr.initialize();
+
+    QSignalSpy spy(&mgr, &SipManager::callStateChanged);
+    QVERIFY(spy.isValid());
+
+    SipCall *call = mgr.makeCall(QStringLiteral("100"));
+    QVERIFY(call != nullptr);
+
+    // In stub mode, makeCall may or may not emit callStateChanged
+    // At minimum the signal should be connectable
+    mgr.shutdown();
+}
+
+void TestSipManager::testSignalRegistrationStateChanged()
+{
+    SipManager mgr;
+    mgr.initialize();
+
+    QSignalSpy spy(&mgr, &SipManager::registrationStateChanged);
+    QVERIFY(spy.isValid());
+
+    Account cfg;
+    cfg.server = QStringLiteral("sip.example.com");
+    cfg.username = QStringLiteral("user1");
+    SipAccount *acc = mgr.addAccount(cfg);
+    QVERIFY(acc != nullptr);
+
+    // The stub auto-registers synchronously before signal connection,
+    // so trigger a manual state change to verify signal propagation
+    acc->handleRegistrationState(RegistrationState::Error, 408,
+                                 QStringLiteral("Timeout"));
+    QVERIFY(spy.count() >= 1);
 
     mgr.shutdown();
 }
