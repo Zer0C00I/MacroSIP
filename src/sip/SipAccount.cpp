@@ -72,7 +72,8 @@ bool SipAccount::registerAccount()
                                                        : m_config.domain)
                                 .toUtf8();
     cfg.cred_info[0].realm = pj_str(realmBytes.data());
-    cfg.cred_info[0].scheme = pj_str(const_cast<char *>("digest"));
+    static char digestScheme[] = "digest";
+    cfg.cred_info[0].scheme = pj_str(digestScheme);
 
     QByteArray authUser = (m_config.authID.isEmpty() ? m_config.username
                                                      : m_config.authID)

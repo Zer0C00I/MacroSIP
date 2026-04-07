@@ -487,7 +487,6 @@ void SipManager::unsubscribePresence(const QString &uri)
 {
 #ifdef PJSIP_ENABLED
     // Find buddy by URI and remove
-    unsigned buddyCount = pjsua_get_buddy_count();
     pjsua_buddy_id ids[256];
     unsigned cnt = 256;
     if (pjsua_enum_buddies(ids, &cnt) == PJ_SUCCESS) {
@@ -503,7 +502,6 @@ void SipManager::unsubscribePresence(const QString &uri)
             }
         }
     }
-    Q_UNUSED(buddyCount)
 #else
     qDebug() << "SipManager::unsubscribePresence (stub):" << uri;
 #endif
