@@ -39,6 +39,11 @@ const CallUserData &SipCall::userData() const
     return m_userData;
 }
 
+QDateTime SipCall::confirmedTime() const
+{
+    return m_confirmedTime;
+}
+
 void SipCall::setCallId(int id)
 {
     m_callId = id;
@@ -51,6 +56,9 @@ void SipCall::setUserData(const CallUserData &data)
 
 void SipCall::handleStateChange(CallState newState)
 {
+    if (newState == CallState::Confirmed && m_confirmedTime.isNull()) {
+        m_confirmedTime = QDateTime::currentDateTime();
+    }
     m_state = newState;
     emit stateChanged(newState);
 }
@@ -76,6 +84,7 @@ bool SipCall::answer(int code)
     Q_UNUSED(code)
     m_state = CallState::Confirmed;
     m_mediaStatus = MediaStatus::Active;
+    m_confirmedTime = QDateTime::currentDateTime();
     emit stateChanged(m_state);
     emit mediaStatusChanged(m_mediaStatus);
     return true;

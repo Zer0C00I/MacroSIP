@@ -18,6 +18,7 @@ public:
     CallState state() const;
     MediaStatus mediaStatus() const;
     const CallUserData &userData() const;
+    QDateTime confirmedTime() const;
 
     void setCallId(int id);
     void setUserData(const CallUserData &data);
@@ -46,6 +47,7 @@ private:
     CallState m_state = CallState::Idle;
     MediaStatus m_mediaStatus = MediaStatus::None;
     CallUserData m_userData;
+    QDateTime m_confirmedTime;
 
 #ifdef PJSIP_ENABLED
     pjsua_recorder_id m_recorderId = PJSUA_INVALID_ID;

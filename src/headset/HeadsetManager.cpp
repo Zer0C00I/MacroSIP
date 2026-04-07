@@ -5,7 +5,6 @@
 #endif
 
 #include <QDebug>
-#include <cstring>
 
 namespace macrosip {
 
@@ -148,9 +147,7 @@ void HeadsetManager::updateLeds()
     // Byte 0 = report ID (0 for single-report devices), remaining bytes =
     // bit-packed LED flags.  This works for the majority of USB telephony
     // headsets (Jabra, Plantronics/Poly, etc.).
-    unsigned char report[3];
-    std::memset(report, 0, sizeof(report));
-    report[0] = 0x00;  // Report ID
+    unsigned char report[3] = {};  // zero-init (report ID = 0x00)
 
     unsigned char flags = 0;
     if (m_ledOffhook) {
@@ -214,9 +211,9 @@ void HeadsetManager::pollDevice()
         emit hookSwitchOff();
     }
 
-    // Mute — report changes
-    if (mute != m_ledMute) {
-        m_ledMute = mute;
+    // Mute — detect button transitions (compare against button state, not LED)
+    if (mute != m_muteBtn) {
+        m_muteBtn = mute;
         emit muteToggled(mute);
     }
 

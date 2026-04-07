@@ -196,7 +196,14 @@ void MainWindow::onCallStateChanged(int callId, CallState state)
             rec.name = ud.name;
             rec.number = ud.number;
             rec.time = QDateTime::currentDateTime();
-            rec.duration = 0;
+
+            // Compute call duration from Confirmed → Disconnected
+            const QDateTime confirmed = call->confirmedTime();
+            if (confirmed.isValid()) {
+                rec.duration = static_cast<int>(confirmed.secsTo(rec.time));
+            } else {
+                rec.duration = 0;
+            }
 
             // Determine call type from direction and whether media was active
             if (ud.direction == CallDirection::Incoming) {

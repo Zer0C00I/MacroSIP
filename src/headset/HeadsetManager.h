@@ -80,6 +80,7 @@ private:
 
     // Tracked button state (absolute)
     bool m_offhookBtn = false;
+    bool m_muteBtn    = false;
     bool m_lastRedial = false;
 
     // LED state the application wants
