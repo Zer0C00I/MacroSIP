@@ -89,6 +89,17 @@ void MainWindow::onAccountSettings()
     if (dialog.exec() == QDialog::Accepted) {
         AppSettings::instance().account = dialog.account();
         AppSettings::instance().save();
+
+        // Re-register with new account settings by restarting SIP
+        if (m_sipManager != nullptr) {
+            m_sipManager->shutdown();
+            m_sipManager->initialize();
+
+            const Account &acct = AppSettings::instance().account;
+            if (acct.isValid()) {
+                m_sipManager->addAccount(acct);
+            }
+        }
     }
 }
 
@@ -319,6 +330,14 @@ void MainWindow::setupSip()
             this, &MainWindow::onCallStateChanged);
     connect(m_sipManager, &SipManager::registrationStateChanged,
             this, &MainWindow::onRegistrationStateChanged);
+
+    // Initialize the SIP engine and register the configured account
+    m_sipManager->initialize();
+
+    const Account &acct = AppSettings::instance().account;
+    if (acct.isValid()) {
+        m_sipManager->addAccount(acct);
+    }
 }
 
 void MainWindow::connectSignals()
