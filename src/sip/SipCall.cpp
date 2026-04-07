@@ -1,6 +1,10 @@
 #include "sip/SipCall.h"
 #include <QDebug>
 
+#ifdef PJSIP_ENABLED
+#include <pjsua-lib/pjsua.h>
+#endif
+
 namespace macrosip {
 
 SipCall::SipCall(QObject *parent)
@@ -45,6 +49,18 @@ void SipCall::setUserData(const CallUserData &data)
     m_userData = data;
 }
 
+void SipCall::handleStateChange(CallState newState)
+{
+    m_state = newState;
+    emit stateChanged(newState);
+}
+
+void SipCall::handleMediaStatusChange(MediaStatus newStatus)
+{
+    m_mediaStatus = newStatus;
+    emit mediaStatusChanged(newStatus);
+}
+
 bool SipCall::answer(int code)
 {
     if (m_callId < 0) {
@@ -52,12 +68,10 @@ bool SipCall::answer(int code)
     }
 
 #ifdef PJSIP_ENABLED
-    // pj_status_t st = pjsua_call_answer(
-    //     static_cast<pjsua_call_id>(m_callId),
-    //     static_cast<unsigned>(code), nullptr, nullptr);
-    // return st == PJ_SUCCESS;
-    Q_UNUSED(code)
-    return false;
+    pj_status_t st = pjsua_call_answer(
+        static_cast<pjsua_call_id>(m_callId),
+        static_cast<unsigned>(code), nullptr, nullptr);
+    return st == PJ_SUCCESS;
 #else
     Q_UNUSED(code)
     m_state = CallState::Confirmed;
@@ -75,12 +89,14 @@ bool SipCall::hangup(int code)
     }
 
 #ifdef PJSIP_ENABLED
-    // pj_status_t st = pjsua_call_hangup(
-    //     static_cast<pjsua_call_id>(m_callId),
-    //     static_cast<unsigned>(code), nullptr, nullptr);
-    // return st == PJ_SUCCESS;
-    Q_UNUSED(code)
-    return false;
+    pj_status_t st = pjsua_call_hangup(
+        static_cast<pjsua_call_id>(m_callId),
+        static_cast<unsigned>(code), nullptr, nullptr);
+    if (st == PJ_SUCCESS) {
+        m_state = CallState::Disconnected;
+        m_mediaStatus = MediaStatus::None;
+    }
+    return st == PJ_SUCCESS;
 #else
     Q_UNUSED(code)
     m_state = CallState::Disconnected;
@@ -98,10 +114,9 @@ bool SipCall::hold()
     }
 
 #ifdef PJSIP_ENABLED
-    // pj_status_t st = pjsua_call_set_hold(
-    //     static_cast<pjsua_call_id>(m_callId), nullptr);
-    // return st == PJ_SUCCESS;
-    return false;
+    pj_status_t st = pjsua_call_set_hold(
+        static_cast<pjsua_call_id>(m_callId), nullptr);
+    return st == PJ_SUCCESS;
 #else
     m_mediaStatus = MediaStatus::LocalHold;
     emit mediaStatusChanged(m_mediaStatus);
@@ -116,10 +131,9 @@ bool SipCall::unhold()
     }
 
 #ifdef PJSIP_ENABLED
-    // pj_status_t st = pjsua_call_reinvite(
-    //     static_cast<pjsua_call_id>(m_callId), PJ_TRUE, nullptr);
-    // return st == PJ_SUCCESS;
-    return false;
+    pj_status_t st = pjsua_call_reinvite(
+        static_cast<pjsua_call_id>(m_callId), PJ_TRUE, nullptr);
+    return st == PJ_SUCCESS;
 #else
     m_mediaStatus = MediaStatus::Active;
     emit mediaStatusChanged(m_mediaStatus);
@@ -134,12 +148,11 @@ bool SipCall::transfer(const QString &target)
     }
 
 #ifdef PJSIP_ENABLED
-    // pj_str_t dest = pj_str(target.toUtf8().data());
-    // pj_status_t st = pjsua_call_xfer(
-    //     static_cast<pjsua_call_id>(m_callId), &dest, nullptr);
-    // return st == PJ_SUCCESS;
-    Q_UNUSED(target)
-    return false;
+    QByteArray destBytes = target.toUtf8();
+    pj_str_t dest = pj_str(destBytes.data());
+    pj_status_t st = pjsua_call_xfer(
+        static_cast<pjsua_call_id>(m_callId), &dest, nullptr);
+    return st == PJ_SUCCESS;
 #else
     emit transferStatusChanged(200, QStringLiteral("Transfer OK (stub)"));
     return true;
@@ -153,12 +166,11 @@ bool SipCall::sendDtmf(const QString &digits)
     }
 
 #ifdef PJSIP_ENABLED
-    // pj_str_t d = pj_str(digits.toUtf8().data());
-    // pj_status_t st = pjsua_call_dial_dtmf(
-    //     static_cast<pjsua_call_id>(m_callId), &d);
-    // return st == PJ_SUCCESS;
-    Q_UNUSED(digits)
-    return false;
+    QByteArray dtmfBytes = digits.toUtf8();
+    pj_str_t d = pj_str(dtmfBytes.data());
+    pj_status_t st = pjsua_call_dial_dtmf(
+        static_cast<pjsua_call_id>(m_callId), &d);
+    return st == PJ_SUCCESS;
 #else
     for (const QChar &ch : digits) {
         emit dtmfReceived(QString(ch));
@@ -174,9 +186,30 @@ bool SipCall::startRecording(const QString &path)
     }
 
 #ifdef PJSIP_ENABLED
-    // Create WAV recorder, connect call audio
-    Q_UNUSED(path)
-    return false;
+    if (m_recorderId != PJSUA_INVALID_ID) {
+        return false;  // Already recording
+    }
+
+    QByteArray pathBytes = path.toUtf8();
+    pj_str_t filename = pj_str(pathBytes.data());
+
+    pj_status_t st = pjsua_recorder_create(&filename, 0, nullptr, 0, 0,
+                                             &m_recorderId);
+    if (st != PJ_SUCCESS) {
+        qWarning() << "SipCall::startRecording: recorder create failed:" << st;
+        return false;
+    }
+
+    // Connect call audio to the recorder
+    pjsua_call_info ci;
+    if (pjsua_call_get_info(static_cast<pjsua_call_id>(m_callId), &ci) ==
+        PJ_SUCCESS) {
+        pjsua_conf_port_id recPort = pjsua_recorder_get_conf_port(m_recorderId);
+        pjsua_conf_connect(ci.conf_slot, recPort);
+        pjsua_conf_connect(0, recPort);  // Also record local mic
+    }
+
+    return true;
 #else
     qDebug() << "SipCall::startRecording (stub):" << path;
     m_recorderId = 1;
@@ -186,16 +219,19 @@ bool SipCall::startRecording(const QString &path)
 
 void SipCall::stopRecording()
 {
+#ifdef PJSIP_ENABLED
+    if (m_recorderId == PJSUA_INVALID_ID) {
+        return;
+    }
+    pjsua_recorder_destroy(m_recorderId);
+    m_recorderId = PJSUA_INVALID_ID;
+#else
     if (m_recorderId < 0) {
         return;
     }
-
-#ifdef PJSIP_ENABLED
-    // Destroy WAV recorder
-#endif
-
     qDebug() << "SipCall::stopRecording (stub)";
     m_recorderId = -1;
+#endif
 }
 
 } // namespace macrosip

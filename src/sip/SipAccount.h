@@ -3,6 +3,10 @@
 #include "sip/SipTypes.h"
 #include "models/Account.h"
 
+#ifdef PJSIP_ENABLED
+#include <pjsua-lib/pjsua.h>
+#endif
+
 namespace macrosip {
 
 class SipAccount : public QObject {
@@ -18,6 +22,10 @@ public:
     RegistrationState registrationState() const;
     int accountId() const;
     bool isRegistered() const;
+
+    /// Called from SipManager when a PJSIP reg-state callback fires
+    void handleRegistrationState(RegistrationState state, int code,
+                                 const QString &reason);
 
 signals:
     void registrationStateChanged(RegistrationState state, int code, const QString &reason);

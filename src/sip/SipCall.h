@@ -2,6 +2,10 @@
 #include <QObject>
 #include "sip/SipTypes.h"
 
+#ifdef PJSIP_ENABLED
+#include <pjsua-lib/pjsua.h>
+#endif
+
 namespace macrosip {
 
 class SipCall : public QObject {
@@ -27,6 +31,10 @@ public:
     bool startRecording(const QString &path);
     void stopRecording();
 
+    /// Called from SipManager callbacks to update internal state
+    void handleStateChange(CallState newState);
+    void handleMediaStatusChange(MediaStatus newStatus);
+
 signals:
     void stateChanged(CallState newState);
     void mediaStatusChanged(MediaStatus status);
@@ -38,7 +46,12 @@ private:
     CallState m_state = CallState::Idle;
     MediaStatus m_mediaStatus = MediaStatus::None;
     CallUserData m_userData;
+
+#ifdef PJSIP_ENABLED
+    pjsua_recorder_id m_recorderId = PJSUA_INVALID_ID;
+#else
     int m_recorderId = -1;
+#endif
 };
 
 } // namespace macrosip
