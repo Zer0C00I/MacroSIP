@@ -7,14 +7,15 @@ using namespace macrosip;
 class TestSettingsDialog : public QObject {
     Q_OBJECT
 private slots:
-    void testConstruction();
+    void testDefaultState();
     void testLoadSaveRoundTrip();
 };
 
-void TestSettingsDialog::testConstruction()
+void TestSettingsDialog::testDefaultState()
 {
     SettingsDialog dlg;
-    QVERIFY(true);
+    // Dialog should be constructible and have child widgets
+    QVERIFY(dlg.children().count() > 0);
 }
 
 void TestSettingsDialog::testLoadSaveRoundTrip()

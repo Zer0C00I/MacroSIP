@@ -48,6 +48,11 @@ void ContactsWidget::removeContact(const QString &number)
         delete item;
 }
 
+int ContactsWidget::contactCount() const
+{
+    return m_contactTree->topLevelItemCount();
+}
+
 void ContactsWidget::updatePresence(const QString &number,
                                      PresenceStatus status)
 {

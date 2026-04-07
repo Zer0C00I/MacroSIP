@@ -307,13 +307,15 @@ void TestSipManager::testSignalCallStateChanged()
     mgr.initialize();
 
     QSignalSpy spy(&mgr, &SipManager::callStateChanged);
-    QVERIFY(spy.isValid());
 
     SipCall *call = mgr.makeCall(QStringLiteral("100"));
     QVERIFY(call != nullptr);
 
-    // In stub mode, makeCall may or may not emit callStateChanged
-    // At minimum the signal should be connectable
+    // Trigger a state change on the call object, should propagate to SipManager
+    call->handleStateChange(CallState::Confirmed);
+    QCOMPARE(spy.count(), 1);
+    QCOMPARE(spy.at(0).at(1).value<CallState>(), CallState::Confirmed);
+
     mgr.shutdown();
 }
 

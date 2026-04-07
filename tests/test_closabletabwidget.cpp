@@ -50,8 +50,15 @@ void TestClosableTabWidget::testSetTabIcon()
 void TestClosableTabWidget::testTabCloseSignal()
 {
     ClosableTabWidget tw;
+    auto *w = new QWidget();
+    tw.addClosableTab(w, QStringLiteral("Tab"));
+
     QSignalSpy spy(&tw, &ClosableTabWidget::tabCloseClicked);
-    QVERIFY(spy.isValid());
+
+    // Trigger close request and verify signal fires with correct index
+    Q_EMIT tw.tabCloseRequested(0);
+    QCOMPARE(spy.count(), 1);
+    QCOMPARE(spy.at(0).at(0).toInt(), 0);
 }
 
 void TestClosableTabWidget::testTabCloseRequested()

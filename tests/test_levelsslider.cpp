@@ -9,17 +9,16 @@ class TestLevelsSlider : public QObject {
 private slots:
     void testDefaultState();
     void testSetVolume();
+    void testSetVolumeEmitsSignal();
     void testSetMuted();
-    void testIsMuted();
+    void testMutedDoesNotChangeVolume();
     void testSetLevel();
-    void testVolumeChangedSignal();
 };
 
 void TestLevelsSlider::testDefaultState()
 {
     LevelsSlider slider;
     QVERIFY(!slider.isMuted());
-    // Default volume should be reasonable (0-100)
     QVERIFY(slider.volume() >= 0);
     QVERIFY(slider.volume() <= 100);
 }
@@ -37,6 +36,17 @@ void TestLevelsSlider::testSetVolume()
     QCOMPARE(slider.volume(), 100);
 }
 
+void TestLevelsSlider::testSetVolumeEmitsSignal()
+{
+    LevelsSlider slider;
+    QSignalSpy spy(&slider, &LevelsSlider::volumeChanged);
+
+    slider.setVolume(60);
+
+    QVERIFY(spy.count() >= 1);
+    QCOMPARE(spy.last().at(0).toInt(), 60);
+}
+
 void TestLevelsSlider::testSetMuted()
 {
     LevelsSlider slider;
@@ -49,34 +59,30 @@ void TestLevelsSlider::testSetMuted()
     QVERIFY(!slider.isMuted());
 }
 
-void TestLevelsSlider::testIsMuted()
+void TestLevelsSlider::testMutedDoesNotChangeVolume()
 {
     LevelsSlider slider;
+    slider.setVolume(50);
+    QCOMPARE(slider.volume(), 50);
+
     slider.setMuted(true);
-    QVERIFY(slider.isMuted());
+    QCOMPARE(slider.volume(), 50);  // volume value preserved
+
     slider.setMuted(false);
-    QVERIFY(!slider.isMuted());
+    QCOMPARE(slider.volume(), 50);
 }
 
 void TestLevelsSlider::testSetLevel()
 {
     LevelsSlider slider;
-    // setLevel updates the VU meter, should not crash
+    // setLevel updates the VU meter — we just verify no crash with bounds
     slider.setLevel(0);
     slider.setLevel(50);
     slider.setLevel(100);
-}
-
-void TestLevelsSlider::testVolumeChangedSignal()
-{
-    LevelsSlider slider;
-    QSignalSpy spy(&slider, &LevelsSlider::volumeChanged);
-    QVERIFY(spy.isValid());
-
-    slider.setVolume(60);
-    // setVolume triggers the slider which emits volumeChanged
-    QVERIFY(spy.count() >= 1);
-    QCOMPARE(spy.last().at(0).toInt(), 60);
+    // Volume should not change from setLevel
+    int origVol = slider.volume();
+    slider.setLevel(80);
+    QCOMPARE(slider.volume(), origVol);
 }
 
 QTEST_MAIN(TestLevelsSlider)

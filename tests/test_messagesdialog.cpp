@@ -1,4 +1,9 @@
 #include <QtTest>
+#include <QSignalSpy>
+#include <QTabWidget>
+#include <QTextEdit>
+#include <QLineEdit>
+#include <QPushButton>
 #include "dialogs/MessagesDialog.h"
 #include "sip/SipTypes.h"
 
@@ -7,24 +12,23 @@ using namespace macrosip;
 class TestMessagesDialog : public QObject {
     Q_OBJECT
 private slots:
-    void testConstruction();
+    void testDefaultEmpty();
     void testOpenTab();
     void testOpenTabDuplicate();
     void testAppendMessage();
+    void testAppendMessageNonExistentTab();
     void testCloseTab();
-    void testSetCallState();
-    void testSignalMessageSent();
-    void testSignalHoldRequested();
-    void testSignalTransferRequested();
-    void testSignalRecordRequested();
-    void testSignalHangupRequested();
-    void testSignalConferenceRequested();
+    void testCloseTabInvalidIndex();
+    void testSetCallStateUpdatesTitle();
+    void testMessageSentSignal();
 };
 
-void TestMessagesDialog::testConstruction()
+void TestMessagesDialog::testDefaultEmpty()
 {
     MessagesDialog dlg;
-    QVERIFY(true);
+    auto *tabs = dlg.findChild<QTabWidget *>();
+    QVERIFY(tabs != nullptr);
+    QCOMPARE(tabs->count(), 0);
 }
 
 void TestMessagesDialog::testOpenTab()
@@ -32,7 +36,12 @@ void TestMessagesDialog::testOpenTab()
     MessagesDialog dlg;
     dlg.openTab(QStringLiteral("100"), QStringLiteral("Alice"));
     dlg.openTab(QStringLiteral("200"), QStringLiteral("Bob"));
-    QVERIFY(true);
+
+    auto *tabs = dlg.findChild<QTabWidget *>();
+    QVERIFY(tabs != nullptr);
+    QCOMPARE(tabs->count(), 2);
+    QCOMPARE(tabs->tabText(0), QStringLiteral("Alice"));
+    QCOMPARE(tabs->tabText(1), QStringLiteral("Bob"));
 }
 
 void TestMessagesDialog::testOpenTabDuplicate()
@@ -40,7 +49,10 @@ void TestMessagesDialog::testOpenTabDuplicate()
     MessagesDialog dlg;
     dlg.openTab(QStringLiteral("100"), QStringLiteral("Alice"));
     dlg.openTab(QStringLiteral("100"), QStringLiteral("Alice"));  // duplicate
-    QVERIFY(true);
+
+    auto *tabs = dlg.findChild<QTabWidget *>();
+    QVERIFY(tabs != nullptr);
+    QCOMPARE(tabs->count(), 1);  // should not create a second tab
 }
 
 void TestMessagesDialog::testAppendMessage()
@@ -50,72 +62,102 @@ void TestMessagesDialog::testAppendMessage()
 
     dlg.appendMessage(QStringLiteral("100"), QStringLiteral("Hello!"), true);
     dlg.appendMessage(QStringLiteral("100"), QStringLiteral("Hi!"), false);
-    // Append to non-existent tab should not crash
+
+    // Verify the history text edit contains the messages
+    auto histories = dlg.findChildren<QTextEdit *>();
+    QVERIFY(!histories.isEmpty());
+
+    bool foundHello = false;
+    bool foundHi = false;
+    for (auto *te : histories) {
+        if (te->isReadOnly()) {
+            const QString html = te->toPlainText();
+            if (html.contains(QStringLiteral("Hello!")))
+                foundHello = true;
+            if (html.contains(QStringLiteral("Hi!")))
+                foundHi = true;
+        }
+    }
+    QVERIFY(foundHello);
+    QVERIFY(foundHi);
+}
+
+void TestMessagesDialog::testAppendMessageNonExistentTab()
+{
+    MessagesDialog dlg;
+    dlg.openTab(QStringLiteral("100"), QStringLiteral("Alice"));
+
+    // Appending to a non-existent tab should silently do nothing
     dlg.appendMessage(QStringLiteral("999"), QStringLiteral("test"), true);
-    QVERIFY(true);
+
+    auto *tabs = dlg.findChild<QTabWidget *>();
+    QCOMPARE(tabs->count(), 1);  // still just one tab
 }
 
 void TestMessagesDialog::testCloseTab()
 {
     MessagesDialog dlg;
     dlg.openTab(QStringLiteral("100"), QStringLiteral("Alice"));
+    dlg.openTab(QStringLiteral("200"), QStringLiteral("Bob"));
+
+    auto *tabs = dlg.findChild<QTabWidget *>();
+    QCOMPARE(tabs->count(), 2);
+
     dlg.closeTab(0);
-    // Close invalid index should not crash
-    dlg.closeTab(99);
-    QVERIFY(true);
+    QCOMPARE(tabs->count(), 1);
 }
 
-void TestMessagesDialog::testSetCallState()
+void TestMessagesDialog::testCloseTabInvalidIndex()
 {
     MessagesDialog dlg;
     dlg.openTab(QStringLiteral("100"), QStringLiteral("Alice"));
+
+    auto *tabs = dlg.findChild<QTabWidget *>();
+    QCOMPARE(tabs->count(), 1);
+
+    // Closing invalid index should not crash and not change count
+    dlg.closeTab(99);
+    QCOMPARE(tabs->count(), 1);
+}
+
+void TestMessagesDialog::testSetCallStateUpdatesTitle()
+{
+    MessagesDialog dlg;
+    dlg.openTab(QStringLiteral("100"), QStringLiteral("Alice"));
+
+    auto *tabs = dlg.findChild<QTabWidget *>();
+    QVERIFY(tabs != nullptr);
+
     dlg.setCallState(QStringLiteral("100"), CallState::Confirmed);
+    QVERIFY(tabs->tabText(0).contains(QStringLiteral("[Active]")));
+
     dlg.setCallState(QStringLiteral("100"), CallState::Disconnected);
-    // Non-existent should not crash
-    dlg.setCallState(QStringLiteral("999"), CallState::Idle);
-    QVERIFY(true);
+    QVERIFY(tabs->tabText(0).contains(QStringLiteral("[Ended]")));
 }
 
-void TestMessagesDialog::testSignalMessageSent()
+void TestMessagesDialog::testMessageSentSignal()
 {
     MessagesDialog dlg;
+    dlg.openTab(QStringLiteral("100"), QStringLiteral("Alice"));
+
     QSignalSpy spy(&dlg, &MessagesDialog::messageSent);
-    QVERIFY(spy.isValid());
-}
 
-void TestMessagesDialog::testSignalHoldRequested()
-{
-    MessagesDialog dlg;
-    QSignalSpy spy(&dlg, &MessagesDialog::holdRequested);
-    QVERIFY(spy.isValid());
-}
+    // Find the Send button and the input field in Alice's tab
+    auto *tabs = dlg.findChild<QTabWidget *>();
+    QVERIFY(tabs != nullptr);
+    QCOMPARE(tabs->count(), 1);
+    QWidget *tabWidget = tabs->widget(0);
 
-void TestMessagesDialog::testSignalTransferRequested()
-{
-    MessagesDialog dlg;
-    QSignalSpy spy(&dlg, &MessagesDialog::transferRequested);
-    QVERIFY(spy.isValid());
-}
+    auto *input = tabWidget->findChild<QLineEdit *>();
+    QVERIFY(input != nullptr);
 
-void TestMessagesDialog::testSignalRecordRequested()
-{
-    MessagesDialog dlg;
-    QSignalSpy spy(&dlg, &MessagesDialog::recordRequested);
-    QVERIFY(spy.isValid());
-}
+    // Type text and press Enter (triggers onSendMessage via returnPressed)
+    input->setText(QStringLiteral("Hello World"));
+    Q_EMIT input->returnPressed();
 
-void TestMessagesDialog::testSignalHangupRequested()
-{
-    MessagesDialog dlg;
-    QSignalSpy spy(&dlg, &MessagesDialog::hangupRequested);
-    QVERIFY(spy.isValid());
-}
-
-void TestMessagesDialog::testSignalConferenceRequested()
-{
-    MessagesDialog dlg;
-    QSignalSpy spy(&dlg, &MessagesDialog::conferenceRequested);
-    QVERIFY(spy.isValid());
+    QCOMPARE(spy.count(), 1);
+    QCOMPARE(spy.at(0).at(0).toString(), QStringLiteral("100"));
+    QCOMPARE(spy.at(0).at(1).toString(), QStringLiteral("Hello World"));
 }
 
 QTEST_MAIN(TestMessagesDialog)

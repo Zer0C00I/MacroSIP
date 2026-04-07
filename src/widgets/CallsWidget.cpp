@@ -33,6 +33,16 @@ void CallsWidget::clearHistory()
     m_callTree->clear();
 }
 
+int CallsWidget::callCount() const
+{
+    return static_cast<int>(m_allCalls.size());
+}
+
+int CallsWidget::visibleCallCount() const
+{
+    return m_callTree->topLevelItemCount();
+}
+
 void CallsWidget::onFilterChanged([[maybe_unused]] int index)
 {
     applyFilter();

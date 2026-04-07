@@ -21,6 +21,11 @@ public:
     void addCall(const CallRecord &call);
     void clearHistory();
 
+    /** Total number of stored call records (before filtering). */
+    int callCount() const;
+    /** Number of rows currently visible in the tree (after filtering). */
+    int visibleCallCount() const;
+
 Q_SIGNALS:
     void callSelected(const macrosip::CallRecord &record);
     void redial(const QString &number);

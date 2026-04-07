@@ -1,4 +1,5 @@
 #include <QtTest>
+#include <QSignalSpy>
 #include "headset/HeadsetManager.h"
 
 using namespace macrosip;
@@ -6,20 +7,18 @@ using namespace macrosip;
 class TestHeadsetManager : public QObject {
     Q_OBJECT
 private slots:
-    void testConstruction();
+    void testDefaultNotOpen();
     void testOpenDeviceReturnsFalse();
-    void testIsDeviceOpen();
-    void testCloseDevice();
+    void testCloseDeviceNoOp();
     void testSetOffhookNoDevice();
     void testSetRingNoDevice();
     void testSetMuteNoDevice();
-    void testSignalHookSwitch();
-    void testSignalMuteToggled();
-    void testSignalRedialPressed();
-    void testSignalDeviceLost();
+    void testOpenThenCloseDoesNotCrash();
+    void testMultipleCloseCallsSafe();
+    void testDeviceClosedAfterOpen();
 };
 
-void TestHeadsetManager::testConstruction()
+void TestHeadsetManager::testDefaultNotOpen()
 {
     HeadsetManager mgr;
     QVERIFY(!mgr.isDeviceOpen());
@@ -28,22 +27,18 @@ void TestHeadsetManager::testConstruction()
 void TestHeadsetManager::testOpenDeviceReturnsFalse()
 {
     HeadsetManager mgr;
-    // Without a real telephony HID device, openDevice should return false
-    // (or false in stub mode when HEADSET_ENABLED is off)
+    // Without a real HID device (or in stub mode), openDevice returns false
     bool result = mgr.openDevice();
     QVERIFY(!result);
-}
-
-void TestHeadsetManager::testIsDeviceOpen()
-{
-    HeadsetManager mgr;
     QVERIFY(!mgr.isDeviceOpen());
 }
 
-void TestHeadsetManager::testCloseDevice()
+void TestHeadsetManager::testCloseDeviceNoOp()
 {
     HeadsetManager mgr;
-    // Should not crash when no device is open
+    QVERIFY(!mgr.isDeviceOpen());
+
+    // Close when nothing is open should be safe and leave state unchanged
     mgr.closeDevice();
     QVERIFY(!mgr.isDeviceOpen());
 }
@@ -51,9 +46,10 @@ void TestHeadsetManager::testCloseDevice()
 void TestHeadsetManager::testSetOffhookNoDevice()
 {
     HeadsetManager mgr;
-    // Should not crash
+    // Without a device open, LED setters should be no-ops (no crash)
     mgr.setOffhook(true);
     mgr.setOffhook(false);
+    QVERIFY(!mgr.isDeviceOpen());
 }
 
 void TestHeadsetManager::testSetRingNoDevice()
@@ -61,6 +57,7 @@ void TestHeadsetManager::testSetRingNoDevice()
     HeadsetManager mgr;
     mgr.setRing(true);
     mgr.setRing(false);
+    QVERIFY(!mgr.isDeviceOpen());
 }
 
 void TestHeadsetManager::testSetMuteNoDevice()
@@ -68,36 +65,36 @@ void TestHeadsetManager::testSetMuteNoDevice()
     HeadsetManager mgr;
     mgr.setMute(true);
     mgr.setMute(false);
+    QVERIFY(!mgr.isDeviceOpen());
 }
 
-void TestHeadsetManager::testSignalHookSwitch()
+void TestHeadsetManager::testOpenThenCloseDoesNotCrash()
 {
     HeadsetManager mgr;
-    QSignalSpy spyOn(&mgr, &HeadsetManager::hookSwitchOn);
-    QSignalSpy spyOff(&mgr, &HeadsetManager::hookSwitchOff);
-    QVERIFY(spyOn.isValid());
-    QVERIFY(spyOff.isValid());
+    bool opened = mgr.openDevice();
+    // Regardless of open result, close should be safe
+    mgr.closeDevice();
+    QVERIFY(!mgr.isDeviceOpen());
+    Q_UNUSED(opened)
 }
 
-void TestHeadsetManager::testSignalMuteToggled()
+void TestHeadsetManager::testMultipleCloseCallsSafe()
 {
     HeadsetManager mgr;
-    QSignalSpy spy(&mgr, &HeadsetManager::muteToggled);
-    QVERIFY(spy.isValid());
+    mgr.closeDevice();
+    mgr.closeDevice();
+    mgr.closeDevice();
+    QVERIFY(!mgr.isDeviceOpen());
 }
 
-void TestHeadsetManager::testSignalRedialPressed()
+void TestHeadsetManager::testDeviceClosedAfterOpen()
 {
     HeadsetManager mgr;
-    QSignalSpy spy(&mgr, &HeadsetManager::redialPressed);
-    QVERIFY(spy.isValid());
-}
-
-void TestHeadsetManager::testSignalDeviceLost()
-{
-    HeadsetManager mgr;
-    QSignalSpy spy(&mgr, &HeadsetManager::deviceLost);
-    QVERIFY(spy.isValid());
+    mgr.openDevice();
+    // openDevice failed (no device), so still closed
+    QVERIFY(!mgr.isDeviceOpen());
+    mgr.closeDevice();
+    QVERIFY(!mgr.isDeviceOpen());
 }
 
 QTEST_GUILESS_MAIN(TestHeadsetManager)
