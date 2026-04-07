@@ -30,7 +30,8 @@ QList<Contact> ContactStore::importCsv(const QString &filePath)
     const QList<QStringList> rows = CsvFile::read(filePath);
     for (const QStringList &row : rows) {
         // Skip header row
-        if (!row.isEmpty() && row.first() == QStringLiteral("name")) {
+        if (!row.isEmpty() && row.first().compare(
+                QStringLiteral("name"), Qt::CaseInsensitive) == 0) {
             continue;
         }
         Contact c = rowToContact(row);

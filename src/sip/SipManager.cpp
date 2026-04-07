@@ -781,7 +781,8 @@ void SipManager::onIncomingCall(pjsua_acc_id accId, pjsua_call_id callId,
     // Extract User-Agent header if available
     QString userAgent;
     if (rdata) {
-        const pj_str_t hName = pj_str(const_cast<char *>("User-Agent"));
+        static char userAgentHdr[] = "User-Agent";
+        const pj_str_t hName = pj_str(userAgentHdr);
         auto *hdr = reinterpret_cast<pjsip_generic_string_hdr *>(
             pjsip_msg_find_hdr_by_name(rdata->msg_info.msg, &hName, nullptr));
         if (hdr) {
@@ -801,6 +802,7 @@ void SipManager::onIncomingCall(pjsua_acc_id accId, pjsua_call_id callId,
         ud.number = from;
         ud.name = name;
         ud.userAgent = userAgent;
+        ud.direction = CallDirection::Incoming;
         call->setUserData(ud);
 
         {

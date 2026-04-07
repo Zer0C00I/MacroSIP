@@ -18,7 +18,8 @@ QList<CallRecord> CallHistoryStore::load() const
     const QList<QStringList> rows = CsvFile::read(m_filePath);
     for (const QStringList &row : rows) {
         // Skip header row if present
-        if (!row.isEmpty() && row.first() == QStringLiteral("id")) {
+        if (!row.isEmpty() && row.first().compare(
+                QStringLiteral("id"), Qt::CaseInsensitive) == 0) {
             continue;
         }
         CallRecord r = rowToRecord(row);

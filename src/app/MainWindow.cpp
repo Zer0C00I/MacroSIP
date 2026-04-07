@@ -181,13 +181,16 @@ void MainWindow::onCallStateChanged(int callId, CallState state)
             rec.name = ud.name;
             rec.number = ud.number;
             rec.time = QDateTime::currentDateTime();
-            rec.type = CallType::Outgoing; // Will be refined below
             rec.duration = 0;
 
-            // Determine call type based on state transitions
-            if (call->state() == CallState::Disconnected &&
-                call->mediaStatus() == MediaStatus::None) {
-                rec.type = CallType::Missed;
+            // Determine call type from direction and whether media was active
+            if (ud.direction == CallDirection::Incoming) {
+                // If media was never active, the call was missed/rejected
+                rec.type = (call->mediaStatus() == MediaStatus::None)
+                               ? CallType::Missed
+                               : CallType::Incoming;
+            } else {
+                rec.type = CallType::Outgoing;
             }
 
             m_callRecords.prepend(rec);

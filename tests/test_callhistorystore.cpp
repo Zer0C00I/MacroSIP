@@ -88,7 +88,9 @@ private slots:
 
     void testLoadEmpty()
     {
-        CallHistoryStore store(QStringLiteral("/tmp/nonexistent_file.csv"));
+        QTemporaryDir tmpDir;
+        QVERIFY(tmpDir.isValid());
+        CallHistoryStore store(tmpDir.path() + QStringLiteral("/nonexistent.csv"));
         QList<CallRecord> loaded = store.load();
         QVERIFY(loaded.isEmpty());
     }

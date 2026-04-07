@@ -78,7 +78,9 @@ private slots:
 
     void testLoadEmpty()
     {
-        ContactStore store(QStringLiteral("/tmp/nonexistent_contacts.csv"));
+        QTemporaryDir tmpDir;
+        QVERIFY(tmpDir.isValid());
+        ContactStore store(tmpDir.path() + QStringLiteral("/nonexistent.csv"));
         QList<Contact> loaded = store.load();
         QVERIFY(loaded.isEmpty());
     }
