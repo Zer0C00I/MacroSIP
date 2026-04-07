@@ -15,6 +15,9 @@ private slots:
     void testSaveLoadAccount();
     void testSaveLoadShortcuts();
     void testDefaultValues();
+    void testNewFieldsRoundTrip();
+    void testVideoFieldsRoundTrip();
+    void testSetRunAtStartup();
 };
 
 void TestSettings::testConfigDir()
@@ -197,6 +200,164 @@ void TestSettings::testDefaultValues()
     QCOMPARE(s.localDTMF, true);
     QCOMPARE(s.rport, true);
     QCOMPARE(s.callWaiting, true);
+}
+
+void TestSettings::testNewFieldsRoundTrip()
+{
+    AppSettings &s = AppSettings::instance();
+
+    // Set non-default values for all new fields
+    s.recordingFormat    = QStringLiteral("wav");
+    s.dtmfMethod         = QStringLiteral("rfc2833");
+    s.autoAnswerMode     = QStringLiteral("all");
+    s.soundEvents        = false;
+    s.randomPopupPosition = true;
+    s.multiMonitor       = true;
+    s.disableNameLookup  = true;
+    s.updatesInterval    = QStringLiteral("daily");
+    s.runAtStartup       = true;
+    s.enableLocalAccount = true;
+    s.disableMessaging   = true;
+    s.handleIpChanges    = true;
+    s.handleMediaButtons = true;
+    s.directoryOfUsers   = QStringLiteral("https://example.com/users");
+    s.defaultListAction  = QStringLiteral("call");
+    s.volumeRing         = 42;
+
+    s.save();
+
+    // Reset to defaults
+    s.recordingFormat    = QStringLiteral("mp3");
+    s.dtmfMethod.clear();
+    s.autoAnswerMode.clear();
+    s.soundEvents        = true;
+    s.randomPopupPosition = false;
+    s.multiMonitor       = false;
+    s.disableNameLookup  = false;
+    s.updatesInterval.clear();
+    s.runAtStartup       = false;
+    s.enableLocalAccount = false;
+    s.disableMessaging   = false;
+    s.handleIpChanges    = false;
+    s.handleMediaButtons = false;
+    s.directoryOfUsers.clear();
+    s.defaultListAction.clear();
+    s.volumeRing         = 100;
+
+    s.load();
+
+    QCOMPARE(s.recordingFormat, QStringLiteral("wav"));
+    QCOMPARE(s.dtmfMethod, QStringLiteral("rfc2833"));
+    QCOMPARE(s.autoAnswerMode, QStringLiteral("all"));
+    QCOMPARE(s.soundEvents, false);
+    QCOMPARE(s.randomPopupPosition, true);
+    QCOMPARE(s.multiMonitor, true);
+    QCOMPARE(s.disableNameLookup, true);
+    QCOMPARE(s.updatesInterval, QStringLiteral("daily"));
+    QCOMPARE(s.runAtStartup, true);
+    QCOMPARE(s.enableLocalAccount, true);
+    QCOMPARE(s.disableMessaging, true);
+    QCOMPARE(s.handleIpChanges, true);
+    QCOMPARE(s.handleMediaButtons, true);
+    QCOMPARE(s.directoryOfUsers, QStringLiteral("https://example.com/users"));
+    QCOMPARE(s.defaultListAction, QStringLiteral("call"));
+    QCOMPARE(s.volumeRing, 42);
+
+    // Reset
+    s.recordingFormat    = QStringLiteral("mp3");
+    s.dtmfMethod.clear();
+    s.autoAnswerMode.clear();
+    s.soundEvents        = true;
+    s.randomPopupPosition = false;
+    s.multiMonitor       = false;
+    s.disableNameLookup  = false;
+    s.updatesInterval.clear();
+    s.runAtStartup       = false;
+    s.enableLocalAccount = false;
+    s.disableMessaging   = false;
+    s.handleIpChanges    = false;
+    s.handleMediaButtons = false;
+    s.directoryOfUsers.clear();
+    s.defaultListAction.clear();
+    s.volumeRing         = 100;
+    s.save();
+}
+
+void TestSettings::testVideoFieldsRoundTrip()
+{
+    AppSettings &s = AppSettings::instance();
+
+    s.videoEnabled = false;
+    s.videoCodec   = QStringLiteral("H264");
+    s.videoBitrate = 2048;
+    s.videoH264    = true;
+    s.videoH263    = true;
+    s.videoVP8     = true;
+    s.videoVP9     = false;
+    s.cameraDevice = QStringLiteral("USB Camera 1");
+
+    s.save();
+
+    // Reset
+    s.videoEnabled = true;
+    s.videoCodec.clear();
+    s.videoBitrate = 0;
+    s.videoH264    = false;
+    s.videoH263    = false;
+    s.videoVP8     = false;
+    s.videoVP9     = false;
+    s.cameraDevice.clear();
+
+    s.load();
+
+    QCOMPARE(s.videoEnabled, false);
+    QCOMPARE(s.videoCodec, QStringLiteral("H264"));
+    QCOMPARE(s.videoBitrate, 2048);
+    QCOMPARE(s.videoH264, true);
+    QCOMPARE(s.videoH263, true);
+    QCOMPARE(s.videoVP8, true);
+    QCOMPARE(s.videoVP9, false);
+    QCOMPARE(s.cameraDevice, QStringLiteral("USB Camera 1"));
+
+    // Reset
+    s.videoEnabled = true;
+    s.videoCodec.clear();
+    s.videoBitrate = 0;
+    s.videoH264    = false;
+    s.videoH263    = false;
+    s.videoVP8     = false;
+    s.videoVP9     = false;
+    s.cameraDevice.clear();
+    s.save();
+}
+
+void TestSettings::testSetRunAtStartup()
+{
+    QTemporaryDir tmpDir;
+    QVERIFY(tmpDir.isValid());
+
+    // setRunAtStartup uses XDG config location, but we can verify the
+    // static method creates and removes the file by calling it and
+    // checking the expected path.
+    const QString configDir =
+        QStandardPaths::writableLocation(QStandardPaths::ConfigLocation);
+    const QString desktopFile = configDir + QStringLiteral("/autostart/macrosip.desktop");
+
+    // Enable
+    AppSettings::setRunAtStartup(true);
+    QVERIFY(QFile::exists(desktopFile));
+
+    // Verify content
+    QSettings ds(desktopFile, QSettings::IniFormat);
+    QCOMPARE(ds.value(QStringLiteral("Desktop Entry/Type")).toString(),
+             QStringLiteral("Application"));
+    QCOMPARE(ds.value(QStringLiteral("Desktop Entry/Name")).toString(),
+             QStringLiteral("MacroSIP"));
+    QVERIFY(!ds.value(QStringLiteral("Desktop Entry/Exec")).toString().isEmpty());
+
+    // Disable
+    AppSettings::setRunAtStartup(false);
+    QVERIFY(!QFile::exists(desktopFile));
 }
 
 QTEST_GUILESS_MAIN(TestSettings)
