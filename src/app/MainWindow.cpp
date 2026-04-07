@@ -7,6 +7,8 @@
 #include "dialogs/AccountDialog.h"
 #include "dialogs/RingingDialog.h"
 #include "models/Settings.h"
+#include "utils/CallHistoryStore.h"
+#include "utils/ContactStore.h"
 #include <QTabWidget>
 #include <QStatusBar>
 #include <QMenuBar>
@@ -16,6 +18,8 @@
 #include <QApplication>
 #include <QMessageBox>
 #include <QVBoxLayout>
+#include <QFileDialog>
+#include <QUuid>
 
 namespace macrosip {
 
@@ -25,17 +29,23 @@ MainWindow::MainWindow(QWidget *parent)
     setupUi();
     setupMenuBar();
     setupTrayIcon();
+    setupPersistence();
     setupSip();
     connectSignals();
 }
 
 MainWindow::~MainWindow()
 {
+    saveCallHistory();
+    saveContacts();
+
     if (m_sipManager != nullptr) {
         m_sipManager->shutdown();
     }
     delete m_trayMenu;
     delete m_messagesDialog;
+    delete m_callStore;
+    delete m_contactStore;
 }
 
 SipManager *MainWindow::sipManager() const
@@ -159,9 +169,37 @@ void MainWindow::onCallStateChanged(int callId, CallState state)
     case CallState::Confirmed:
         updateStatusBar(tr("Call active"));
         break;
-    case CallState::Disconnected:
+    case CallState::Disconnected: {
         updateStatusBar(tr("Call ended"));
+
+        // Record the completed call in history
+        SipCall *call = m_sipManager != nullptr ? m_sipManager->findCall(callId) : nullptr;
+        if (call != nullptr) {
+            CallRecord rec;
+            rec.id = QUuid::createUuid().toString(QUuid::WithoutBraces);
+            const CallUserData &ud = call->userData();
+            rec.name = ud.name;
+            rec.number = ud.number;
+            rec.time = QDateTime::currentDateTime();
+            rec.type = CallType::Outgoing; // Will be refined below
+            rec.duration = 0;
+
+            // Determine call type based on state transitions
+            if (call->state() == CallState::Disconnected &&
+                call->mediaStatus() == MediaStatus::None) {
+                rec.type = CallType::Missed;
+            }
+
+            m_callRecords.prepend(rec);
+            if (m_calls != nullptr) {
+                m_calls->addCall(rec);
+            }
+            if (m_callStore != nullptr) {
+                m_callStore->append(rec);
+            }
+        }
         break;
+    }
     case CallState::Calling:
         updateStatusBar(tr("Calling..."));
         break;
@@ -272,6 +310,14 @@ void MainWindow::setupMenuBar()
 
     fileMenu->addSeparator();
 
+    QAction *importAction = fileMenu->addAction(tr("&Import Contacts..."));
+    connect(importAction, &QAction::triggered, this, &MainWindow::onImportContacts);
+
+    QAction *exportAction = fileMenu->addAction(tr("&Export Contacts..."));
+    connect(exportAction, &QAction::triggered, this, &MainWindow::onExportContacts);
+
+    fileMenu->addSeparator();
+
     QAction *quitAction = fileMenu->addAction(tr("&Quit"));
     quitAction->setShortcut(QKeySequence::Quit);
     connect(quitAction, &QAction::triggered, this, &MainWindow::onQuit);
@@ -352,6 +398,17 @@ void MainWindow::connectSignals()
     if (m_contacts != nullptr) {
         connect(m_contacts, &ContactsWidget::callContact,
                 this, &MainWindow::onCallRequested);
+        connect(m_contacts, &ContactsWidget::deleteContact,
+                this, [this](const QString &number) {
+                    m_contactList.erase(
+                        std::remove_if(m_contactList.begin(), m_contactList.end(),
+                                       [&number](const Contact &c) {
+                                           return c.number == number;
+                                       }),
+                        m_contactList.end());
+                    m_contacts->removeContact(number);
+                    saveContacts();
+                });
     }
 
     if (m_calls != nullptr) {
@@ -386,6 +443,108 @@ void MainWindow::updateTrayIcon(RegistrationState state)
     case RegistrationState::Error:
         m_trayIcon->setToolTip(QStringLiteral("MacroSIP - Error"));
         break;
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Persistence
+// ---------------------------------------------------------------------------
+
+void MainWindow::setupPersistence()
+{
+    const AppSettings &settings = AppSettings::instance();
+
+    m_callStore = new CallHistoryStore(settings.callsFile());
+    m_contactStore = new ContactStore(settings.contactsFile());
+
+    // Load saved data
+    m_callRecords = m_callStore->load();
+    m_contactList = m_contactStore->load();
+
+    // Populate widgets
+    if (m_calls != nullptr) {
+        m_calls->loadCalls(m_callRecords);
+    }
+    if (m_contacts != nullptr) {
+        m_contacts->loadContacts(m_contactList);
+    }
+}
+
+void MainWindow::saveCallHistory()
+{
+    if (m_callStore != nullptr) {
+        m_callStore->save(m_callRecords);
+    }
+}
+
+void MainWindow::saveContacts()
+{
+    if (m_contactStore != nullptr) {
+        m_contactStore->save(m_contactList);
+    }
+}
+
+void MainWindow::onImportContacts()
+{
+    const QString path = QFileDialog::getOpenFileName(
+        this, tr("Import Contacts"), QString(),
+        tr("CSV Files (*.csv);;All Files (*)"));
+
+    if (path.isEmpty()) {
+        return;
+    }
+
+    QList<Contact> imported = ContactStore::importCsv(path);
+    if (imported.isEmpty()) {
+        QMessageBox::information(this, tr("Import"),
+                                 tr("No contacts found in the file."));
+        return;
+    }
+
+    // Merge: add contacts that don't already exist by number
+    int added = 0;
+    for (const Contact &c : std::as_const(imported)) {
+        bool exists = false;
+        for (const Contact &existing : std::as_const(m_contactList)) {
+            if (existing.number == c.number) {
+                exists = true;
+                break;
+            }
+        }
+        if (!exists) {
+            m_contactList.append(c);
+            if (m_contacts != nullptr) {
+                m_contacts->addContact(c);
+            }
+            ++added;
+        }
+    }
+
+    saveContacts();
+
+    QMessageBox::information(this, tr("Import"),
+                             tr("Imported %1 new contact(s) (%2 total in file).")
+                                 .arg(added)
+                                 .arg(imported.size()));
+}
+
+void MainWindow::onExportContacts()
+{
+    const QString path = QFileDialog::getSaveFileName(
+        this, tr("Export Contacts"), QStringLiteral("contacts.csv"),
+        tr("CSV Files (*.csv);;All Files (*)"));
+
+    if (path.isEmpty()) {
+        return;
+    }
+
+    if (ContactStore::exportCsv(path, m_contactList)) {
+        QMessageBox::information(this, tr("Export"),
+                                 tr("Exported %1 contact(s).")
+                                     .arg(m_contactList.size()));
+    } else {
+        QMessageBox::warning(this, tr("Export"),
+                             tr("Failed to export contacts."));
     }
 }
 

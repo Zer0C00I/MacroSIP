@@ -20,3 +20,11 @@ add_macrosip_test(test_callrecord test_callrecord.cpp ${CMAKE_SOURCE_DIR}/src/mo
 add_macrosip_test(test_csvfile test_csvfile.cpp ${CMAKE_SOURCE_DIR}/src/utils/CsvFile.cpp)
 add_macrosip_test(test_crypto test_crypto.cpp ${CMAKE_SOURCE_DIR}/src/utils/Crypto.cpp)
 add_macrosip_test(test_langpack test_langpack.cpp ${CMAKE_SOURCE_DIR}/src/utils/LangPack.cpp)
+add_macrosip_test(test_callhistorystore test_callhistorystore.cpp
+    ${CMAKE_SOURCE_DIR}/src/utils/CallHistoryStore.cpp
+    ${CMAKE_SOURCE_DIR}/src/utils/CsvFile.cpp
+    ${CMAKE_SOURCE_DIR}/src/models/CallRecord.cpp)
+add_macrosip_test(test_contactstore test_contactstore.cpp
+    ${CMAKE_SOURCE_DIR}/src/utils/ContactStore.cpp
+    ${CMAKE_SOURCE_DIR}/src/utils/CsvFile.cpp
+    ${CMAKE_SOURCE_DIR}/src/models/Contact.cpp)

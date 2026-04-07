@@ -36,6 +36,8 @@ set(MACROSIP_SOURCES
     utils/Crypto.cpp
     utils/CsvFile.cpp
     utils/LangPack.cpp
+    utils/CallHistoryStore.cpp
+    utils/ContactStore.cpp
 
     # Resources
     resources/resources.qrc
@@ -74,6 +76,8 @@ set(MACROSIP_HEADERS
     utils/Crypto.h
     utils/CsvFile.h
     utils/LangPack.h
+    utils/CallHistoryStore.h
+    utils/ContactStore.h
 )
 
 add_executable(macrosip ${MACROSIP_SOURCES} ${MACROSIP_HEADERS})
