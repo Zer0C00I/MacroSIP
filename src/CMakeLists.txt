@@ -88,6 +88,11 @@ target_include_directories(macrosip PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/utils
 )
 
+# Force-include the forbidden-API header in every translation unit
+target_compile_options(macrosip PRIVATE
+    -include ${CMAKE_CURRENT_SOURCE_DIR}/security/forbidden.h
+)
+
 target_link_libraries(macrosip PRIVATE ${QT_LIBS})
 
 if(ENABLE_PJSIP AND PJSIP_FOUND)
