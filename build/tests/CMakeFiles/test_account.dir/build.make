@@ -69,20 +69,13 @@ include tests/CMakeFiles/test_account.dir/progress.make
 # Include the compile flags for this target's objects.
 include tests/CMakeFiles/test_account.dir/flags.make
 
-tests/test_account_autogen/timestamp: /usr/lib/qt5/bin/moc
-tests/test_account_autogen/timestamp: /usr/lib/qt5/bin/uic
-tests/test_account_autogen/timestamp: tests/CMakeFiles/test_account.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/runner/work/MacroSIP/MacroSIP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Automatic MOC and UIC for target test_account"
-	cd /home/runner/work/MacroSIP/MacroSIP/build/tests && /usr/local/bin/cmake -E cmake_autogen /home/runner/work/MacroSIP/MacroSIP/build/tests/CMakeFiles/test_account_autogen.dir/AutogenInfo.json Release
-	cd /home/runner/work/MacroSIP/MacroSIP/build/tests && /usr/local/bin/cmake -E touch /home/runner/work/MacroSIP/MacroSIP/build/tests/test_account_autogen/timestamp
-
 tests/CMakeFiles/test_account.dir/codegen:
 .PHONY : tests/CMakeFiles/test_account.dir/codegen
 
 tests/CMakeFiles/test_account.dir/test_account_autogen/mocs_compilation.cpp.o: tests/CMakeFiles/test_account.dir/flags.make
 tests/CMakeFiles/test_account.dir/test_account_autogen/mocs_compilation.cpp.o: tests/test_account_autogen/mocs_compilation.cpp
 tests/CMakeFiles/test_account.dir/test_account_autogen/mocs_compilation.cpp.o: tests/CMakeFiles/test_account.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/runner/work/MacroSIP/MacroSIP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object tests/CMakeFiles/test_account.dir/test_account_autogen/mocs_compilation.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/runner/work/MacroSIP/MacroSIP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object tests/CMakeFiles/test_account.dir/test_account_autogen/mocs_compilation.cpp.o"
 	cd /home/runner/work/MacroSIP/MacroSIP/build/tests && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT tests/CMakeFiles/test_account.dir/test_account_autogen/mocs_compilation.cpp.o -MF CMakeFiles/test_account.dir/test_account_autogen/mocs_compilation.cpp.o.d -o CMakeFiles/test_account.dir/test_account_autogen/mocs_compilation.cpp.o -c /home/runner/work/MacroSIP/MacroSIP/build/tests/test_account_autogen/mocs_compilation.cpp
 
 tests/CMakeFiles/test_account.dir/test_account_autogen/mocs_compilation.cpp.i: cmake_force
@@ -96,7 +89,7 @@ tests/CMakeFiles/test_account.dir/test_account_autogen/mocs_compilation.cpp.s: c
 tests/CMakeFiles/test_account.dir/test_account.cpp.o: tests/CMakeFiles/test_account.dir/flags.make
 tests/CMakeFiles/test_account.dir/test_account.cpp.o: /home/runner/work/MacroSIP/MacroSIP/tests/test_account.cpp
 tests/CMakeFiles/test_account.dir/test_account.cpp.o: tests/CMakeFiles/test_account.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/runner/work/MacroSIP/MacroSIP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object tests/CMakeFiles/test_account.dir/test_account.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/runner/work/MacroSIP/MacroSIP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object tests/CMakeFiles/test_account.dir/test_account.cpp.o"
 	cd /home/runner/work/MacroSIP/MacroSIP/build/tests && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT tests/CMakeFiles/test_account.dir/test_account.cpp.o -MF CMakeFiles/test_account.dir/test_account.cpp.o.d -o CMakeFiles/test_account.dir/test_account.cpp.o -c /home/runner/work/MacroSIP/MacroSIP/tests/test_account.cpp
 
 tests/CMakeFiles/test_account.dir/test_account.cpp.i: cmake_force
@@ -110,7 +103,7 @@ tests/CMakeFiles/test_account.dir/test_account.cpp.s: cmake_force
 tests/CMakeFiles/test_account.dir/__/src/models/Account.cpp.o: tests/CMakeFiles/test_account.dir/flags.make
 tests/CMakeFiles/test_account.dir/__/src/models/Account.cpp.o: /home/runner/work/MacroSIP/MacroSIP/src/models/Account.cpp
 tests/CMakeFiles/test_account.dir/__/src/models/Account.cpp.o: tests/CMakeFiles/test_account.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/runner/work/MacroSIP/MacroSIP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object tests/CMakeFiles/test_account.dir/__/src/models/Account.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/runner/work/MacroSIP/MacroSIP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object tests/CMakeFiles/test_account.dir/__/src/models/Account.cpp.o"
 	cd /home/runner/work/MacroSIP/MacroSIP/build/tests && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT tests/CMakeFiles/test_account.dir/__/src/models/Account.cpp.o -MF CMakeFiles/test_account.dir/__/src/models/Account.cpp.o.d -o CMakeFiles/test_account.dir/__/src/models/Account.cpp.o -c /home/runner/work/MacroSIP/MacroSIP/src/models/Account.cpp
 
 tests/CMakeFiles/test_account.dir/__/src/models/Account.cpp.i: cmake_force
@@ -135,16 +128,18 @@ tests/test_account: tests/CMakeFiles/test_account.dir/test_account.cpp.o
 tests/test_account: tests/CMakeFiles/test_account.dir/__/src/models/Account.cpp.o
 tests/test_account: tests/CMakeFiles/test_account.dir/build.make
 tests/test_account: tests/CMakeFiles/test_account.dir/compiler_depend.ts
-tests/test_account: /usr/lib/x86_64-linux-gnu/libQt5Test.so.5.15.13
-tests/test_account: /usr/lib/x86_64-linux-gnu/libQt5Widgets.so.5.15.13
-tests/test_account: /usr/lib/x86_64-linux-gnu/libQt5Multimedia.so.5.15.13
+tests/test_account: /usr/lib/x86_64-linux-gnu/libQt6Test.so.6.4.2
+tests/test_account: /usr/lib/x86_64-linux-gnu/libQt6Widgets.so.6.4.2
+tests/test_account: /usr/lib/x86_64-linux-gnu/libQt6Multimedia.so.6.4.2
 tests/test_account: /usr/lib/x86_64-linux-gnu/libssl.so
 tests/test_account: /usr/lib/x86_64-linux-gnu/libcrypto.so
-tests/test_account: /usr/lib/x86_64-linux-gnu/libQt5Gui.so.5.15.13
-tests/test_account: /usr/lib/x86_64-linux-gnu/libQt5Network.so.5.15.13
-tests/test_account: /usr/lib/x86_64-linux-gnu/libQt5Core.so.5.15.13
+tests/test_account: /usr/lib/x86_64-linux-gnu/libQt6Gui.so.6.4.2
+tests/test_account: /usr/lib/x86_64-linux-gnu/libGLX.so
+tests/test_account: /usr/lib/x86_64-linux-gnu/libOpenGL.so
+tests/test_account: /usr/lib/x86_64-linux-gnu/libQt6Network.so.6.4.2
+tests/test_account: /usr/lib/x86_64-linux-gnu/libQt6Core.so.6.4.2
 tests/test_account: tests/CMakeFiles/test_account.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/runner/work/MacroSIP/MacroSIP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable test_account"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/runner/work/MacroSIP/MacroSIP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable test_account"
 	cd /home/runner/work/MacroSIP/MacroSIP/build/tests && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/test_account.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -155,7 +150,7 @@ tests/CMakeFiles/test_account.dir/clean:
 	cd /home/runner/work/MacroSIP/MacroSIP/build/tests && $(CMAKE_COMMAND) -P CMakeFiles/test_account.dir/cmake_clean.cmake
 .PHONY : tests/CMakeFiles/test_account.dir/clean
 
-tests/CMakeFiles/test_account.dir/depend: tests/test_account_autogen/timestamp
+tests/CMakeFiles/test_account.dir/depend:
 	cd /home/runner/work/MacroSIP/MacroSIP/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/runner/work/MacroSIP/MacroSIP /home/runner/work/MacroSIP/MacroSIP/tests /home/runner/work/MacroSIP/MacroSIP/build /home/runner/work/MacroSIP/MacroSIP/build/tests /home/runner/work/MacroSIP/MacroSIP/build/tests/CMakeFiles/test_account.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : tests/CMakeFiles/test_account.dir/depend
 

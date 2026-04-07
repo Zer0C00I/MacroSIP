@@ -19,7 +19,7 @@ const QByteArray kObfuscationKey = QByteArrayLiteral("MacroSIP_Obfusc");
 QByteArray xorTransform(const QByteArray &data, const QByteArray &key)
 {
     QByteArray result(data.size(), '\0');
-    for (int i = 0; i < data.size(); ++i) {
+    for (qsizetype i = 0; i < data.size(); ++i) {
         result[i] = static_cast<char>(data.at(i) ^ key.at(i % key.size()));
     }
     return result;
@@ -55,7 +55,7 @@ QByteArray Crypto::encrypt(const QString &plaintext, const QByteArray &key)
                           reinterpret_cast<unsigned char *>(ciphertext.data()),
                           &outLen,
                           reinterpret_cast<const unsigned char *>(input.constData()),
-                          input.size()) != 1) {
+                          static_cast<int>(input.size())) != 1) {
         EVP_CIPHER_CTX_free(ctx);
         return {};
     }
@@ -105,7 +105,7 @@ QString Crypto::decrypt(const QByteArray &ciphertext, const QByteArray &key)
                           reinterpret_cast<unsigned char *>(plaintext.data()),
                           &outLen,
                           reinterpret_cast<const unsigned char *>(encrypted.constData()),
-                          encrypted.size()) != 1) {
+                          static_cast<int>(encrypted.size())) != 1) {
         EVP_CIPHER_CTX_free(ctx);
         return {};
     }

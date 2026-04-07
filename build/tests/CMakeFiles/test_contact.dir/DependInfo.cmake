@@ -8,7 +8,6 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "" "tests/test_contact_autogen/timestamp" "custom" "tests/test_contact_autogen/deps"
   "/home/runner/work/MacroSIP/MacroSIP/src/models/Contact.cpp" "tests/CMakeFiles/test_contact.dir/__/src/models/Contact.cpp.o" "gcc" "tests/CMakeFiles/test_contact.dir/__/src/models/Contact.cpp.o.d"
   "/home/runner/work/MacroSIP/MacroSIP/tests/test_contact.cpp" "tests/CMakeFiles/test_contact.dir/test_contact.cpp.o" "gcc" "tests/CMakeFiles/test_contact.dir/test_contact.cpp.o.d"
   "/home/runner/work/MacroSIP/MacroSIP/build/tests/test_contact_autogen/mocs_compilation.cpp" "tests/CMakeFiles/test_contact.dir/test_contact_autogen/mocs_compilation.cpp.o" "gcc" "tests/CMakeFiles/test_contact.dir/test_contact_autogen/mocs_compilation.cpp.o.d"

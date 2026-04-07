@@ -21,7 +21,6 @@ bool LangPack::load(const QString &filePath)
     m_translations.clear();
 
     QTextStream stream(&file);
-    stream.setCodec("UTF-8");
 
     while (!stream.atEnd()) {
         const QString line = stream.readLine().trimmed();
@@ -31,7 +30,7 @@ bool LangPack::load(const QString &filePath)
             continue;
         }
 
-        const int separatorPos = line.indexOf(QLatin1Char('='));
+        const qsizetype separatorPos = line.indexOf(QLatin1Char('='));
         if (separatorPos <= 0) {
             continue;
         }

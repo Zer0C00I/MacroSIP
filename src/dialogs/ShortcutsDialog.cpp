@@ -18,7 +18,7 @@ ShortcutsDialog::ShortcutsDialog(QWidget *parent)
 void ShortcutsDialog::setShortcuts(const QList<Shortcut> &shortcuts)
 {
     for (int row = 0; row < RowCount; ++row) {
-        const bool hasData = row < shortcuts.size();
+        const bool hasData = row < static_cast<int>(shortcuts.size());
 
         auto *labelEdit = qobject_cast<QLineEdit *>(
             m_table->cellWidget(row, ColLabel));

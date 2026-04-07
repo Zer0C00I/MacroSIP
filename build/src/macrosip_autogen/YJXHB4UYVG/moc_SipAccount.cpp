@@ -1,55 +1,67 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'SipAccount.h'
 **
-** Created by: The Qt Meta Object Compiler version 67 (Qt 5.15.13)
+** Created by: The Qt Meta Object Compiler version 68 (Qt 6.4.2)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
 #include <memory>
 #include "../../../../src/sip/SipAccount.h"
-#include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'SipAccount.h' doesn't include <QObject>."
-#elif Q_MOC_OUTPUT_REVISION != 67
-#error "This file was generated using the moc from 5.15.13. It"
+#elif Q_MOC_OUTPUT_REVISION != 68
+#error "This file was generated using the moc from 6.4.2. It"
 #error "cannot be used with the include files from this version of Qt."
 #error "(The moc has changed too much.)"
+#endif
+
+#ifndef Q_CONSTINIT
+#define Q_CONSTINIT
 #endif
 
 QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
+namespace {
 struct qt_meta_stringdata_macrosip__SipAccount_t {
-    QByteArrayData data[7];
-    char stringdata0[83];
+    uint offsetsAndSizes[14];
+    char stringdata0[21];
+    char stringdata1[25];
+    char stringdata2[1];
+    char stringdata3[18];
+    char stringdata4[6];
+    char stringdata5[5];
+    char stringdata6[7];
 };
-#define QT_MOC_LITERAL(idx, ofs, len) \
-    Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
-    qptrdiff(offsetof(qt_meta_stringdata_macrosip__SipAccount_t, stringdata0) + ofs \
-        - idx * sizeof(QByteArrayData)) \
-    )
-static const qt_meta_stringdata_macrosip__SipAccount_t qt_meta_stringdata_macrosip__SipAccount = {
+#define QT_MOC_LITERAL(ofs, len) \
+    uint(sizeof(qt_meta_stringdata_macrosip__SipAccount_t::offsetsAndSizes) + ofs), len 
+Q_CONSTINIT static const qt_meta_stringdata_macrosip__SipAccount_t qt_meta_stringdata_macrosip__SipAccount = {
     {
-QT_MOC_LITERAL(0, 0, 20), // "macrosip::SipAccount"
-QT_MOC_LITERAL(1, 21, 24), // "registrationStateChanged"
-QT_MOC_LITERAL(2, 46, 0), // ""
-QT_MOC_LITERAL(3, 47, 17), // "RegistrationState"
-QT_MOC_LITERAL(4, 65, 5), // "state"
-QT_MOC_LITERAL(5, 71, 4), // "code"
-QT_MOC_LITERAL(6, 76, 6) // "reason"
-
+        QT_MOC_LITERAL(0, 20),  // "macrosip::SipAccount"
+        QT_MOC_LITERAL(21, 24),  // "registrationStateChanged"
+        QT_MOC_LITERAL(46, 0),  // ""
+        QT_MOC_LITERAL(47, 17),  // "RegistrationState"
+        QT_MOC_LITERAL(65, 5),  // "state"
+        QT_MOC_LITERAL(71, 4),  // "code"
+        QT_MOC_LITERAL(76, 6)   // "reason"
     },
-    "macrosip::SipAccount\0registrationStateChanged\0"
-    "\0RegistrationState\0state\0code\0reason"
+    "macrosip::SipAccount",
+    "registrationStateChanged",
+    "",
+    "RegistrationState",
+    "state",
+    "code",
+    "reason"
 };
 #undef QT_MOC_LITERAL
+} // unnamed namespace
 
-static const uint qt_meta_data_macrosip__SipAccount[] = {
+Q_CONSTINIT static const uint qt_meta_data_macrosip__SipAccount[] = {
 
  // content:
-       8,       // revision
+      10,       // revision
        0,       // classname
        0,    0, // classinfo
        1,   14, // methods
@@ -59,8 +71,8 @@ static const uint qt_meta_data_macrosip__SipAccount[] = {
        0,       // flags
        1,       // signalCount
 
- // signals: name, argc, parameters, tag, flags
-       1,    3,   19,    2, 0x06 /* Public */,
+ // signals: name, argc, parameters, tag, flags, initial metatype offsets
+       1,    3,   20,    2, 0x06,    1 /* Public */,
 
  // signals: parameters
     QMetaType::Void, 0x80000000 | 3, QMetaType::Int, QMetaType::QString,    4,    5,    6,
@@ -68,36 +80,44 @@ static const uint qt_meta_data_macrosip__SipAccount[] = {
        0        // eod
 };
 
+Q_CONSTINIT const QMetaObject macrosip::SipAccount::staticMetaObject = { {
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
+    qt_meta_stringdata_macrosip__SipAccount.offsetsAndSizes,
+    qt_meta_data_macrosip__SipAccount,
+    qt_static_metacall,
+    nullptr,
+    qt_incomplete_metaTypeArray<qt_meta_stringdata_macrosip__SipAccount_t,
+        // Q_OBJECT / Q_GADGET
+        QtPrivate::TypeAndForceComplete<SipAccount, std::true_type>,
+        // method 'registrationStateChanged'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<RegistrationState, std::false_type>,
+        QtPrivate::TypeAndForceComplete<int, std::false_type>,
+        QtPrivate::TypeAndForceComplete<const QString &, std::false_type>
+    >,
+    nullptr
+} };
+
 void macrosip::SipAccount::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     if (_c == QMetaObject::InvokeMetaMethod) {
         auto *_t = static_cast<SipAccount *>(_o);
         (void)_t;
         switch (_id) {
-        case 0: _t->registrationStateChanged((*reinterpret_cast< RegistrationState(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< const QString(*)>(_a[3]))); break;
+        case 0: _t->registrationStateChanged((*reinterpret_cast< std::add_pointer_t<RegistrationState>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[3]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
         int *result = reinterpret_cast<int *>(_a[0]);
         {
             using _t = void (SipAccount::*)(RegistrationState , int , const QString & );
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&SipAccount::registrationStateChanged)) {
+            if (_t _q_method = &SipAccount::registrationStateChanged; *reinterpret_cast<_t *>(_a[1]) == _q_method) {
                 *result = 0;
                 return;
             }
         }
     }
 }
-
-QT_INIT_METAOBJECT const QMetaObject macrosip::SipAccount::staticMetaObject = { {
-    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
-    qt_meta_stringdata_macrosip__SipAccount.data,
-    qt_meta_data_macrosip__SipAccount,
-    qt_static_metacall,
-    nullptr,
-    nullptr
-} };
-
 
 const QMetaObject *macrosip::SipAccount::metaObject() const
 {
@@ -123,7 +143,7 @@ int macrosip::SipAccount::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         _id -= 1;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
         if (_id < 1)
-            *reinterpret_cast<int*>(_a[0]) = -1;
+            *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
         _id -= 1;
     }
     return _id;

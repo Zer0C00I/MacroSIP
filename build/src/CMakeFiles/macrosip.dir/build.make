@@ -69,18 +69,11 @@ include src/CMakeFiles/macrosip.dir/progress.make
 # Include the compile flags for this target's objects.
 include src/CMakeFiles/macrosip.dir/flags.make
 
-src/macrosip_autogen/timestamp: /usr/lib/qt5/bin/moc
-src/macrosip_autogen/timestamp: /usr/lib/qt5/bin/uic
-src/macrosip_autogen/timestamp: src/CMakeFiles/macrosip.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/runner/work/MacroSIP/MacroSIP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Automatic MOC and UIC for target macrosip"
-	cd /home/runner/work/MacroSIP/MacroSIP/build/src && /usr/local/bin/cmake -E cmake_autogen /home/runner/work/MacroSIP/MacroSIP/build/src/CMakeFiles/macrosip_autogen.dir/AutogenInfo.json Release
-	cd /home/runner/work/MacroSIP/MacroSIP/build/src && /usr/local/bin/cmake -E touch /home/runner/work/MacroSIP/MacroSIP/build/src/macrosip_autogen/timestamp
-
 src/macrosip_autogen/3YJK5W5UP7/qrc_resources.cpp: /home/runner/work/MacroSIP/MacroSIP/src/resources/resources.qrc
 src/macrosip_autogen/3YJK5W5UP7/qrc_resources.cpp: src/CMakeFiles/macrosip_autogen.dir/AutoRcc_resources_3YJK5W5UP7_Info.json
-src/macrosip_autogen/3YJK5W5UP7/qrc_resources.cpp: /usr/lib/qt5/bin/rcc
-src/macrosip_autogen/3YJK5W5UP7/qrc_resources.cpp: /usr/lib/qt5/bin/rcc
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/runner/work/MacroSIP/MacroSIP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Automatic RCC for resources/resources.qrc"
+src/macrosip_autogen/3YJK5W5UP7/qrc_resources.cpp: /usr/lib/qt6/libexec/rcc
+src/macrosip_autogen/3YJK5W5UP7/qrc_resources.cpp: /usr/lib/qt6/libexec/rcc
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/runner/work/MacroSIP/MacroSIP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Automatic RCC for resources/resources.qrc"
 	cd /home/runner/work/MacroSIP/MacroSIP/build/src && /usr/local/bin/cmake -E cmake_autorcc /home/runner/work/MacroSIP/MacroSIP/build/src/CMakeFiles/macrosip_autogen.dir/AutoRcc_resources_3YJK5W5UP7_Info.json Release
 
 src/CMakeFiles/macrosip.dir/codegen:
@@ -89,7 +82,7 @@ src/CMakeFiles/macrosip.dir/codegen:
 src/CMakeFiles/macrosip.dir/macrosip_autogen/mocs_compilation.cpp.o: src/CMakeFiles/macrosip.dir/flags.make
 src/CMakeFiles/macrosip.dir/macrosip_autogen/mocs_compilation.cpp.o: src/macrosip_autogen/mocs_compilation.cpp
 src/CMakeFiles/macrosip.dir/macrosip_autogen/mocs_compilation.cpp.o: src/CMakeFiles/macrosip.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/runner/work/MacroSIP/MacroSIP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object src/CMakeFiles/macrosip.dir/macrosip_autogen/mocs_compilation.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/runner/work/MacroSIP/MacroSIP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object src/CMakeFiles/macrosip.dir/macrosip_autogen/mocs_compilation.cpp.o"
 	cd /home/runner/work/MacroSIP/MacroSIP/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/macrosip.dir/macrosip_autogen/mocs_compilation.cpp.o -MF CMakeFiles/macrosip.dir/macrosip_autogen/mocs_compilation.cpp.o.d -o CMakeFiles/macrosip.dir/macrosip_autogen/mocs_compilation.cpp.o -c /home/runner/work/MacroSIP/MacroSIP/build/src/macrosip_autogen/mocs_compilation.cpp
 
 src/CMakeFiles/macrosip.dir/macrosip_autogen/mocs_compilation.cpp.i: cmake_force
@@ -103,7 +96,7 @@ src/CMakeFiles/macrosip.dir/macrosip_autogen/mocs_compilation.cpp.s: cmake_force
 src/CMakeFiles/macrosip.dir/main.cpp.o: src/CMakeFiles/macrosip.dir/flags.make
 src/CMakeFiles/macrosip.dir/main.cpp.o: /home/runner/work/MacroSIP/MacroSIP/src/main.cpp
 src/CMakeFiles/macrosip.dir/main.cpp.o: src/CMakeFiles/macrosip.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/runner/work/MacroSIP/MacroSIP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object src/CMakeFiles/macrosip.dir/main.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/runner/work/MacroSIP/MacroSIP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object src/CMakeFiles/macrosip.dir/main.cpp.o"
 	cd /home/runner/work/MacroSIP/MacroSIP/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/macrosip.dir/main.cpp.o -MF CMakeFiles/macrosip.dir/main.cpp.o.d -o CMakeFiles/macrosip.dir/main.cpp.o -c /home/runner/work/MacroSIP/MacroSIP/src/main.cpp
 
 src/CMakeFiles/macrosip.dir/main.cpp.i: cmake_force
@@ -117,7 +110,7 @@ src/CMakeFiles/macrosip.dir/main.cpp.s: cmake_force
 src/CMakeFiles/macrosip.dir/app/MacroSipApp.cpp.o: src/CMakeFiles/macrosip.dir/flags.make
 src/CMakeFiles/macrosip.dir/app/MacroSipApp.cpp.o: /home/runner/work/MacroSIP/MacroSIP/src/app/MacroSipApp.cpp
 src/CMakeFiles/macrosip.dir/app/MacroSipApp.cpp.o: src/CMakeFiles/macrosip.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/runner/work/MacroSIP/MacroSIP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object src/CMakeFiles/macrosip.dir/app/MacroSipApp.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/runner/work/MacroSIP/MacroSIP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object src/CMakeFiles/macrosip.dir/app/MacroSipApp.cpp.o"
 	cd /home/runner/work/MacroSIP/MacroSIP/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/macrosip.dir/app/MacroSipApp.cpp.o -MF CMakeFiles/macrosip.dir/app/MacroSipApp.cpp.o.d -o CMakeFiles/macrosip.dir/app/MacroSipApp.cpp.o -c /home/runner/work/MacroSIP/MacroSIP/src/app/MacroSipApp.cpp
 
 src/CMakeFiles/macrosip.dir/app/MacroSipApp.cpp.i: cmake_force
@@ -131,7 +124,7 @@ src/CMakeFiles/macrosip.dir/app/MacroSipApp.cpp.s: cmake_force
 src/CMakeFiles/macrosip.dir/app/MainWindow.cpp.o: src/CMakeFiles/macrosip.dir/flags.make
 src/CMakeFiles/macrosip.dir/app/MainWindow.cpp.o: /home/runner/work/MacroSIP/MacroSIP/src/app/MainWindow.cpp
 src/CMakeFiles/macrosip.dir/app/MainWindow.cpp.o: src/CMakeFiles/macrosip.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/runner/work/MacroSIP/MacroSIP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object src/CMakeFiles/macrosip.dir/app/MainWindow.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/runner/work/MacroSIP/MacroSIP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object src/CMakeFiles/macrosip.dir/app/MainWindow.cpp.o"
 	cd /home/runner/work/MacroSIP/MacroSIP/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/macrosip.dir/app/MainWindow.cpp.o -MF CMakeFiles/macrosip.dir/app/MainWindow.cpp.o.d -o CMakeFiles/macrosip.dir/app/MainWindow.cpp.o -c /home/runner/work/MacroSIP/MacroSIP/src/app/MainWindow.cpp
 
 src/CMakeFiles/macrosip.dir/app/MainWindow.cpp.i: cmake_force
@@ -145,7 +138,7 @@ src/CMakeFiles/macrosip.dir/app/MainWindow.cpp.s: cmake_force
 src/CMakeFiles/macrosip.dir/models/Account.cpp.o: src/CMakeFiles/macrosip.dir/flags.make
 src/CMakeFiles/macrosip.dir/models/Account.cpp.o: /home/runner/work/MacroSIP/MacroSIP/src/models/Account.cpp
 src/CMakeFiles/macrosip.dir/models/Account.cpp.o: src/CMakeFiles/macrosip.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/runner/work/MacroSIP/MacroSIP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object src/CMakeFiles/macrosip.dir/models/Account.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/runner/work/MacroSIP/MacroSIP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object src/CMakeFiles/macrosip.dir/models/Account.cpp.o"
 	cd /home/runner/work/MacroSIP/MacroSIP/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/macrosip.dir/models/Account.cpp.o -MF CMakeFiles/macrosip.dir/models/Account.cpp.o.d -o CMakeFiles/macrosip.dir/models/Account.cpp.o -c /home/runner/work/MacroSIP/MacroSIP/src/models/Account.cpp
 
 src/CMakeFiles/macrosip.dir/models/Account.cpp.i: cmake_force
@@ -159,7 +152,7 @@ src/CMakeFiles/macrosip.dir/models/Account.cpp.s: cmake_force
 src/CMakeFiles/macrosip.dir/models/Contact.cpp.o: src/CMakeFiles/macrosip.dir/flags.make
 src/CMakeFiles/macrosip.dir/models/Contact.cpp.o: /home/runner/work/MacroSIP/MacroSIP/src/models/Contact.cpp
 src/CMakeFiles/macrosip.dir/models/Contact.cpp.o: src/CMakeFiles/macrosip.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/runner/work/MacroSIP/MacroSIP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object src/CMakeFiles/macrosip.dir/models/Contact.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/runner/work/MacroSIP/MacroSIP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object src/CMakeFiles/macrosip.dir/models/Contact.cpp.o"
 	cd /home/runner/work/MacroSIP/MacroSIP/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/macrosip.dir/models/Contact.cpp.o -MF CMakeFiles/macrosip.dir/models/Contact.cpp.o.d -o CMakeFiles/macrosip.dir/models/Contact.cpp.o -c /home/runner/work/MacroSIP/MacroSIP/src/models/Contact.cpp
 
 src/CMakeFiles/macrosip.dir/models/Contact.cpp.i: cmake_force
@@ -173,7 +166,7 @@ src/CMakeFiles/macrosip.dir/models/Contact.cpp.s: cmake_force
 src/CMakeFiles/macrosip.dir/models/CallRecord.cpp.o: src/CMakeFiles/macrosip.dir/flags.make
 src/CMakeFiles/macrosip.dir/models/CallRecord.cpp.o: /home/runner/work/MacroSIP/MacroSIP/src/models/CallRecord.cpp
 src/CMakeFiles/macrosip.dir/models/CallRecord.cpp.o: src/CMakeFiles/macrosip.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/runner/work/MacroSIP/MacroSIP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object src/CMakeFiles/macrosip.dir/models/CallRecord.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/runner/work/MacroSIP/MacroSIP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object src/CMakeFiles/macrosip.dir/models/CallRecord.cpp.o"
 	cd /home/runner/work/MacroSIP/MacroSIP/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/macrosip.dir/models/CallRecord.cpp.o -MF CMakeFiles/macrosip.dir/models/CallRecord.cpp.o.d -o CMakeFiles/macrosip.dir/models/CallRecord.cpp.o -c /home/runner/work/MacroSIP/MacroSIP/src/models/CallRecord.cpp
 
 src/CMakeFiles/macrosip.dir/models/CallRecord.cpp.i: cmake_force
@@ -187,7 +180,7 @@ src/CMakeFiles/macrosip.dir/models/CallRecord.cpp.s: cmake_force
 src/CMakeFiles/macrosip.dir/models/Settings.cpp.o: src/CMakeFiles/macrosip.dir/flags.make
 src/CMakeFiles/macrosip.dir/models/Settings.cpp.o: /home/runner/work/MacroSIP/MacroSIP/src/models/Settings.cpp
 src/CMakeFiles/macrosip.dir/models/Settings.cpp.o: src/CMakeFiles/macrosip.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/runner/work/MacroSIP/MacroSIP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object src/CMakeFiles/macrosip.dir/models/Settings.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/runner/work/MacroSIP/MacroSIP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object src/CMakeFiles/macrosip.dir/models/Settings.cpp.o"
 	cd /home/runner/work/MacroSIP/MacroSIP/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/macrosip.dir/models/Settings.cpp.o -MF CMakeFiles/macrosip.dir/models/Settings.cpp.o.d -o CMakeFiles/macrosip.dir/models/Settings.cpp.o -c /home/runner/work/MacroSIP/MacroSIP/src/models/Settings.cpp
 
 src/CMakeFiles/macrosip.dir/models/Settings.cpp.i: cmake_force
@@ -201,7 +194,7 @@ src/CMakeFiles/macrosip.dir/models/Settings.cpp.s: cmake_force
 src/CMakeFiles/macrosip.dir/sip/SipManager.cpp.o: src/CMakeFiles/macrosip.dir/flags.make
 src/CMakeFiles/macrosip.dir/sip/SipManager.cpp.o: /home/runner/work/MacroSIP/MacroSIP/src/sip/SipManager.cpp
 src/CMakeFiles/macrosip.dir/sip/SipManager.cpp.o: src/CMakeFiles/macrosip.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/runner/work/MacroSIP/MacroSIP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object src/CMakeFiles/macrosip.dir/sip/SipManager.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/runner/work/MacroSIP/MacroSIP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object src/CMakeFiles/macrosip.dir/sip/SipManager.cpp.o"
 	cd /home/runner/work/MacroSIP/MacroSIP/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/macrosip.dir/sip/SipManager.cpp.o -MF CMakeFiles/macrosip.dir/sip/SipManager.cpp.o.d -o CMakeFiles/macrosip.dir/sip/SipManager.cpp.o -c /home/runner/work/MacroSIP/MacroSIP/src/sip/SipManager.cpp
 
 src/CMakeFiles/macrosip.dir/sip/SipManager.cpp.i: cmake_force
@@ -215,7 +208,7 @@ src/CMakeFiles/macrosip.dir/sip/SipManager.cpp.s: cmake_force
 src/CMakeFiles/macrosip.dir/sip/SipCall.cpp.o: src/CMakeFiles/macrosip.dir/flags.make
 src/CMakeFiles/macrosip.dir/sip/SipCall.cpp.o: /home/runner/work/MacroSIP/MacroSIP/src/sip/SipCall.cpp
 src/CMakeFiles/macrosip.dir/sip/SipCall.cpp.o: src/CMakeFiles/macrosip.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/runner/work/MacroSIP/MacroSIP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object src/CMakeFiles/macrosip.dir/sip/SipCall.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/runner/work/MacroSIP/MacroSIP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object src/CMakeFiles/macrosip.dir/sip/SipCall.cpp.o"
 	cd /home/runner/work/MacroSIP/MacroSIP/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/macrosip.dir/sip/SipCall.cpp.o -MF CMakeFiles/macrosip.dir/sip/SipCall.cpp.o.d -o CMakeFiles/macrosip.dir/sip/SipCall.cpp.o -c /home/runner/work/MacroSIP/MacroSIP/src/sip/SipCall.cpp
 
 src/CMakeFiles/macrosip.dir/sip/SipCall.cpp.i: cmake_force
@@ -229,7 +222,7 @@ src/CMakeFiles/macrosip.dir/sip/SipCall.cpp.s: cmake_force
 src/CMakeFiles/macrosip.dir/sip/SipAccount.cpp.o: src/CMakeFiles/macrosip.dir/flags.make
 src/CMakeFiles/macrosip.dir/sip/SipAccount.cpp.o: /home/runner/work/MacroSIP/MacroSIP/src/sip/SipAccount.cpp
 src/CMakeFiles/macrosip.dir/sip/SipAccount.cpp.o: src/CMakeFiles/macrosip.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/runner/work/MacroSIP/MacroSIP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object src/CMakeFiles/macrosip.dir/sip/SipAccount.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/runner/work/MacroSIP/MacroSIP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object src/CMakeFiles/macrosip.dir/sip/SipAccount.cpp.o"
 	cd /home/runner/work/MacroSIP/MacroSIP/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/macrosip.dir/sip/SipAccount.cpp.o -MF CMakeFiles/macrosip.dir/sip/SipAccount.cpp.o.d -o CMakeFiles/macrosip.dir/sip/SipAccount.cpp.o -c /home/runner/work/MacroSIP/MacroSIP/src/sip/SipAccount.cpp
 
 src/CMakeFiles/macrosip.dir/sip/SipAccount.cpp.i: cmake_force
@@ -243,7 +236,7 @@ src/CMakeFiles/macrosip.dir/sip/SipAccount.cpp.s: cmake_force
 src/CMakeFiles/macrosip.dir/dialogs/AccountDialog.cpp.o: src/CMakeFiles/macrosip.dir/flags.make
 src/CMakeFiles/macrosip.dir/dialogs/AccountDialog.cpp.o: /home/runner/work/MacroSIP/MacroSIP/src/dialogs/AccountDialog.cpp
 src/CMakeFiles/macrosip.dir/dialogs/AccountDialog.cpp.o: src/CMakeFiles/macrosip.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/runner/work/MacroSIP/MacroSIP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object src/CMakeFiles/macrosip.dir/dialogs/AccountDialog.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/runner/work/MacroSIP/MacroSIP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object src/CMakeFiles/macrosip.dir/dialogs/AccountDialog.cpp.o"
 	cd /home/runner/work/MacroSIP/MacroSIP/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/macrosip.dir/dialogs/AccountDialog.cpp.o -MF CMakeFiles/macrosip.dir/dialogs/AccountDialog.cpp.o.d -o CMakeFiles/macrosip.dir/dialogs/AccountDialog.cpp.o -c /home/runner/work/MacroSIP/MacroSIP/src/dialogs/AccountDialog.cpp
 
 src/CMakeFiles/macrosip.dir/dialogs/AccountDialog.cpp.i: cmake_force
@@ -257,7 +250,7 @@ src/CMakeFiles/macrosip.dir/dialogs/AccountDialog.cpp.s: cmake_force
 src/CMakeFiles/macrosip.dir/dialogs/SettingsDialog.cpp.o: src/CMakeFiles/macrosip.dir/flags.make
 src/CMakeFiles/macrosip.dir/dialogs/SettingsDialog.cpp.o: /home/runner/work/MacroSIP/MacroSIP/src/dialogs/SettingsDialog.cpp
 src/CMakeFiles/macrosip.dir/dialogs/SettingsDialog.cpp.o: src/CMakeFiles/macrosip.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/runner/work/MacroSIP/MacroSIP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object src/CMakeFiles/macrosip.dir/dialogs/SettingsDialog.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/runner/work/MacroSIP/MacroSIP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object src/CMakeFiles/macrosip.dir/dialogs/SettingsDialog.cpp.o"
 	cd /home/runner/work/MacroSIP/MacroSIP/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/macrosip.dir/dialogs/SettingsDialog.cpp.o -MF CMakeFiles/macrosip.dir/dialogs/SettingsDialog.cpp.o.d -o CMakeFiles/macrosip.dir/dialogs/SettingsDialog.cpp.o -c /home/runner/work/MacroSIP/MacroSIP/src/dialogs/SettingsDialog.cpp
 
 src/CMakeFiles/macrosip.dir/dialogs/SettingsDialog.cpp.i: cmake_force
@@ -271,7 +264,7 @@ src/CMakeFiles/macrosip.dir/dialogs/SettingsDialog.cpp.s: cmake_force
 src/CMakeFiles/macrosip.dir/dialogs/MessagesDialog.cpp.o: src/CMakeFiles/macrosip.dir/flags.make
 src/CMakeFiles/macrosip.dir/dialogs/MessagesDialog.cpp.o: /home/runner/work/MacroSIP/MacroSIP/src/dialogs/MessagesDialog.cpp
 src/CMakeFiles/macrosip.dir/dialogs/MessagesDialog.cpp.o: src/CMakeFiles/macrosip.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/runner/work/MacroSIP/MacroSIP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object src/CMakeFiles/macrosip.dir/dialogs/MessagesDialog.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/runner/work/MacroSIP/MacroSIP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object src/CMakeFiles/macrosip.dir/dialogs/MessagesDialog.cpp.o"
 	cd /home/runner/work/MacroSIP/MacroSIP/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/macrosip.dir/dialogs/MessagesDialog.cpp.o -MF CMakeFiles/macrosip.dir/dialogs/MessagesDialog.cpp.o.d -o CMakeFiles/macrosip.dir/dialogs/MessagesDialog.cpp.o -c /home/runner/work/MacroSIP/MacroSIP/src/dialogs/MessagesDialog.cpp
 
 src/CMakeFiles/macrosip.dir/dialogs/MessagesDialog.cpp.i: cmake_force
@@ -285,7 +278,7 @@ src/CMakeFiles/macrosip.dir/dialogs/MessagesDialog.cpp.s: cmake_force
 src/CMakeFiles/macrosip.dir/dialogs/RingingDialog.cpp.o: src/CMakeFiles/macrosip.dir/flags.make
 src/CMakeFiles/macrosip.dir/dialogs/RingingDialog.cpp.o: /home/runner/work/MacroSIP/MacroSIP/src/dialogs/RingingDialog.cpp
 src/CMakeFiles/macrosip.dir/dialogs/RingingDialog.cpp.o: src/CMakeFiles/macrosip.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/runner/work/MacroSIP/MacroSIP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object src/CMakeFiles/macrosip.dir/dialogs/RingingDialog.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/runner/work/MacroSIP/MacroSIP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object src/CMakeFiles/macrosip.dir/dialogs/RingingDialog.cpp.o"
 	cd /home/runner/work/MacroSIP/MacroSIP/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/macrosip.dir/dialogs/RingingDialog.cpp.o -MF CMakeFiles/macrosip.dir/dialogs/RingingDialog.cpp.o.d -o CMakeFiles/macrosip.dir/dialogs/RingingDialog.cpp.o -c /home/runner/work/MacroSIP/MacroSIP/src/dialogs/RingingDialog.cpp
 
 src/CMakeFiles/macrosip.dir/dialogs/RingingDialog.cpp.i: cmake_force
@@ -299,7 +292,7 @@ src/CMakeFiles/macrosip.dir/dialogs/RingingDialog.cpp.s: cmake_force
 src/CMakeFiles/macrosip.dir/dialogs/TransferDialog.cpp.o: src/CMakeFiles/macrosip.dir/flags.make
 src/CMakeFiles/macrosip.dir/dialogs/TransferDialog.cpp.o: /home/runner/work/MacroSIP/MacroSIP/src/dialogs/TransferDialog.cpp
 src/CMakeFiles/macrosip.dir/dialogs/TransferDialog.cpp.o: src/CMakeFiles/macrosip.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/runner/work/MacroSIP/MacroSIP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object src/CMakeFiles/macrosip.dir/dialogs/TransferDialog.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/runner/work/MacroSIP/MacroSIP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object src/CMakeFiles/macrosip.dir/dialogs/TransferDialog.cpp.o"
 	cd /home/runner/work/MacroSIP/MacroSIP/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/macrosip.dir/dialogs/TransferDialog.cpp.o -MF CMakeFiles/macrosip.dir/dialogs/TransferDialog.cpp.o.d -o CMakeFiles/macrosip.dir/dialogs/TransferDialog.cpp.o -c /home/runner/work/MacroSIP/MacroSIP/src/dialogs/TransferDialog.cpp
 
 src/CMakeFiles/macrosip.dir/dialogs/TransferDialog.cpp.i: cmake_force
@@ -313,7 +306,7 @@ src/CMakeFiles/macrosip.dir/dialogs/TransferDialog.cpp.s: cmake_force
 src/CMakeFiles/macrosip.dir/dialogs/AddContactDialog.cpp.o: src/CMakeFiles/macrosip.dir/flags.make
 src/CMakeFiles/macrosip.dir/dialogs/AddContactDialog.cpp.o: /home/runner/work/MacroSIP/MacroSIP/src/dialogs/AddContactDialog.cpp
 src/CMakeFiles/macrosip.dir/dialogs/AddContactDialog.cpp.o: src/CMakeFiles/macrosip.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/runner/work/MacroSIP/MacroSIP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object src/CMakeFiles/macrosip.dir/dialogs/AddContactDialog.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/runner/work/MacroSIP/MacroSIP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object src/CMakeFiles/macrosip.dir/dialogs/AddContactDialog.cpp.o"
 	cd /home/runner/work/MacroSIP/MacroSIP/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/macrosip.dir/dialogs/AddContactDialog.cpp.o -MF CMakeFiles/macrosip.dir/dialogs/AddContactDialog.cpp.o.d -o CMakeFiles/macrosip.dir/dialogs/AddContactDialog.cpp.o -c /home/runner/work/MacroSIP/MacroSIP/src/dialogs/AddContactDialog.cpp
 
 src/CMakeFiles/macrosip.dir/dialogs/AddContactDialog.cpp.i: cmake_force
@@ -327,7 +320,7 @@ src/CMakeFiles/macrosip.dir/dialogs/AddContactDialog.cpp.s: cmake_force
 src/CMakeFiles/macrosip.dir/dialogs/AAOptionsDialog.cpp.o: src/CMakeFiles/macrosip.dir/flags.make
 src/CMakeFiles/macrosip.dir/dialogs/AAOptionsDialog.cpp.o: /home/runner/work/MacroSIP/MacroSIP/src/dialogs/AAOptionsDialog.cpp
 src/CMakeFiles/macrosip.dir/dialogs/AAOptionsDialog.cpp.o: src/CMakeFiles/macrosip.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/runner/work/MacroSIP/MacroSIP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object src/CMakeFiles/macrosip.dir/dialogs/AAOptionsDialog.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/runner/work/MacroSIP/MacroSIP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object src/CMakeFiles/macrosip.dir/dialogs/AAOptionsDialog.cpp.o"
 	cd /home/runner/work/MacroSIP/MacroSIP/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/macrosip.dir/dialogs/AAOptionsDialog.cpp.o -MF CMakeFiles/macrosip.dir/dialogs/AAOptionsDialog.cpp.o.d -o CMakeFiles/macrosip.dir/dialogs/AAOptionsDialog.cpp.o -c /home/runner/work/MacroSIP/MacroSIP/src/dialogs/AAOptionsDialog.cpp
 
 src/CMakeFiles/macrosip.dir/dialogs/AAOptionsDialog.cpp.i: cmake_force
@@ -341,7 +334,7 @@ src/CMakeFiles/macrosip.dir/dialogs/AAOptionsDialog.cpp.s: cmake_force
 src/CMakeFiles/macrosip.dir/dialogs/FeatureCodesDialog.cpp.o: src/CMakeFiles/macrosip.dir/flags.make
 src/CMakeFiles/macrosip.dir/dialogs/FeatureCodesDialog.cpp.o: /home/runner/work/MacroSIP/MacroSIP/src/dialogs/FeatureCodesDialog.cpp
 src/CMakeFiles/macrosip.dir/dialogs/FeatureCodesDialog.cpp.o: src/CMakeFiles/macrosip.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/runner/work/MacroSIP/MacroSIP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object src/CMakeFiles/macrosip.dir/dialogs/FeatureCodesDialog.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/runner/work/MacroSIP/MacroSIP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object src/CMakeFiles/macrosip.dir/dialogs/FeatureCodesDialog.cpp.o"
 	cd /home/runner/work/MacroSIP/MacroSIP/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/macrosip.dir/dialogs/FeatureCodesDialog.cpp.o -MF CMakeFiles/macrosip.dir/dialogs/FeatureCodesDialog.cpp.o.d -o CMakeFiles/macrosip.dir/dialogs/FeatureCodesDialog.cpp.o -c /home/runner/work/MacroSIP/MacroSIP/src/dialogs/FeatureCodesDialog.cpp
 
 src/CMakeFiles/macrosip.dir/dialogs/FeatureCodesDialog.cpp.i: cmake_force
@@ -355,7 +348,7 @@ src/CMakeFiles/macrosip.dir/dialogs/FeatureCodesDialog.cpp.s: cmake_force
 src/CMakeFiles/macrosip.dir/dialogs/ShortcutsDialog.cpp.o: src/CMakeFiles/macrosip.dir/flags.make
 src/CMakeFiles/macrosip.dir/dialogs/ShortcutsDialog.cpp.o: /home/runner/work/MacroSIP/MacroSIP/src/dialogs/ShortcutsDialog.cpp
 src/CMakeFiles/macrosip.dir/dialogs/ShortcutsDialog.cpp.o: src/CMakeFiles/macrosip.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/runner/work/MacroSIP/MacroSIP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building CXX object src/CMakeFiles/macrosip.dir/dialogs/ShortcutsDialog.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/runner/work/MacroSIP/MacroSIP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object src/CMakeFiles/macrosip.dir/dialogs/ShortcutsDialog.cpp.o"
 	cd /home/runner/work/MacroSIP/MacroSIP/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/macrosip.dir/dialogs/ShortcutsDialog.cpp.o -MF CMakeFiles/macrosip.dir/dialogs/ShortcutsDialog.cpp.o.d -o CMakeFiles/macrosip.dir/dialogs/ShortcutsDialog.cpp.o -c /home/runner/work/MacroSIP/MacroSIP/src/dialogs/ShortcutsDialog.cpp
 
 src/CMakeFiles/macrosip.dir/dialogs/ShortcutsDialog.cpp.i: cmake_force
@@ -369,7 +362,7 @@ src/CMakeFiles/macrosip.dir/dialogs/ShortcutsDialog.cpp.s: cmake_force
 src/CMakeFiles/macrosip.dir/widgets/DialerWidget.cpp.o: src/CMakeFiles/macrosip.dir/flags.make
 src/CMakeFiles/macrosip.dir/widgets/DialerWidget.cpp.o: /home/runner/work/MacroSIP/MacroSIP/src/widgets/DialerWidget.cpp
 src/CMakeFiles/macrosip.dir/widgets/DialerWidget.cpp.o: src/CMakeFiles/macrosip.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/runner/work/MacroSIP/MacroSIP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building CXX object src/CMakeFiles/macrosip.dir/widgets/DialerWidget.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/runner/work/MacroSIP/MacroSIP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building CXX object src/CMakeFiles/macrosip.dir/widgets/DialerWidget.cpp.o"
 	cd /home/runner/work/MacroSIP/MacroSIP/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/macrosip.dir/widgets/DialerWidget.cpp.o -MF CMakeFiles/macrosip.dir/widgets/DialerWidget.cpp.o.d -o CMakeFiles/macrosip.dir/widgets/DialerWidget.cpp.o -c /home/runner/work/MacroSIP/MacroSIP/src/widgets/DialerWidget.cpp
 
 src/CMakeFiles/macrosip.dir/widgets/DialerWidget.cpp.i: cmake_force
@@ -383,7 +376,7 @@ src/CMakeFiles/macrosip.dir/widgets/DialerWidget.cpp.s: cmake_force
 src/CMakeFiles/macrosip.dir/widgets/ContactsWidget.cpp.o: src/CMakeFiles/macrosip.dir/flags.make
 src/CMakeFiles/macrosip.dir/widgets/ContactsWidget.cpp.o: /home/runner/work/MacroSIP/MacroSIP/src/widgets/ContactsWidget.cpp
 src/CMakeFiles/macrosip.dir/widgets/ContactsWidget.cpp.o: src/CMakeFiles/macrosip.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/runner/work/MacroSIP/MacroSIP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Building CXX object src/CMakeFiles/macrosip.dir/widgets/ContactsWidget.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/runner/work/MacroSIP/MacroSIP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building CXX object src/CMakeFiles/macrosip.dir/widgets/ContactsWidget.cpp.o"
 	cd /home/runner/work/MacroSIP/MacroSIP/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/macrosip.dir/widgets/ContactsWidget.cpp.o -MF CMakeFiles/macrosip.dir/widgets/ContactsWidget.cpp.o.d -o CMakeFiles/macrosip.dir/widgets/ContactsWidget.cpp.o -c /home/runner/work/MacroSIP/MacroSIP/src/widgets/ContactsWidget.cpp
 
 src/CMakeFiles/macrosip.dir/widgets/ContactsWidget.cpp.i: cmake_force
@@ -397,7 +390,7 @@ src/CMakeFiles/macrosip.dir/widgets/ContactsWidget.cpp.s: cmake_force
 src/CMakeFiles/macrosip.dir/widgets/CallsWidget.cpp.o: src/CMakeFiles/macrosip.dir/flags.make
 src/CMakeFiles/macrosip.dir/widgets/CallsWidget.cpp.o: /home/runner/work/MacroSIP/MacroSIP/src/widgets/CallsWidget.cpp
 src/CMakeFiles/macrosip.dir/widgets/CallsWidget.cpp.o: src/CMakeFiles/macrosip.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/runner/work/MacroSIP/MacroSIP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_25) "Building CXX object src/CMakeFiles/macrosip.dir/widgets/CallsWidget.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/runner/work/MacroSIP/MacroSIP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Building CXX object src/CMakeFiles/macrosip.dir/widgets/CallsWidget.cpp.o"
 	cd /home/runner/work/MacroSIP/MacroSIP/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/macrosip.dir/widgets/CallsWidget.cpp.o -MF CMakeFiles/macrosip.dir/widgets/CallsWidget.cpp.o.d -o CMakeFiles/macrosip.dir/widgets/CallsWidget.cpp.o -c /home/runner/work/MacroSIP/MacroSIP/src/widgets/CallsWidget.cpp
 
 src/CMakeFiles/macrosip.dir/widgets/CallsWidget.cpp.i: cmake_force
@@ -411,7 +404,7 @@ src/CMakeFiles/macrosip.dir/widgets/CallsWidget.cpp.s: cmake_force
 src/CMakeFiles/macrosip.dir/widgets/ClosableTabWidget.cpp.o: src/CMakeFiles/macrosip.dir/flags.make
 src/CMakeFiles/macrosip.dir/widgets/ClosableTabWidget.cpp.o: /home/runner/work/MacroSIP/MacroSIP/src/widgets/ClosableTabWidget.cpp
 src/CMakeFiles/macrosip.dir/widgets/ClosableTabWidget.cpp.o: src/CMakeFiles/macrosip.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/runner/work/MacroSIP/MacroSIP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_26) "Building CXX object src/CMakeFiles/macrosip.dir/widgets/ClosableTabWidget.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/runner/work/MacroSIP/MacroSIP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_25) "Building CXX object src/CMakeFiles/macrosip.dir/widgets/ClosableTabWidget.cpp.o"
 	cd /home/runner/work/MacroSIP/MacroSIP/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/macrosip.dir/widgets/ClosableTabWidget.cpp.o -MF CMakeFiles/macrosip.dir/widgets/ClosableTabWidget.cpp.o.d -o CMakeFiles/macrosip.dir/widgets/ClosableTabWidget.cpp.o -c /home/runner/work/MacroSIP/MacroSIP/src/widgets/ClosableTabWidget.cpp
 
 src/CMakeFiles/macrosip.dir/widgets/ClosableTabWidget.cpp.i: cmake_force
@@ -425,7 +418,7 @@ src/CMakeFiles/macrosip.dir/widgets/ClosableTabWidget.cpp.s: cmake_force
 src/CMakeFiles/macrosip.dir/widgets/LevelsSlider.cpp.o: src/CMakeFiles/macrosip.dir/flags.make
 src/CMakeFiles/macrosip.dir/widgets/LevelsSlider.cpp.o: /home/runner/work/MacroSIP/MacroSIP/src/widgets/LevelsSlider.cpp
 src/CMakeFiles/macrosip.dir/widgets/LevelsSlider.cpp.o: src/CMakeFiles/macrosip.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/runner/work/MacroSIP/MacroSIP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_27) "Building CXX object src/CMakeFiles/macrosip.dir/widgets/LevelsSlider.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/runner/work/MacroSIP/MacroSIP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_26) "Building CXX object src/CMakeFiles/macrosip.dir/widgets/LevelsSlider.cpp.o"
 	cd /home/runner/work/MacroSIP/MacroSIP/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/macrosip.dir/widgets/LevelsSlider.cpp.o -MF CMakeFiles/macrosip.dir/widgets/LevelsSlider.cpp.o.d -o CMakeFiles/macrosip.dir/widgets/LevelsSlider.cpp.o -c /home/runner/work/MacroSIP/MacroSIP/src/widgets/LevelsSlider.cpp
 
 src/CMakeFiles/macrosip.dir/widgets/LevelsSlider.cpp.i: cmake_force
@@ -439,7 +432,7 @@ src/CMakeFiles/macrosip.dir/widgets/LevelsSlider.cpp.s: cmake_force
 src/CMakeFiles/macrosip.dir/utils/Crypto.cpp.o: src/CMakeFiles/macrosip.dir/flags.make
 src/CMakeFiles/macrosip.dir/utils/Crypto.cpp.o: /home/runner/work/MacroSIP/MacroSIP/src/utils/Crypto.cpp
 src/CMakeFiles/macrosip.dir/utils/Crypto.cpp.o: src/CMakeFiles/macrosip.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/runner/work/MacroSIP/MacroSIP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_28) "Building CXX object src/CMakeFiles/macrosip.dir/utils/Crypto.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/runner/work/MacroSIP/MacroSIP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_27) "Building CXX object src/CMakeFiles/macrosip.dir/utils/Crypto.cpp.o"
 	cd /home/runner/work/MacroSIP/MacroSIP/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/macrosip.dir/utils/Crypto.cpp.o -MF CMakeFiles/macrosip.dir/utils/Crypto.cpp.o.d -o CMakeFiles/macrosip.dir/utils/Crypto.cpp.o -c /home/runner/work/MacroSIP/MacroSIP/src/utils/Crypto.cpp
 
 src/CMakeFiles/macrosip.dir/utils/Crypto.cpp.i: cmake_force
@@ -453,7 +446,7 @@ src/CMakeFiles/macrosip.dir/utils/Crypto.cpp.s: cmake_force
 src/CMakeFiles/macrosip.dir/utils/CsvFile.cpp.o: src/CMakeFiles/macrosip.dir/flags.make
 src/CMakeFiles/macrosip.dir/utils/CsvFile.cpp.o: /home/runner/work/MacroSIP/MacroSIP/src/utils/CsvFile.cpp
 src/CMakeFiles/macrosip.dir/utils/CsvFile.cpp.o: src/CMakeFiles/macrosip.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/runner/work/MacroSIP/MacroSIP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_29) "Building CXX object src/CMakeFiles/macrosip.dir/utils/CsvFile.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/runner/work/MacroSIP/MacroSIP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_28) "Building CXX object src/CMakeFiles/macrosip.dir/utils/CsvFile.cpp.o"
 	cd /home/runner/work/MacroSIP/MacroSIP/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/macrosip.dir/utils/CsvFile.cpp.o -MF CMakeFiles/macrosip.dir/utils/CsvFile.cpp.o.d -o CMakeFiles/macrosip.dir/utils/CsvFile.cpp.o -c /home/runner/work/MacroSIP/MacroSIP/src/utils/CsvFile.cpp
 
 src/CMakeFiles/macrosip.dir/utils/CsvFile.cpp.i: cmake_force
@@ -467,7 +460,7 @@ src/CMakeFiles/macrosip.dir/utils/CsvFile.cpp.s: cmake_force
 src/CMakeFiles/macrosip.dir/utils/LangPack.cpp.o: src/CMakeFiles/macrosip.dir/flags.make
 src/CMakeFiles/macrosip.dir/utils/LangPack.cpp.o: /home/runner/work/MacroSIP/MacroSIP/src/utils/LangPack.cpp
 src/CMakeFiles/macrosip.dir/utils/LangPack.cpp.o: src/CMakeFiles/macrosip.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/runner/work/MacroSIP/MacroSIP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_30) "Building CXX object src/CMakeFiles/macrosip.dir/utils/LangPack.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/runner/work/MacroSIP/MacroSIP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_29) "Building CXX object src/CMakeFiles/macrosip.dir/utils/LangPack.cpp.o"
 	cd /home/runner/work/MacroSIP/MacroSIP/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/macrosip.dir/utils/LangPack.cpp.o -MF CMakeFiles/macrosip.dir/utils/LangPack.cpp.o.d -o CMakeFiles/macrosip.dir/utils/LangPack.cpp.o -c /home/runner/work/MacroSIP/MacroSIP/src/utils/LangPack.cpp
 
 src/CMakeFiles/macrosip.dir/utils/LangPack.cpp.i: cmake_force
@@ -481,7 +474,7 @@ src/CMakeFiles/macrosip.dir/utils/LangPack.cpp.s: cmake_force
 src/CMakeFiles/macrosip.dir/macrosip_autogen/3YJK5W5UP7/qrc_resources.cpp.o: src/CMakeFiles/macrosip.dir/flags.make
 src/CMakeFiles/macrosip.dir/macrosip_autogen/3YJK5W5UP7/qrc_resources.cpp.o: src/macrosip_autogen/3YJK5W5UP7/qrc_resources.cpp
 src/CMakeFiles/macrosip.dir/macrosip_autogen/3YJK5W5UP7/qrc_resources.cpp.o: src/CMakeFiles/macrosip.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/runner/work/MacroSIP/MacroSIP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_31) "Building CXX object src/CMakeFiles/macrosip.dir/macrosip_autogen/3YJK5W5UP7/qrc_resources.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/runner/work/MacroSIP/MacroSIP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_30) "Building CXX object src/CMakeFiles/macrosip.dir/macrosip_autogen/3YJK5W5UP7/qrc_resources.cpp.o"
 	cd /home/runner/work/MacroSIP/MacroSIP/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/macrosip.dir/macrosip_autogen/3YJK5W5UP7/qrc_resources.cpp.o -MF CMakeFiles/macrosip.dir/macrosip_autogen/3YJK5W5UP7/qrc_resources.cpp.o.d -o CMakeFiles/macrosip.dir/macrosip_autogen/3YJK5W5UP7/qrc_resources.cpp.o -c /home/runner/work/MacroSIP/MacroSIP/build/src/macrosip_autogen/3YJK5W5UP7/qrc_resources.cpp
 
 src/CMakeFiles/macrosip.dir/macrosip_autogen/3YJK5W5UP7/qrc_resources.cpp.i: cmake_force
@@ -558,15 +551,17 @@ src/macrosip: src/CMakeFiles/macrosip.dir/utils/LangPack.cpp.o
 src/macrosip: src/CMakeFiles/macrosip.dir/macrosip_autogen/3YJK5W5UP7/qrc_resources.cpp.o
 src/macrosip: src/CMakeFiles/macrosip.dir/build.make
 src/macrosip: src/CMakeFiles/macrosip.dir/compiler_depend.ts
-src/macrosip: /usr/lib/x86_64-linux-gnu/libQt5Widgets.so.5.15.13
-src/macrosip: /usr/lib/x86_64-linux-gnu/libQt5Multimedia.so.5.15.13
+src/macrosip: /usr/lib/x86_64-linux-gnu/libQt6Widgets.so.6.4.2
+src/macrosip: /usr/lib/x86_64-linux-gnu/libQt6Multimedia.so.6.4.2
 src/macrosip: /usr/lib/x86_64-linux-gnu/libssl.so
 src/macrosip: /usr/lib/x86_64-linux-gnu/libcrypto.so
-src/macrosip: /usr/lib/x86_64-linux-gnu/libQt5Gui.so.5.15.13
-src/macrosip: /usr/lib/x86_64-linux-gnu/libQt5Network.so.5.15.13
-src/macrosip: /usr/lib/x86_64-linux-gnu/libQt5Core.so.5.15.13
+src/macrosip: /usr/lib/x86_64-linux-gnu/libQt6Gui.so.6.4.2
+src/macrosip: /usr/lib/x86_64-linux-gnu/libGLX.so
+src/macrosip: /usr/lib/x86_64-linux-gnu/libOpenGL.so
+src/macrosip: /usr/lib/x86_64-linux-gnu/libQt6Network.so.6.4.2
+src/macrosip: /usr/lib/x86_64-linux-gnu/libQt6Core.so.6.4.2
 src/macrosip: src/CMakeFiles/macrosip.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/runner/work/MacroSIP/MacroSIP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_32) "Linking CXX executable macrosip"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/runner/work/MacroSIP/MacroSIP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_31) "Linking CXX executable macrosip"
 	cd /home/runner/work/MacroSIP/MacroSIP/build/src && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/macrosip.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -578,7 +573,6 @@ src/CMakeFiles/macrosip.dir/clean:
 .PHONY : src/CMakeFiles/macrosip.dir/clean
 
 src/CMakeFiles/macrosip.dir/depend: src/macrosip_autogen/3YJK5W5UP7/qrc_resources.cpp
-src/CMakeFiles/macrosip.dir/depend: src/macrosip_autogen/timestamp
 	cd /home/runner/work/MacroSIP/MacroSIP/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/runner/work/MacroSIP/MacroSIP /home/runner/work/MacroSIP/MacroSIP/src /home/runner/work/MacroSIP/MacroSIP/build /home/runner/work/MacroSIP/MacroSIP/build/src /home/runner/work/MacroSIP/MacroSIP/build/src/CMakeFiles/macrosip.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : src/CMakeFiles/macrosip.dir/depend
 

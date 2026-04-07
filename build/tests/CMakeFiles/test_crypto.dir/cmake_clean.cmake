@@ -11,8 +11,6 @@ file(REMOVE_RECURSE
   "CMakeFiles/test_crypto.dir/test_crypto_autogen/mocs_compilation.cpp.o.d"
   "test_crypto"
   "test_crypto.pdb"
-  "test_crypto_autogen/mocs_compilation.cpp"
-  "test_crypto_autogen/timestamp"
 )
 
 # Per-language clean rules from dependency scanning.

@@ -8,7 +8,6 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "" "tests/test_langpack_autogen/timestamp" "custom" "tests/test_langpack_autogen/deps"
   "/home/runner/work/MacroSIP/MacroSIP/src/utils/LangPack.cpp" "tests/CMakeFiles/test_langpack.dir/__/src/utils/LangPack.cpp.o" "gcc" "tests/CMakeFiles/test_langpack.dir/__/src/utils/LangPack.cpp.o.d"
   "/home/runner/work/MacroSIP/MacroSIP/tests/test_langpack.cpp" "tests/CMakeFiles/test_langpack.dir/test_langpack.cpp.o" "gcc" "tests/CMakeFiles/test_langpack.dir/test_langpack.cpp.o.d"
   "/home/runner/work/MacroSIP/MacroSIP/build/tests/test_langpack_autogen/mocs_compilation.cpp" "tests/CMakeFiles/test_langpack.dir/test_langpack_autogen/mocs_compilation.cpp.o" "gcc" "tests/CMakeFiles/test_langpack.dir/test_langpack_autogen/mocs_compilation.cpp.o.d"

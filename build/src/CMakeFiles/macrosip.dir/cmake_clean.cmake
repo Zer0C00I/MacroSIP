@@ -64,8 +64,6 @@ file(REMOVE_RECURSE
   "macrosip"
   "macrosip.pdb"
   "macrosip_autogen/3YJK5W5UP7/qrc_resources.cpp"
-  "macrosip_autogen/mocs_compilation.cpp"
-  "macrosip_autogen/timestamp"
 )
 
 # Per-language clean rules from dependency scanning.

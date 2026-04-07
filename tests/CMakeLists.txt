@@ -1,10 +1,5 @@
-find_package(Qt6 COMPONENTS Test QUIET)
-if(NOT Qt6_FOUND)
-    find_package(Qt5 5.15 REQUIRED COMPONENTS Test)
-    set(QT_TEST_LIBS Qt5::Test Qt5::Core)
-else()
-    set(QT_TEST_LIBS Qt6::Test Qt6::Core)
-endif()
+find_package(Qt6 REQUIRED COMPONENTS Test)
+set(QT_TEST_LIBS Qt6::Test Qt6::Core)
 
 # Helper function to add a test
 function(add_macrosip_test test_name test_source)

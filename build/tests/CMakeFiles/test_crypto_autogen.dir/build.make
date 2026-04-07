@@ -68,8 +68,8 @@ include tests/CMakeFiles/test_crypto_autogen.dir/progress.make
 
 tests/CMakeFiles/test_crypto_autogen: tests/test_crypto_autogen/timestamp
 
-tests/test_crypto_autogen/timestamp: /usr/lib/qt5/bin/moc
-tests/test_crypto_autogen/timestamp: /usr/lib/qt5/bin/uic
+tests/test_crypto_autogen/timestamp: /usr/lib/qt6/libexec/moc
+tests/test_crypto_autogen/timestamp: /usr/lib/qt6/libexec/uic
 tests/test_crypto_autogen/timestamp: tests/CMakeFiles/test_crypto_autogen.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/runner/work/MacroSIP/MacroSIP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Automatic MOC and UIC for target test_crypto"
 	cd /home/runner/work/MacroSIP/MacroSIP/build/tests && /usr/local/bin/cmake -E cmake_autogen /home/runner/work/MacroSIP/MacroSIP/build/tests/CMakeFiles/test_crypto_autogen.dir/AutogenInfo.json Release

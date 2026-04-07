@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.16)
+cmake_minimum_required(VERSION 3.19)
 project(MacroSIP VERSION 3.22.3 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
@@ -44,15 +44,9 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
-find_package(Qt6 COMPONENTS Core Gui Widgets Network Multimedia QUIET)
-if(NOT Qt6_FOUND)
-    find_package(Qt5 5.15 REQUIRED COMPONENTS Core Gui Widgets Network Multimedia)
-    set(QT_LIBS Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Network Qt5::Multimedia)
-    message(STATUS "Using Qt5")
-else()
-    set(QT_LIBS Qt6::Core Qt6::Gui Qt6::Widgets Qt6::Network Qt6::Multimedia)
-    message(STATUS "Using Qt6")
-endif()
+find_package(Qt6 REQUIRED COMPONENTS Core Gui Widgets Network Multimedia)
+set(QT_LIBS Qt6::Core Qt6::Gui Qt6::Widgets Qt6::Network Qt6::Multimedia)
+message(STATUS "Using Qt ${Qt6_VERSION}")
 
 # ---------- Optional PJSIP ----------
 find_package(PkgConfig QUIET)

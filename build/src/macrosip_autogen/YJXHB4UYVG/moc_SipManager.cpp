@@ -1,86 +1,136 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'SipManager.h'
 **
-** Created by: The Qt Meta Object Compiler version 67 (Qt 5.15.13)
+** Created by: The Qt Meta Object Compiler version 68 (Qt 6.4.2)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
 #include <memory>
 #include "../../../../src/sip/SipManager.h"
-#include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'SipManager.h' doesn't include <QObject>."
-#elif Q_MOC_OUTPUT_REVISION != 67
-#error "This file was generated using the moc from 5.15.13. It"
+#elif Q_MOC_OUTPUT_REVISION != 68
+#error "This file was generated using the moc from 6.4.2. It"
 #error "cannot be used with the include files from this version of Qt."
 #error "(The moc has changed too much.)"
+#endif
+
+#ifndef Q_CONSTINIT
+#define Q_CONSTINIT
 #endif
 
 QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
+namespace {
 struct qt_meta_stringdata_macrosip__SipManager_t {
-    QByteArrayData data[30];
-    char stringdata0[355];
+    uint offsetsAndSizes[60];
+    char stringdata0[21];
+    char stringdata1[12];
+    char stringdata2[1];
+    char stringdata3[17];
+    char stringdata4[13];
+    char stringdata5[7];
+    char stringdata6[5];
+    char stringdata7[5];
+    char stringdata8[17];
+    char stringdata9[10];
+    char stringdata10[6];
+    char stringdata11[22];
+    char stringdata12[12];
+    char stringdata13[7];
+    char stringdata14[25];
+    char stringdata15[10];
+    char stringdata16[18];
+    char stringdata17[5];
+    char stringdata18[7];
+    char stringdata19[18];
+    char stringdata20[4];
+    char stringdata21[15];
+    char stringdata22[16];
+    char stringdata23[3];
+    char stringdata24[5];
+    char stringdata25[14];
+    char stringdata26[16];
+    char stringdata27[12];
+    char stringdata28[12];
+    char stringdata29[20];
 };
-#define QT_MOC_LITERAL(idx, ofs, len) \
-    Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
-    qptrdiff(offsetof(qt_meta_stringdata_macrosip__SipManager_t, stringdata0) + ofs \
-        - idx * sizeof(QByteArrayData)) \
-    )
-static const qt_meta_stringdata_macrosip__SipManager_t qt_meta_stringdata_macrosip__SipManager = {
+#define QT_MOC_LITERAL(ofs, len) \
+    uint(sizeof(qt_meta_stringdata_macrosip__SipManager_t::offsetsAndSizes) + ofs), len 
+Q_CONSTINIT static const qt_meta_stringdata_macrosip__SipManager_t qt_meta_stringdata_macrosip__SipManager = {
     {
-QT_MOC_LITERAL(0, 0, 20), // "macrosip::SipManager"
-QT_MOC_LITERAL(1, 21, 11), // "initialized"
-QT_MOC_LITERAL(2, 33, 0), // ""
-QT_MOC_LITERAL(3, 34, 16), // "shutdownComplete"
-QT_MOC_LITERAL(4, 51, 12), // "incomingCall"
-QT_MOC_LITERAL(5, 64, 6), // "callId"
-QT_MOC_LITERAL(6, 71, 4), // "from"
-QT_MOC_LITERAL(7, 76, 4), // "name"
-QT_MOC_LITERAL(8, 81, 16), // "callStateChanged"
-QT_MOC_LITERAL(9, 98, 9), // "CallState"
-QT_MOC_LITERAL(10, 108, 5), // "state"
-QT_MOC_LITERAL(11, 114, 21), // "callMediaStateChanged"
-QT_MOC_LITERAL(12, 136, 11), // "MediaStatus"
-QT_MOC_LITERAL(13, 148, 6), // "status"
-QT_MOC_LITERAL(14, 155, 24), // "registrationStateChanged"
-QT_MOC_LITERAL(15, 180, 9), // "accountId"
-QT_MOC_LITERAL(16, 190, 17), // "RegistrationState"
-QT_MOC_LITERAL(17, 208, 4), // "code"
-QT_MOC_LITERAL(18, 213, 6), // "reason"
-QT_MOC_LITERAL(19, 220, 17), // "buddyStateChanged"
-QT_MOC_LITERAL(20, 238, 3), // "uri"
-QT_MOC_LITERAL(21, 242, 14), // "PresenceStatus"
-QT_MOC_LITERAL(22, 257, 15), // "messageReceived"
-QT_MOC_LITERAL(23, 273, 2), // "to"
-QT_MOC_LITERAL(24, 276, 4), // "body"
-QT_MOC_LITERAL(25, 281, 13), // "messageStatus"
-QT_MOC_LITERAL(26, 295, 15), // "mwiNotification"
-QT_MOC_LITERAL(27, 311, 11), // "newMessages"
-QT_MOC_LITERAL(28, 323, 11), // "oldMessages"
-QT_MOC_LITERAL(29, 335, 19) // "audioDevicesChanged"
-
+        QT_MOC_LITERAL(0, 20),  // "macrosip::SipManager"
+        QT_MOC_LITERAL(21, 11),  // "initialized"
+        QT_MOC_LITERAL(33, 0),  // ""
+        QT_MOC_LITERAL(34, 16),  // "shutdownComplete"
+        QT_MOC_LITERAL(51, 12),  // "incomingCall"
+        QT_MOC_LITERAL(64, 6),  // "callId"
+        QT_MOC_LITERAL(71, 4),  // "from"
+        QT_MOC_LITERAL(76, 4),  // "name"
+        QT_MOC_LITERAL(81, 16),  // "callStateChanged"
+        QT_MOC_LITERAL(98, 9),  // "CallState"
+        QT_MOC_LITERAL(108, 5),  // "state"
+        QT_MOC_LITERAL(114, 21),  // "callMediaStateChanged"
+        QT_MOC_LITERAL(136, 11),  // "MediaStatus"
+        QT_MOC_LITERAL(148, 6),  // "status"
+        QT_MOC_LITERAL(155, 24),  // "registrationStateChanged"
+        QT_MOC_LITERAL(180, 9),  // "accountId"
+        QT_MOC_LITERAL(190, 17),  // "RegistrationState"
+        QT_MOC_LITERAL(208, 4),  // "code"
+        QT_MOC_LITERAL(213, 6),  // "reason"
+        QT_MOC_LITERAL(220, 17),  // "buddyStateChanged"
+        QT_MOC_LITERAL(238, 3),  // "uri"
+        QT_MOC_LITERAL(242, 14),  // "PresenceStatus"
+        QT_MOC_LITERAL(257, 15),  // "messageReceived"
+        QT_MOC_LITERAL(273, 2),  // "to"
+        QT_MOC_LITERAL(276, 4),  // "body"
+        QT_MOC_LITERAL(281, 13),  // "messageStatus"
+        QT_MOC_LITERAL(295, 15),  // "mwiNotification"
+        QT_MOC_LITERAL(311, 11),  // "newMessages"
+        QT_MOC_LITERAL(323, 11),  // "oldMessages"
+        QT_MOC_LITERAL(335, 19)   // "audioDevicesChanged"
     },
-    "macrosip::SipManager\0initialized\0\0"
-    "shutdownComplete\0incomingCall\0callId\0"
-    "from\0name\0callStateChanged\0CallState\0"
-    "state\0callMediaStateChanged\0MediaStatus\0"
-    "status\0registrationStateChanged\0"
-    "accountId\0RegistrationState\0code\0"
-    "reason\0buddyStateChanged\0uri\0"
-    "PresenceStatus\0messageReceived\0to\0"
-    "body\0messageStatus\0mwiNotification\0"
-    "newMessages\0oldMessages\0audioDevicesChanged"
+    "macrosip::SipManager",
+    "initialized",
+    "",
+    "shutdownComplete",
+    "incomingCall",
+    "callId",
+    "from",
+    "name",
+    "callStateChanged",
+    "CallState",
+    "state",
+    "callMediaStateChanged",
+    "MediaStatus",
+    "status",
+    "registrationStateChanged",
+    "accountId",
+    "RegistrationState",
+    "code",
+    "reason",
+    "buddyStateChanged",
+    "uri",
+    "PresenceStatus",
+    "messageReceived",
+    "to",
+    "body",
+    "messageStatus",
+    "mwiNotification",
+    "newMessages",
+    "oldMessages",
+    "audioDevicesChanged"
 };
 #undef QT_MOC_LITERAL
+} // unnamed namespace
 
-static const uint qt_meta_data_macrosip__SipManager[] = {
+Q_CONSTINIT static const uint qt_meta_data_macrosip__SipManager[] = {
 
  // content:
-       8,       // revision
+      10,       // revision
        0,       // classname
        0,    0, // classinfo
       11,   14, // methods
@@ -90,18 +140,18 @@ static const uint qt_meta_data_macrosip__SipManager[] = {
        0,       // flags
       11,       // signalCount
 
- // signals: name, argc, parameters, tag, flags
-       1,    0,   69,    2, 0x06 /* Public */,
-       3,    0,   70,    2, 0x06 /* Public */,
-       4,    3,   71,    2, 0x06 /* Public */,
-       8,    2,   78,    2, 0x06 /* Public */,
-      11,    2,   83,    2, 0x06 /* Public */,
-      14,    4,   88,    2, 0x06 /* Public */,
-      19,    2,   97,    2, 0x06 /* Public */,
-      22,    3,  102,    2, 0x06 /* Public */,
-      25,    2,  109,    2, 0x06 /* Public */,
-      26,    3,  114,    2, 0x06 /* Public */,
-      29,    0,  121,    2, 0x06 /* Public */,
+ // signals: name, argc, parameters, tag, flags, initial metatype offsets
+       1,    0,   80,    2, 0x06,    1 /* Public */,
+       3,    0,   81,    2, 0x06,    2 /* Public */,
+       4,    3,   82,    2, 0x06,    3 /* Public */,
+       8,    2,   89,    2, 0x06,    7 /* Public */,
+      11,    2,   94,    2, 0x06,   10 /* Public */,
+      14,    4,   99,    2, 0x06,   13 /* Public */,
+      19,    2,  108,    2, 0x06,   18 /* Public */,
+      22,    3,  113,    2, 0x06,   21 /* Public */,
+      25,    2,  120,    2, 0x06,   25 /* Public */,
+      26,    3,  125,    2, 0x06,   28 /* Public */,
+      29,    0,  132,    2, 0x06,   32 /* Public */,
 
  // signals: parameters
     QMetaType::Void,
@@ -119,6 +169,62 @@ static const uint qt_meta_data_macrosip__SipManager[] = {
        0        // eod
 };
 
+Q_CONSTINIT const QMetaObject macrosip::SipManager::staticMetaObject = { {
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
+    qt_meta_stringdata_macrosip__SipManager.offsetsAndSizes,
+    qt_meta_data_macrosip__SipManager,
+    qt_static_metacall,
+    nullptr,
+    qt_incomplete_metaTypeArray<qt_meta_stringdata_macrosip__SipManager_t,
+        // Q_OBJECT / Q_GADGET
+        QtPrivate::TypeAndForceComplete<SipManager, std::true_type>,
+        // method 'initialized'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'shutdownComplete'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'incomingCall'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<int, std::false_type>,
+        QtPrivate::TypeAndForceComplete<const QString &, std::false_type>,
+        QtPrivate::TypeAndForceComplete<const QString &, std::false_type>,
+        // method 'callStateChanged'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<int, std::false_type>,
+        QtPrivate::TypeAndForceComplete<CallState, std::false_type>,
+        // method 'callMediaStateChanged'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<int, std::false_type>,
+        QtPrivate::TypeAndForceComplete<MediaStatus, std::false_type>,
+        // method 'registrationStateChanged'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<int, std::false_type>,
+        QtPrivate::TypeAndForceComplete<RegistrationState, std::false_type>,
+        QtPrivate::TypeAndForceComplete<int, std::false_type>,
+        QtPrivate::TypeAndForceComplete<const QString &, std::false_type>,
+        // method 'buddyStateChanged'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<const QString &, std::false_type>,
+        QtPrivate::TypeAndForceComplete<PresenceStatus, std::false_type>,
+        // method 'messageReceived'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<const QString &, std::false_type>,
+        QtPrivate::TypeAndForceComplete<const QString &, std::false_type>,
+        QtPrivate::TypeAndForceComplete<const QString &, std::false_type>,
+        // method 'messageStatus'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<const QString &, std::false_type>,
+        QtPrivate::TypeAndForceComplete<int, std::false_type>,
+        // method 'mwiNotification'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<int, std::false_type>,
+        QtPrivate::TypeAndForceComplete<int, std::false_type>,
+        QtPrivate::TypeAndForceComplete<int, std::false_type>,
+        // method 'audioDevicesChanged'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>
+    >,
+    nullptr
+} };
+
 void macrosip::SipManager::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     if (_c == QMetaObject::InvokeMetaMethod) {
@@ -127,14 +233,14 @@ void macrosip::SipManager::qt_static_metacall(QObject *_o, QMetaObject::Call _c,
         switch (_id) {
         case 0: _t->initialized(); break;
         case 1: _t->shutdownComplete(); break;
-        case 2: _t->incomingCall((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< const QString(*)>(_a[2])),(*reinterpret_cast< const QString(*)>(_a[3]))); break;
-        case 3: _t->callStateChanged((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< CallState(*)>(_a[2]))); break;
-        case 4: _t->callMediaStateChanged((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< MediaStatus(*)>(_a[2]))); break;
-        case 5: _t->registrationStateChanged((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< RegistrationState(*)>(_a[2])),(*reinterpret_cast< int(*)>(_a[3])),(*reinterpret_cast< const QString(*)>(_a[4]))); break;
-        case 6: _t->buddyStateChanged((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< PresenceStatus(*)>(_a[2]))); break;
-        case 7: _t->messageReceived((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< const QString(*)>(_a[2])),(*reinterpret_cast< const QString(*)>(_a[3]))); break;
-        case 8: _t->messageStatus((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 9: _t->mwiNotification((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< int(*)>(_a[3]))); break;
+        case 2: _t->incomingCall((*reinterpret_cast< std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[3]))); break;
+        case 3: _t->callStateChanged((*reinterpret_cast< std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<CallState>>(_a[2]))); break;
+        case 4: _t->callMediaStateChanged((*reinterpret_cast< std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<MediaStatus>>(_a[2]))); break;
+        case 5: _t->registrationStateChanged((*reinterpret_cast< std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<RegistrationState>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[3])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[4]))); break;
+        case 6: _t->buddyStateChanged((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<PresenceStatus>>(_a[2]))); break;
+        case 7: _t->messageReceived((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[3]))); break;
+        case 8: _t->messageStatus((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[2]))); break;
+        case 9: _t->mwiNotification((*reinterpret_cast< std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[3]))); break;
         case 10: _t->audioDevicesChanged(); break;
         default: ;
         }
@@ -142,93 +248,83 @@ void macrosip::SipManager::qt_static_metacall(QObject *_o, QMetaObject::Call _c,
         int *result = reinterpret_cast<int *>(_a[0]);
         {
             using _t = void (SipManager::*)();
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&SipManager::initialized)) {
+            if (_t _q_method = &SipManager::initialized; *reinterpret_cast<_t *>(_a[1]) == _q_method) {
                 *result = 0;
                 return;
             }
         }
         {
             using _t = void (SipManager::*)();
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&SipManager::shutdownComplete)) {
+            if (_t _q_method = &SipManager::shutdownComplete; *reinterpret_cast<_t *>(_a[1]) == _q_method) {
                 *result = 1;
                 return;
             }
         }
         {
             using _t = void (SipManager::*)(int , const QString & , const QString & );
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&SipManager::incomingCall)) {
+            if (_t _q_method = &SipManager::incomingCall; *reinterpret_cast<_t *>(_a[1]) == _q_method) {
                 *result = 2;
                 return;
             }
         }
         {
             using _t = void (SipManager::*)(int , CallState );
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&SipManager::callStateChanged)) {
+            if (_t _q_method = &SipManager::callStateChanged; *reinterpret_cast<_t *>(_a[1]) == _q_method) {
                 *result = 3;
                 return;
             }
         }
         {
             using _t = void (SipManager::*)(int , MediaStatus );
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&SipManager::callMediaStateChanged)) {
+            if (_t _q_method = &SipManager::callMediaStateChanged; *reinterpret_cast<_t *>(_a[1]) == _q_method) {
                 *result = 4;
                 return;
             }
         }
         {
             using _t = void (SipManager::*)(int , RegistrationState , int , const QString & );
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&SipManager::registrationStateChanged)) {
+            if (_t _q_method = &SipManager::registrationStateChanged; *reinterpret_cast<_t *>(_a[1]) == _q_method) {
                 *result = 5;
                 return;
             }
         }
         {
             using _t = void (SipManager::*)(const QString & , PresenceStatus );
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&SipManager::buddyStateChanged)) {
+            if (_t _q_method = &SipManager::buddyStateChanged; *reinterpret_cast<_t *>(_a[1]) == _q_method) {
                 *result = 6;
                 return;
             }
         }
         {
             using _t = void (SipManager::*)(const QString & , const QString & , const QString & );
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&SipManager::messageReceived)) {
+            if (_t _q_method = &SipManager::messageReceived; *reinterpret_cast<_t *>(_a[1]) == _q_method) {
                 *result = 7;
                 return;
             }
         }
         {
             using _t = void (SipManager::*)(const QString & , int );
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&SipManager::messageStatus)) {
+            if (_t _q_method = &SipManager::messageStatus; *reinterpret_cast<_t *>(_a[1]) == _q_method) {
                 *result = 8;
                 return;
             }
         }
         {
             using _t = void (SipManager::*)(int , int , int );
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&SipManager::mwiNotification)) {
+            if (_t _q_method = &SipManager::mwiNotification; *reinterpret_cast<_t *>(_a[1]) == _q_method) {
                 *result = 9;
                 return;
             }
         }
         {
             using _t = void (SipManager::*)();
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&SipManager::audioDevicesChanged)) {
+            if (_t _q_method = &SipManager::audioDevicesChanged; *reinterpret_cast<_t *>(_a[1]) == _q_method) {
                 *result = 10;
                 return;
             }
         }
     }
 }
-
-QT_INIT_METAOBJECT const QMetaObject macrosip::SipManager::staticMetaObject = { {
-    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
-    qt_meta_stringdata_macrosip__SipManager.data,
-    qt_meta_data_macrosip__SipManager,
-    qt_static_metacall,
-    nullptr,
-    nullptr
-} };
-
 
 const QMetaObject *macrosip::SipManager::metaObject() const
 {
@@ -254,7 +350,7 @@ int macrosip::SipManager::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         _id -= 11;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
         if (_id < 11)
-            *reinterpret_cast<int*>(_a[0]) = -1;
+            *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
         _id -= 11;
     }
     return _id;

@@ -1,59 +1,72 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'test_contact.cpp'
 **
-** Created by: The Qt Meta Object Compiler version 67 (Qt 5.15.13)
+** Created by: The Qt Meta Object Compiler version 68 (Qt 6.4.2)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
 #include <memory>
-#include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'test_contact.cpp' doesn't include <QObject>."
-#elif Q_MOC_OUTPUT_REVISION != 67
-#error "This file was generated using the moc from 5.15.13. It"
+#elif Q_MOC_OUTPUT_REVISION != 68
+#error "This file was generated using the moc from 6.4.2. It"
 #error "cannot be used with the include files from this version of Qt."
 #error "(The moc has changed too much.)"
+#endif
+
+#ifndef Q_CONSTINIT
+#define Q_CONSTINIT
 #endif
 
 QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
+namespace {
 struct qt_meta_stringdata_TestContact_t {
-    QByteArrayData data[9];
-    char stringdata0[163];
+    uint offsetsAndSizes[18];
+    char stringdata0[12];
+    char stringdata1[18];
+    char stringdata2[1];
+    char stringdata3[12];
+    char stringdata4[29];
+    char stringdata5[24];
+    char stringdata6[25];
+    char stringdata7[24];
+    char stringdata8[18];
 };
-#define QT_MOC_LITERAL(idx, ofs, len) \
-    Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
-    qptrdiff(offsetof(qt_meta_stringdata_TestContact_t, stringdata0) + ofs \
-        - idx * sizeof(QByteArrayData)) \
-    )
-static const qt_meta_stringdata_TestContact_t qt_meta_stringdata_TestContact = {
+#define QT_MOC_LITERAL(ofs, len) \
+    uint(sizeof(qt_meta_stringdata_TestContact_t::offsetsAndSizes) + ofs), len 
+Q_CONSTINIT static const qt_meta_stringdata_TestContact_t qt_meta_stringdata_TestContact = {
     {
-QT_MOC_LITERAL(0, 0, 11), // "TestContact"
-QT_MOC_LITERAL(1, 12, 17), // "testDefaultValues"
-QT_MOC_LITERAL(2, 30, 0), // ""
-QT_MOC_LITERAL(3, 31, 11), // "testIsValid"
-QT_MOC_LITERAL(4, 43, 28), // "testDisplayNameFromFirstLast"
-QT_MOC_LITERAL(5, 72, 23), // "testDisplayNameFromName"
-QT_MOC_LITERAL(6, 96, 24), // "testDisplayNameFirstOnly"
-QT_MOC_LITERAL(7, 121, 23), // "testDisplayNameLastOnly"
-QT_MOC_LITERAL(8, 145, 17) // "testJsonRoundTrip"
-
+        QT_MOC_LITERAL(0, 11),  // "TestContact"
+        QT_MOC_LITERAL(12, 17),  // "testDefaultValues"
+        QT_MOC_LITERAL(30, 0),  // ""
+        QT_MOC_LITERAL(31, 11),  // "testIsValid"
+        QT_MOC_LITERAL(43, 28),  // "testDisplayNameFromFirstLast"
+        QT_MOC_LITERAL(72, 23),  // "testDisplayNameFromName"
+        QT_MOC_LITERAL(96, 24),  // "testDisplayNameFirstOnly"
+        QT_MOC_LITERAL(121, 23),  // "testDisplayNameLastOnly"
+        QT_MOC_LITERAL(145, 17)   // "testJsonRoundTrip"
     },
-    "TestContact\0testDefaultValues\0\0"
-    "testIsValid\0testDisplayNameFromFirstLast\0"
-    "testDisplayNameFromName\0"
-    "testDisplayNameFirstOnly\0"
-    "testDisplayNameLastOnly\0testJsonRoundTrip"
+    "TestContact",
+    "testDefaultValues",
+    "",
+    "testIsValid",
+    "testDisplayNameFromFirstLast",
+    "testDisplayNameFromName",
+    "testDisplayNameFirstOnly",
+    "testDisplayNameLastOnly",
+    "testJsonRoundTrip"
 };
 #undef QT_MOC_LITERAL
+} // unnamed namespace
 
-static const uint qt_meta_data_TestContact[] = {
+Q_CONSTINIT static const uint qt_meta_data_TestContact[] = {
 
  // content:
-       8,       // revision
+      10,       // revision
        0,       // classname
        0,    0, // classinfo
        7,   14, // methods
@@ -63,14 +76,14 @@ static const uint qt_meta_data_TestContact[] = {
        0,       // flags
        0,       // signalCount
 
- // slots: name, argc, parameters, tag, flags
-       1,    0,   49,    2, 0x08 /* Private */,
-       3,    0,   50,    2, 0x08 /* Private */,
-       4,    0,   51,    2, 0x08 /* Private */,
-       5,    0,   52,    2, 0x08 /* Private */,
-       6,    0,   53,    2, 0x08 /* Private */,
-       7,    0,   54,    2, 0x08 /* Private */,
-       8,    0,   55,    2, 0x08 /* Private */,
+ // slots: name, argc, parameters, tag, flags, initial metatype offsets
+       1,    0,   56,    2, 0x08,    1 /* Private */,
+       3,    0,   57,    2, 0x08,    2 /* Private */,
+       4,    0,   58,    2, 0x08,    3 /* Private */,
+       5,    0,   59,    2, 0x08,    4 /* Private */,
+       6,    0,   60,    2, 0x08,    5 /* Private */,
+       7,    0,   61,    2, 0x08,    6 /* Private */,
+       8,    0,   62,    2, 0x08,    7 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
@@ -83,6 +96,33 @@ static const uint qt_meta_data_TestContact[] = {
 
        0        // eod
 };
+
+Q_CONSTINIT const QMetaObject TestContact::staticMetaObject = { {
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
+    qt_meta_stringdata_TestContact.offsetsAndSizes,
+    qt_meta_data_TestContact,
+    qt_static_metacall,
+    nullptr,
+    qt_incomplete_metaTypeArray<qt_meta_stringdata_TestContact_t,
+        // Q_OBJECT / Q_GADGET
+        QtPrivate::TypeAndForceComplete<TestContact, std::true_type>,
+        // method 'testDefaultValues'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'testIsValid'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'testDisplayNameFromFirstLast'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'testDisplayNameFromName'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'testDisplayNameFirstOnly'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'testDisplayNameLastOnly'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'testJsonRoundTrip'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>
+    >,
+    nullptr
+} };
 
 void TestContact::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
@@ -102,16 +142,6 @@ void TestContact::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
     }
     (void)_a;
 }
-
-QT_INIT_METAOBJECT const QMetaObject TestContact::staticMetaObject = { {
-    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
-    qt_meta_stringdata_TestContact.data,
-    qt_meta_data_TestContact,
-    qt_static_metacall,
-    nullptr,
-    nullptr
-} };
-
 
 const QMetaObject *TestContact::metaObject() const
 {
@@ -137,7 +167,7 @@ int TestContact::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         _id -= 7;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
         if (_id < 7)
-            *reinterpret_cast<int*>(_a[0]) = -1;
+            *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
         _id -= 7;
     }
     return _id;

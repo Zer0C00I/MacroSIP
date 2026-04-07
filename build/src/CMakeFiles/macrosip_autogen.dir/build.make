@@ -68,8 +68,8 @@ include src/CMakeFiles/macrosip_autogen.dir/progress.make
 
 src/CMakeFiles/macrosip_autogen: src/macrosip_autogen/timestamp
 
-src/macrosip_autogen/timestamp: /usr/lib/qt5/bin/moc
-src/macrosip_autogen/timestamp: /usr/lib/qt5/bin/uic
+src/macrosip_autogen/timestamp: /usr/lib/qt6/libexec/moc
+src/macrosip_autogen/timestamp: /usr/lib/qt6/libexec/uic
 src/macrosip_autogen/timestamp: src/CMakeFiles/macrosip_autogen.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/runner/work/MacroSIP/MacroSIP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Automatic MOC and UIC for target macrosip"
 	cd /home/runner/work/MacroSIP/MacroSIP/build/src && /usr/local/bin/cmake -E cmake_autogen /home/runner/work/MacroSIP/MacroSIP/build/src/CMakeFiles/macrosip_autogen.dir/AutogenInfo.json Release

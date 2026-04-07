@@ -1,64 +1,85 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'SipCall.h'
 **
-** Created by: The Qt Meta Object Compiler version 67 (Qt 5.15.13)
+** Created by: The Qt Meta Object Compiler version 68 (Qt 6.4.2)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
 #include <memory>
 #include "../../../../src/sip/SipCall.h"
-#include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'SipCall.h' doesn't include <QObject>."
-#elif Q_MOC_OUTPUT_REVISION != 67
-#error "This file was generated using the moc from 5.15.13. It"
+#elif Q_MOC_OUTPUT_REVISION != 68
+#error "This file was generated using the moc from 6.4.2. It"
 #error "cannot be used with the include files from this version of Qt."
 #error "(The moc has changed too much.)"
+#endif
+
+#ifndef Q_CONSTINIT
+#define Q_CONSTINIT
 #endif
 
 QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
+namespace {
 struct qt_meta_stringdata_macrosip__SipCall_t {
-    QByteArrayData data[13];
-    char stringdata0[148];
+    uint offsetsAndSizes[26];
+    char stringdata0[18];
+    char stringdata1[13];
+    char stringdata2[1];
+    char stringdata3[10];
+    char stringdata4[9];
+    char stringdata5[19];
+    char stringdata6[12];
+    char stringdata7[7];
+    char stringdata8[13];
+    char stringdata9[6];
+    char stringdata10[22];
+    char stringdata11[11];
+    char stringdata12[7];
 };
-#define QT_MOC_LITERAL(idx, ofs, len) \
-    Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
-    qptrdiff(offsetof(qt_meta_stringdata_macrosip__SipCall_t, stringdata0) + ofs \
-        - idx * sizeof(QByteArrayData)) \
-    )
-static const qt_meta_stringdata_macrosip__SipCall_t qt_meta_stringdata_macrosip__SipCall = {
+#define QT_MOC_LITERAL(ofs, len) \
+    uint(sizeof(qt_meta_stringdata_macrosip__SipCall_t::offsetsAndSizes) + ofs), len 
+Q_CONSTINIT static const qt_meta_stringdata_macrosip__SipCall_t qt_meta_stringdata_macrosip__SipCall = {
     {
-QT_MOC_LITERAL(0, 0, 17), // "macrosip::SipCall"
-QT_MOC_LITERAL(1, 18, 12), // "stateChanged"
-QT_MOC_LITERAL(2, 31, 0), // ""
-QT_MOC_LITERAL(3, 32, 9), // "CallState"
-QT_MOC_LITERAL(4, 42, 8), // "newState"
-QT_MOC_LITERAL(5, 51, 18), // "mediaStatusChanged"
-QT_MOC_LITERAL(6, 70, 11), // "MediaStatus"
-QT_MOC_LITERAL(7, 82, 6), // "status"
-QT_MOC_LITERAL(8, 89, 12), // "dtmfReceived"
-QT_MOC_LITERAL(9, 102, 5), // "digit"
-QT_MOC_LITERAL(10, 108, 21), // "transferStatusChanged"
-QT_MOC_LITERAL(11, 130, 10), // "statusCode"
-QT_MOC_LITERAL(12, 141, 6) // "reason"
-
+        QT_MOC_LITERAL(0, 17),  // "macrosip::SipCall"
+        QT_MOC_LITERAL(18, 12),  // "stateChanged"
+        QT_MOC_LITERAL(31, 0),  // ""
+        QT_MOC_LITERAL(32, 9),  // "CallState"
+        QT_MOC_LITERAL(42, 8),  // "newState"
+        QT_MOC_LITERAL(51, 18),  // "mediaStatusChanged"
+        QT_MOC_LITERAL(70, 11),  // "MediaStatus"
+        QT_MOC_LITERAL(82, 6),  // "status"
+        QT_MOC_LITERAL(89, 12),  // "dtmfReceived"
+        QT_MOC_LITERAL(102, 5),  // "digit"
+        QT_MOC_LITERAL(108, 21),  // "transferStatusChanged"
+        QT_MOC_LITERAL(130, 10),  // "statusCode"
+        QT_MOC_LITERAL(141, 6)   // "reason"
     },
-    "macrosip::SipCall\0stateChanged\0\0"
-    "CallState\0newState\0mediaStatusChanged\0"
-    "MediaStatus\0status\0dtmfReceived\0digit\0"
-    "transferStatusChanged\0statusCode\0"
+    "macrosip::SipCall",
+    "stateChanged",
+    "",
+    "CallState",
+    "newState",
+    "mediaStatusChanged",
+    "MediaStatus",
+    "status",
+    "dtmfReceived",
+    "digit",
+    "transferStatusChanged",
+    "statusCode",
     "reason"
 };
 #undef QT_MOC_LITERAL
+} // unnamed namespace
 
-static const uint qt_meta_data_macrosip__SipCall[] = {
+Q_CONSTINIT static const uint qt_meta_data_macrosip__SipCall[] = {
 
  // content:
-       8,       // revision
+      10,       // revision
        0,       // classname
        0,    0, // classinfo
        4,   14, // methods
@@ -68,11 +89,11 @@ static const uint qt_meta_data_macrosip__SipCall[] = {
        0,       // flags
        4,       // signalCount
 
- // signals: name, argc, parameters, tag, flags
-       1,    1,   34,    2, 0x06 /* Public */,
-       5,    1,   37,    2, 0x06 /* Public */,
-       8,    1,   40,    2, 0x06 /* Public */,
-      10,    2,   43,    2, 0x06 /* Public */,
+ // signals: name, argc, parameters, tag, flags, initial metatype offsets
+       1,    1,   38,    2, 0x06,    1 /* Public */,
+       5,    1,   41,    2, 0x06,    3 /* Public */,
+       8,    1,   44,    2, 0x06,    5 /* Public */,
+      10,    2,   47,    2, 0x06,    7 /* Public */,
 
  // signals: parameters
     QMetaType::Void, 0x80000000 | 3,    4,
@@ -83,60 +104,76 @@ static const uint qt_meta_data_macrosip__SipCall[] = {
        0        // eod
 };
 
+Q_CONSTINIT const QMetaObject macrosip::SipCall::staticMetaObject = { {
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
+    qt_meta_stringdata_macrosip__SipCall.offsetsAndSizes,
+    qt_meta_data_macrosip__SipCall,
+    qt_static_metacall,
+    nullptr,
+    qt_incomplete_metaTypeArray<qt_meta_stringdata_macrosip__SipCall_t,
+        // Q_OBJECT / Q_GADGET
+        QtPrivate::TypeAndForceComplete<SipCall, std::true_type>,
+        // method 'stateChanged'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<CallState, std::false_type>,
+        // method 'mediaStatusChanged'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<MediaStatus, std::false_type>,
+        // method 'dtmfReceived'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<const QString &, std::false_type>,
+        // method 'transferStatusChanged'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<int, std::false_type>,
+        QtPrivate::TypeAndForceComplete<const QString &, std::false_type>
+    >,
+    nullptr
+} };
+
 void macrosip::SipCall::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     if (_c == QMetaObject::InvokeMetaMethod) {
         auto *_t = static_cast<SipCall *>(_o);
         (void)_t;
         switch (_id) {
-        case 0: _t->stateChanged((*reinterpret_cast< CallState(*)>(_a[1]))); break;
-        case 1: _t->mediaStatusChanged((*reinterpret_cast< MediaStatus(*)>(_a[1]))); break;
-        case 2: _t->dtmfReceived((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 3: _t->transferStatusChanged((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< const QString(*)>(_a[2]))); break;
+        case 0: _t->stateChanged((*reinterpret_cast< std::add_pointer_t<CallState>>(_a[1]))); break;
+        case 1: _t->mediaStatusChanged((*reinterpret_cast< std::add_pointer_t<MediaStatus>>(_a[1]))); break;
+        case 2: _t->dtmfReceived((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
+        case 3: _t->transferStatusChanged((*reinterpret_cast< std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
         int *result = reinterpret_cast<int *>(_a[0]);
         {
             using _t = void (SipCall::*)(CallState );
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&SipCall::stateChanged)) {
+            if (_t _q_method = &SipCall::stateChanged; *reinterpret_cast<_t *>(_a[1]) == _q_method) {
                 *result = 0;
                 return;
             }
         }
         {
             using _t = void (SipCall::*)(MediaStatus );
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&SipCall::mediaStatusChanged)) {
+            if (_t _q_method = &SipCall::mediaStatusChanged; *reinterpret_cast<_t *>(_a[1]) == _q_method) {
                 *result = 1;
                 return;
             }
         }
         {
             using _t = void (SipCall::*)(const QString & );
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&SipCall::dtmfReceived)) {
+            if (_t _q_method = &SipCall::dtmfReceived; *reinterpret_cast<_t *>(_a[1]) == _q_method) {
                 *result = 2;
                 return;
             }
         }
         {
             using _t = void (SipCall::*)(int , const QString & );
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&SipCall::transferStatusChanged)) {
+            if (_t _q_method = &SipCall::transferStatusChanged; *reinterpret_cast<_t *>(_a[1]) == _q_method) {
                 *result = 3;
                 return;
             }
         }
     }
 }
-
-QT_INIT_METAOBJECT const QMetaObject macrosip::SipCall::staticMetaObject = { {
-    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
-    qt_meta_stringdata_macrosip__SipCall.data,
-    qt_meta_data_macrosip__SipCall,
-    qt_static_metacall,
-    nullptr,
-    nullptr
-} };
-
 
 const QMetaObject *macrosip::SipCall::metaObject() const
 {
@@ -162,7 +199,7 @@ int macrosip::SipCall::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         _id -= 4;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
         if (_id < 4)
-            *reinterpret_cast<int*>(_a[0]) = -1;
+            *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
         _id -= 4;
     }
     return _id;

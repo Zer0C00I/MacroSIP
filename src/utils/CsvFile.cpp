@@ -13,7 +13,6 @@ QList<QStringList> CsvFile::read(const QString &filePath)
     }
 
     QTextStream stream(&file);
-    stream.setCodec("UTF-8");
 
     while (!stream.atEnd()) {
         const QString line = stream.readLine();
@@ -34,7 +33,6 @@ bool CsvFile::write(const QString &filePath, const QList<QStringList> &rows)
     }
 
     QTextStream stream(&file);
-    stream.setCodec("UTF-8");
 
     for (const QStringList &row : rows) {
         stream << formatLine(row) << QStringLiteral("\n");
@@ -49,9 +47,9 @@ QStringList CsvFile::parseLine(const QString &line)
     QStringList fields;
     QString field;
     bool inQuotes = false;
-    const int length = line.length();
+    const qsizetype length = line.length();
 
-    for (int i = 0; i < length; ++i) {
+    for (qsizetype i = 0; i < length; ++i) {
         const QChar ch = line.at(i);
 
         if (inQuotes) {

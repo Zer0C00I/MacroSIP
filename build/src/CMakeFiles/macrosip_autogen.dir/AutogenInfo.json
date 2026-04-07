@@ -207,13 +207,13 @@
 		"/home/runner/work/MacroSIP/MacroSIP/src/dialogs",
 		"/home/runner/work/MacroSIP/MacroSIP/src/widgets",
 		"/home/runner/work/MacroSIP/MacroSIP/src/utils",
-		"/usr/include/x86_64-linux-gnu/qt5",
-		"/usr/include/x86_64-linux-gnu/qt5/QtCore",
-		"/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++",
-		"/usr/include/x86_64-linux-gnu/qt5/QtGui",
-		"/usr/include/x86_64-linux-gnu/qt5/QtWidgets",
-		"/usr/include/x86_64-linux-gnu/qt5/QtNetwork",
-		"/usr/include/x86_64-linux-gnu/qt5/QtMultimedia",
+		"/usr/include/x86_64-linux-gnu/qt6/QtCore",
+		"/usr/include/x86_64-linux-gnu/qt6",
+		"/usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++",
+		"/usr/include/x86_64-linux-gnu/qt6/QtGui",
+		"/usr/include/x86_64-linux-gnu/qt6/QtWidgets",
+		"/usr/include/x86_64-linux-gnu/qt6/QtNetwork",
+		"/usr/include/x86_64-linux-gnu/qt6/QtMultimedia",
 		"/usr/include",
 		"/usr/include/c++/13",
 		"/usr/include/x86_64-linux-gnu/c++/13",
@@ -222,7 +222,14 @@
 		"/usr/local/include",
 		"/usr/include/x86_64-linux-gnu"
 	],
-	"MOC_MACRO_NAMES" : [ "Q_OBJECT", "Q_GADGET", "Q_NAMESPACE", "Q_NAMESPACE_EXPORT" ],
+	"MOC_MACRO_NAMES" : 
+	[
+		"Q_OBJECT",
+		"Q_GADGET",
+		"Q_GADGET_EXPORT",
+		"Q_NAMESPACE",
+		"Q_NAMESPACE_EXPORT"
+	],
 	"MOC_OPTIONS" : [],
 	"MOC_PATH_PREFIX" : false,
 	"MOC_PREDEFS_CMD" : 
@@ -240,10 +247,10 @@
 	"MULTI_CONFIG" : false,
 	"PARALLEL" : 2,
 	"PARSE_CACHE_FILE" : "/home/runner/work/MacroSIP/MacroSIP/build/src/CMakeFiles/macrosip_autogen.dir/ParseCache.txt",
-	"QT_MOC_EXECUTABLE" : "/usr/lib/qt5/bin/moc",
-	"QT_UIC_EXECUTABLE" : "/usr/lib/qt5/bin/uic",
-	"QT_VERSION_MAJOR" : 5,
-	"QT_VERSION_MINOR" : 15,
+	"QT_MOC_EXECUTABLE" : "/usr/lib/qt6/libexec/moc",
+	"QT_UIC_EXECUTABLE" : "/usr/lib/qt6/libexec/uic",
+	"QT_VERSION_MAJOR" : 6,
+	"QT_VERSION_MINOR" : 4,
 	"SETTINGS_FILE" : "/home/runner/work/MacroSIP/MacroSIP/build/src/CMakeFiles/macrosip_autogen.dir/AutogenUsed.txt",
 	"SOURCES" : 
 	[

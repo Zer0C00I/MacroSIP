@@ -11,8 +11,6 @@ file(REMOVE_RECURSE
   "CMakeFiles/test_callrecord.dir/test_callrecord_autogen/mocs_compilation.cpp.o.d"
   "test_callrecord"
   "test_callrecord.pdb"
-  "test_callrecord_autogen/mocs_compilation.cpp"
-  "test_callrecord_autogen/timestamp"
 )
 
 # Per-language clean rules from dependency scanning.

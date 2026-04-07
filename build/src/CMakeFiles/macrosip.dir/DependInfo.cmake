@@ -8,7 +8,6 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "" "src/macrosip_autogen/timestamp" "custom" "src/macrosip_autogen/deps"
   "/home/runner/work/MacroSIP/MacroSIP/src/app/MacroSipApp.cpp" "src/CMakeFiles/macrosip.dir/app/MacroSipApp.cpp.o" "gcc" "src/CMakeFiles/macrosip.dir/app/MacroSipApp.cpp.o.d"
   "/home/runner/work/MacroSIP/MacroSIP/src/app/MainWindow.cpp" "src/CMakeFiles/macrosip.dir/app/MainWindow.cpp.o" "gcc" "src/CMakeFiles/macrosip.dir/app/MainWindow.cpp.o.d"
   "/home/runner/work/MacroSIP/MacroSIP/src/dialogs/AAOptionsDialog.cpp" "src/CMakeFiles/macrosip.dir/dialogs/AAOptionsDialog.cpp.o" "gcc" "src/CMakeFiles/macrosip.dir/dialogs/AAOptionsDialog.cpp.o.d"

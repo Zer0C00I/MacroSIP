@@ -1,51 +1,56 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'FeatureCodesDialog.h'
 **
-** Created by: The Qt Meta Object Compiler version 67 (Qt 5.15.13)
+** Created by: The Qt Meta Object Compiler version 68 (Qt 6.4.2)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
 #include <memory>
 #include "../../../../src/dialogs/FeatureCodesDialog.h"
-#include <QtCore/qbytearray.h>
+#include <QtGui/qtextcursor.h>
 #include <QtCore/qmetatype.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'FeatureCodesDialog.h' doesn't include <QObject>."
-#elif Q_MOC_OUTPUT_REVISION != 67
-#error "This file was generated using the moc from 5.15.13. It"
+#elif Q_MOC_OUTPUT_REVISION != 68
+#error "This file was generated using the moc from 6.4.2. It"
 #error "cannot be used with the include files from this version of Qt."
 #error "(The moc has changed too much.)"
+#endif
+
+#ifndef Q_CONSTINIT
+#define Q_CONSTINIT
 #endif
 
 QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
+namespace {
 struct qt_meta_stringdata_macrosip__FeatureCodesDialog_t {
-    QByteArrayData data[3];
-    char stringdata0[41];
+    uint offsetsAndSizes[6];
+    char stringdata0[29];
+    char stringdata1[11];
+    char stringdata2[1];
 };
-#define QT_MOC_LITERAL(idx, ofs, len) \
-    Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
-    qptrdiff(offsetof(qt_meta_stringdata_macrosip__FeatureCodesDialog_t, stringdata0) + ofs \
-        - idx * sizeof(QByteArrayData)) \
-    )
-static const qt_meta_stringdata_macrosip__FeatureCodesDialog_t qt_meta_stringdata_macrosip__FeatureCodesDialog = {
+#define QT_MOC_LITERAL(ofs, len) \
+    uint(sizeof(qt_meta_stringdata_macrosip__FeatureCodesDialog_t::offsetsAndSizes) + ofs), len 
+Q_CONSTINIT static const qt_meta_stringdata_macrosip__FeatureCodesDialog_t qt_meta_stringdata_macrosip__FeatureCodesDialog = {
     {
-QT_MOC_LITERAL(0, 0, 28), // "macrosip::FeatureCodesDialog"
-QT_MOC_LITERAL(1, 29, 10), // "onAccepted"
-QT_MOC_LITERAL(2, 40, 0) // ""
-
+        QT_MOC_LITERAL(0, 28),  // "macrosip::FeatureCodesDialog"
+        QT_MOC_LITERAL(29, 10),  // "onAccepted"
+        QT_MOC_LITERAL(40, 0)   // ""
     },
-    "macrosip::FeatureCodesDialog\0onAccepted\0"
+    "macrosip::FeatureCodesDialog",
+    "onAccepted",
     ""
 };
 #undef QT_MOC_LITERAL
+} // unnamed namespace
 
-static const uint qt_meta_data_macrosip__FeatureCodesDialog[] = {
+Q_CONSTINIT static const uint qt_meta_data_macrosip__FeatureCodesDialog[] = {
 
  // content:
-       8,       // revision
+      10,       // revision
        0,       // classname
        0,    0, // classinfo
        1,   14, // methods
@@ -55,14 +60,29 @@ static const uint qt_meta_data_macrosip__FeatureCodesDialog[] = {
        0,       // flags
        0,       // signalCount
 
- // slots: name, argc, parameters, tag, flags
-       1,    0,   19,    2, 0x08 /* Private */,
+ // slots: name, argc, parameters, tag, flags, initial metatype offsets
+       1,    0,   20,    2, 0x08,    1 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
 
        0        // eod
 };
+
+Q_CONSTINIT const QMetaObject macrosip::FeatureCodesDialog::staticMetaObject = { {
+    QMetaObject::SuperData::link<QDialog::staticMetaObject>(),
+    qt_meta_stringdata_macrosip__FeatureCodesDialog.offsetsAndSizes,
+    qt_meta_data_macrosip__FeatureCodesDialog,
+    qt_static_metacall,
+    nullptr,
+    qt_incomplete_metaTypeArray<qt_meta_stringdata_macrosip__FeatureCodesDialog_t,
+        // Q_OBJECT / Q_GADGET
+        QtPrivate::TypeAndForceComplete<FeatureCodesDialog, std::true_type>,
+        // method 'onAccepted'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>
+    >,
+    nullptr
+} };
 
 void macrosip::FeatureCodesDialog::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
@@ -76,16 +96,6 @@ void macrosip::FeatureCodesDialog::qt_static_metacall(QObject *_o, QMetaObject::
     }
     (void)_a;
 }
-
-QT_INIT_METAOBJECT const QMetaObject macrosip::FeatureCodesDialog::staticMetaObject = { {
-    QMetaObject::SuperData::link<QDialog::staticMetaObject>(),
-    qt_meta_stringdata_macrosip__FeatureCodesDialog.data,
-    qt_meta_data_macrosip__FeatureCodesDialog,
-    qt_static_metacall,
-    nullptr,
-    nullptr
-} };
-
 
 const QMetaObject *macrosip::FeatureCodesDialog::metaObject() const
 {
@@ -111,7 +121,7 @@ int macrosip::FeatureCodesDialog::qt_metacall(QMetaObject::Call _c, int _id, voi
         _id -= 1;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
         if (_id < 1)
-            *reinterpret_cast<int*>(_a[0]) = -1;
+            *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
         _id -= 1;
     }
     return _id;

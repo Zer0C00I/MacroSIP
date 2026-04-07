@@ -11,8 +11,6 @@ file(REMOVE_RECURSE
   "CMakeFiles/test_langpack.dir/test_langpack_autogen/mocs_compilation.cpp.o.d"
   "test_langpack"
   "test_langpack.pdb"
-  "test_langpack_autogen/mocs_compilation.cpp"
-  "test_langpack_autogen/timestamp"
 )
 
 # Per-language clean rules from dependency scanning.

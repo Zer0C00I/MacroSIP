@@ -269,8 +269,8 @@ void AppSettings::save()
 
     // Shortcuts
     s.beginWriteArray(QStringLiteral("Shortcuts"), static_cast<int>(shortcuts.size()));
-    for (int i = 0; i < shortcuts.size(); ++i) {
-        s.setArrayIndex(i);
+    for (qsizetype i = 0; i < shortcuts.size(); ++i) {
+        s.setArrayIndex(static_cast<int>(i));
         s.setValue(QStringLiteral("label"),  shortcuts.at(i).label);
         s.setValue(QStringLiteral("number"), shortcuts.at(i).number);
         s.setValue(QStringLiteral("type"),   shortcuts.at(i).type);

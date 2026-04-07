@@ -11,8 +11,6 @@ file(REMOVE_RECURSE
   "CMakeFiles/test_contact.dir/test_contact_autogen/mocs_compilation.cpp.o.d"
   "test_contact"
   "test_contact.pdb"
-  "test_contact_autogen/mocs_compilation.cpp"
-  "test_contact_autogen/timestamp"
 )
 
 # Per-language clean rules from dependency scanning.

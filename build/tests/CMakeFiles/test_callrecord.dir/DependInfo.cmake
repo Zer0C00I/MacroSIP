@@ -8,7 +8,6 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "" "tests/test_callrecord_autogen/timestamp" "custom" "tests/test_callrecord_autogen/deps"
   "/home/runner/work/MacroSIP/MacroSIP/src/models/CallRecord.cpp" "tests/CMakeFiles/test_callrecord.dir/__/src/models/CallRecord.cpp.o" "gcc" "tests/CMakeFiles/test_callrecord.dir/__/src/models/CallRecord.cpp.o.d"
   "/home/runner/work/MacroSIP/MacroSIP/tests/test_callrecord.cpp" "tests/CMakeFiles/test_callrecord.dir/test_callrecord.cpp.o" "gcc" "tests/CMakeFiles/test_callrecord.dir/test_callrecord.cpp.o.d"
   "/home/runner/work/MacroSIP/MacroSIP/build/tests/test_callrecord_autogen/mocs_compilation.cpp" "tests/CMakeFiles/test_callrecord.dir/test_callrecord_autogen/mocs_compilation.cpp.o" "gcc" "tests/CMakeFiles/test_callrecord.dir/test_callrecord_autogen/mocs_compilation.cpp.o.d"

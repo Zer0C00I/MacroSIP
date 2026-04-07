@@ -9,17 +9,13 @@ on:
 jobs:
   build-linux:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        qt-version: ['5.15.2', '6.5.3']
-
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install Qt ${{ matrix.qt-version }}
+      - name: Install Qt 6
         uses: jurplel/install-qt-action@v4
         with:
-          version: ${{ matrix.qt-version }}
+          version: '6.5.3'
           modules: 'qtmultimedia'
 
       - name: Install dependencies
