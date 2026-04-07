@@ -1,6 +1,9 @@
 #include "models/Settings.h"
 #include <QStandardPaths>
 #include <QDir>
+#include <QFileInfo>
+#include <QCoreApplication>
+#include <QFile>
 
 namespace macrosip {
 
@@ -104,6 +107,8 @@ void AppSettings::load()
     micAmplification   = s.value(QStringLiteral("micAmplification"), false).toBool();
     swLevelAdjustment  = s.value(QStringLiteral("swLevelAdjustment"), false).toBool();
     localDTMF          = s.value(QStringLiteral("localDTMF"), true).toBool();
+    soundEvents        = s.value(QStringLiteral("soundEvents"), true).toBool();
+    volumeRing         = s.value(QStringLiteral("volumeRing"), 100).toInt();
     s.endGroup();
 
     // Network
@@ -122,11 +127,14 @@ void AppSettings::load()
     s.beginGroup(QStringLiteral("CallFeatures"));
     autoAnswer       = s.value(QStringLiteral("autoAnswer"), false).toBool();
     autoAnswerDelay  = s.value(QStringLiteral("autoAnswerDelay"), 0).toInt();
+    autoAnswerMode   = s.value(QStringLiteral("autoAnswerMode")).toString();
     dnd              = s.value(QStringLiteral("dnd"), false).toBool();
     callWaiting      = s.value(QStringLiteral("callWaiting"), true).toBool();
     forwardingNumber = s.value(QStringLiteral("forwardingNumber")).toString();
     forwardingDelay  = s.value(QStringLiteral("forwardingDelay"), 0).toInt();
     denyIncoming     = s.value(QStringLiteral("denyIncoming")).toString();
+    directoryOfUsers = s.value(QStringLiteral("directoryOfUsers")).toString();
+    defaultListAction = s.value(QStringLiteral("defaultListAction")).toString();
     s.endGroup();
 
     // Feature Codes
@@ -141,8 +149,14 @@ void AppSettings::load()
 
     // Recording
     s.beginGroup(QStringLiteral("Recording"));
-    recordingPath = s.value(QStringLiteral("recordingPath")).toString();
-    autoRecording = s.value(QStringLiteral("autoRecording"), false).toBool();
+    recordingPath   = s.value(QStringLiteral("recordingPath")).toString();
+    autoRecording   = s.value(QStringLiteral("autoRecording"), false).toBool();
+    recordingFormat = s.value(QStringLiteral("recordingFormat"), QStringLiteral("mp3")).toString();
+    s.endGroup();
+
+    // DTMF
+    s.beginGroup(QStringLiteral("DTMF"));
+    dtmfMethod = s.value(QStringLiteral("dtmfMethod")).toString();
     s.endGroup();
 
     // UI
@@ -155,12 +169,33 @@ void AppSettings::load()
     alwaysOnTop            = s.value(QStringLiteral("alwaysOnTop"), false).toBool();
     bringToFrontOnIncoming = s.value(QStringLiteral("bringToFrontOnIncoming"), true).toBool();
     langPack               = s.value(QStringLiteral("langPack")).toString();
+    randomPopupPosition    = s.value(QStringLiteral("randomPopupPosition"), false).toBool();
+    multiMonitor           = s.value(QStringLiteral("multiMonitor"), false).toBool();
+    disableNameLookup      = s.value(QStringLiteral("disableNameLookup"), false).toBool();
     s.endGroup();
 
-    // Diagnostics
+    // Diagnostics / Advanced
     s.beginGroup(QStringLiteral("Diagnostics"));
-    enableLog   = s.value(QStringLiteral("enableLog"), false).toBool();
-    crashReport = s.value(QStringLiteral("crashReport"), false).toBool();
+    enableLog          = s.value(QStringLiteral("enableLog"), false).toBool();
+    crashReport        = s.value(QStringLiteral("crashReport"), false).toBool();
+    enableLocalAccount = s.value(QStringLiteral("enableLocalAccount"), false).toBool();
+    disableMessaging   = s.value(QStringLiteral("disableMessaging"), false).toBool();
+    handleIpChanges    = s.value(QStringLiteral("handleIpChanges"), false).toBool();
+    handleMediaButtons = s.value(QStringLiteral("handleMediaButtons"), false).toBool();
+    runAtStartup       = s.value(QStringLiteral("runAtStartup"), false).toBool();
+    updatesInterval    = s.value(QStringLiteral("updatesInterval")).toString();
+    s.endGroup();
+
+    // Video (stub settings)
+    s.beginGroup(QStringLiteral("Video"));
+    videoEnabled  = s.value(QStringLiteral("videoEnabled"), true).toBool();
+    videoCodec    = s.value(QStringLiteral("videoCodec")).toString();
+    videoBitrate  = s.value(QStringLiteral("videoBitrate"), 0).toInt();
+    videoH264     = s.value(QStringLiteral("videoH264"), false).toBool();
+    videoH263     = s.value(QStringLiteral("videoH263"), false).toBool();
+    videoVP8      = s.value(QStringLiteral("videoVP8"), false).toBool();
+    videoVP9      = s.value(QStringLiteral("videoVP9"), false).toBool();
+    cameraDevice  = s.value(QStringLiteral("cameraDevice")).toString();
     s.endGroup();
 
     // Shortcuts
@@ -208,6 +243,8 @@ void AppSettings::save()
     s.setValue(QStringLiteral("micAmplification"),  micAmplification);
     s.setValue(QStringLiteral("swLevelAdjustment"), swLevelAdjustment);
     s.setValue(QStringLiteral("localDTMF"),         localDTMF);
+    s.setValue(QStringLiteral("soundEvents"),       soundEvents);
+    s.setValue(QStringLiteral("volumeRing"),        volumeRing);
     s.endGroup();
 
     // Network
@@ -226,11 +263,14 @@ void AppSettings::save()
     s.beginGroup(QStringLiteral("CallFeatures"));
     s.setValue(QStringLiteral("autoAnswer"),       autoAnswer);
     s.setValue(QStringLiteral("autoAnswerDelay"),  autoAnswerDelay);
+    s.setValue(QStringLiteral("autoAnswerMode"),   autoAnswerMode);
     s.setValue(QStringLiteral("dnd"),              dnd);
     s.setValue(QStringLiteral("callWaiting"),      callWaiting);
     s.setValue(QStringLiteral("forwardingNumber"), forwardingNumber);
     s.setValue(QStringLiteral("forwardingDelay"),  forwardingDelay);
     s.setValue(QStringLiteral("denyIncoming"),     denyIncoming);
+    s.setValue(QStringLiteral("directoryOfUsers"), directoryOfUsers);
+    s.setValue(QStringLiteral("defaultListAction"), defaultListAction);
     s.endGroup();
 
     // Feature Codes
@@ -245,8 +285,14 @@ void AppSettings::save()
 
     // Recording
     s.beginGroup(QStringLiteral("Recording"));
-    s.setValue(QStringLiteral("recordingPath"), recordingPath);
-    s.setValue(QStringLiteral("autoRecording"), autoRecording);
+    s.setValue(QStringLiteral("recordingPath"),   recordingPath);
+    s.setValue(QStringLiteral("autoRecording"),   autoRecording);
+    s.setValue(QStringLiteral("recordingFormat"), recordingFormat);
+    s.endGroup();
+
+    // DTMF
+    s.beginGroup(QStringLiteral("DTMF"));
+    s.setValue(QStringLiteral("dtmfMethod"), dtmfMethod);
     s.endGroup();
 
     // UI
@@ -259,12 +305,33 @@ void AppSettings::save()
     s.setValue(QStringLiteral("alwaysOnTop"),            alwaysOnTop);
     s.setValue(QStringLiteral("bringToFrontOnIncoming"), bringToFrontOnIncoming);
     s.setValue(QStringLiteral("langPack"),               langPack);
+    s.setValue(QStringLiteral("randomPopupPosition"),    randomPopupPosition);
+    s.setValue(QStringLiteral("multiMonitor"),           multiMonitor);
+    s.setValue(QStringLiteral("disableNameLookup"),      disableNameLookup);
     s.endGroup();
 
-    // Diagnostics
+    // Diagnostics / Advanced
     s.beginGroup(QStringLiteral("Diagnostics"));
-    s.setValue(QStringLiteral("enableLog"),   enableLog);
-    s.setValue(QStringLiteral("crashReport"), crashReport);
+    s.setValue(QStringLiteral("enableLog"),          enableLog);
+    s.setValue(QStringLiteral("crashReport"),        crashReport);
+    s.setValue(QStringLiteral("enableLocalAccount"), enableLocalAccount);
+    s.setValue(QStringLiteral("disableMessaging"),   disableMessaging);
+    s.setValue(QStringLiteral("handleIpChanges"),    handleIpChanges);
+    s.setValue(QStringLiteral("handleMediaButtons"), handleMediaButtons);
+    s.setValue(QStringLiteral("runAtStartup"),       runAtStartup);
+    s.setValue(QStringLiteral("updatesInterval"),    updatesInterval);
+    s.endGroup();
+
+    // Video (stub settings)
+    s.beginGroup(QStringLiteral("Video"));
+    s.setValue(QStringLiteral("videoEnabled"),  videoEnabled);
+    s.setValue(QStringLiteral("videoCodec"),    videoCodec);
+    s.setValue(QStringLiteral("videoBitrate"),  videoBitrate);
+    s.setValue(QStringLiteral("videoH264"),     videoH264);
+    s.setValue(QStringLiteral("videoH263"),     videoH263);
+    s.setValue(QStringLiteral("videoVP8"),      videoVP8);
+    s.setValue(QStringLiteral("videoVP9"),      videoVP9);
+    s.setValue(QStringLiteral("cameraDevice"),  cameraDevice);
     s.endGroup();
 
     // Shortcuts
@@ -283,6 +350,27 @@ void AppSettings::save()
     s.endGroup();
 
     s.sync();
+}
+
+void AppSettings::setRunAtStartup(bool enable)
+{
+    const QString autostartDir =
+        QStandardPaths::writableLocation(QStandardPaths::ConfigLocation)
+        + QStringLiteral("/autostart");
+    const QString desktopFile = autostartDir + QStringLiteral("/macrosip.desktop");
+
+    if (enable) {
+        QDir().mkpath(autostartDir);
+        QSettings ds(desktopFile, QSettings::IniFormat);
+        ds.setValue(QStringLiteral("Desktop Entry/Type"), QStringLiteral("Application"));
+        ds.setValue(QStringLiteral("Desktop Entry/Name"), QStringLiteral("MacroSIP"));
+        ds.setValue(QStringLiteral("Desktop Entry/Exec"),
+                    QCoreApplication::applicationFilePath());
+        ds.setValue(QStringLiteral("Desktop Entry/Hidden"), false);
+        ds.sync();
+    } else {
+        QFile::remove(desktopFile);
+    }
 }
 
 } // namespace macrosip

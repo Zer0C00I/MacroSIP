@@ -314,8 +314,8 @@ void MainWindow::setupUi()
     m_calls = new CallsWidget(m_tabWidget);
 
     m_tabWidget->addTab(m_dialer, tr("Dialer"));
+    m_tabWidget->addTab(m_calls, tr("Logs"));
     m_tabWidget->addTab(m_contacts, tr("Contacts"));
-    m_tabWidget->addTab(m_calls, tr("Calls"));
 
     layout->addWidget(m_tabWidget);
     setCentralWidget(centralWidget);
