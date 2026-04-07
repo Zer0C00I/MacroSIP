@@ -1,7 +1,10 @@
 #pragma once
 #include <QMainWindow>
 #include <QSystemTrayIcon>
+#include <QList>
 #include "sip/SipManager.h"
+#include "models/Contact.h"
+#include "models/CallRecord.h"
 
 class QTabWidget;
 class QStatusBar;
@@ -16,6 +19,9 @@ class ContactsWidget;
 class CallsWidget;
 class MessagesDialog;
 class SettingsDialog;
+class CallHistoryStore;
+class ContactStore;
+class HeadsetManager;
 
 class MainWindow : public QMainWindow {
     Q_OBJECT
@@ -33,6 +39,8 @@ public slots:
     void onSettings();
     void onAbout();
     void onQuit();
+    void onImportContacts();
+    void onExportContacts();
 
 protected:
     void closeEvent(QCloseEvent *event) override;
@@ -52,9 +60,13 @@ private:
     void setupMenuBar();
     void setupTrayIcon();
     void setupSip();
+    void setupPersistence();
+    void setupHeadset();
     void connectSignals();
     void updateStatusBar(const QString &text);
     void updateTrayIcon(RegistrationState state);
+    void saveCallHistory();
+    void saveContacts();
 
     SipManager *m_sipManager = nullptr;
     QTabWidget *m_tabWidget = nullptr;
@@ -65,6 +77,15 @@ private:
     QSystemTrayIcon *m_trayIcon = nullptr;
     QMenu *m_trayMenu = nullptr;
     QStatusBar *m_statusBar = nullptr;
+
+    // Persistence
+    CallHistoryStore *m_callStore = nullptr;
+    ContactStore *m_contactStore = nullptr;
+    QList<Contact> m_contactList;
+    QList<CallRecord> m_callRecords;
+
+    // Headset HID
+    HeadsetManager *m_headset = nullptr;
 };
 
 } // namespace macrosip

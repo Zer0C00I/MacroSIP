@@ -24,6 +24,9 @@ public:
     void removeContact(const QString &number);
     void updatePresence(const QString &number, PresenceStatus status);
 
+    /** Number of contacts currently in the tree widget. */
+    int contactCount() const;
+
 Q_SIGNALS:
     void contactSelected(const macrosip::Contact &contact);
     void callContact(const QString &number);

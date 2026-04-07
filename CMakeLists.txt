@@ -48,8 +48,25 @@ find_package(Qt6 REQUIRED COMPONENTS Core Gui Widgets Network Multimedia)
 set(QT_LIBS Qt6::Core Qt6::Gui Qt6::Widgets Qt6::Network Qt6::Multimedia)
 message(STATUS "Using Qt ${Qt6_VERSION}")
 
-# ---------- Optional PJSIP ----------
+# ---------- Optional HIDAPI (headset HID support) ----------
 find_package(PkgConfig QUIET)
+if(PkgConfig_FOUND)
+    pkg_check_modules(HIDAPI IMPORTED_TARGET hidapi-hidraw)
+    if(NOT HIDAPI_FOUND)
+        pkg_check_modules(HIDAPI IMPORTED_TARGET hidapi-libusb)
+    endif()
+endif()
+
+option(ENABLE_HEADSET "Enable USB HID headset support" ON)
+if(ENABLE_HEADSET AND HIDAPI_FOUND)
+    message(STATUS "HIDAPI found – headset HID support enabled")
+    add_compile_definitions(HEADSET_ENABLED)
+else()
+    message(STATUS "HIDAPI not found – headset HID support disabled")
+    set(ENABLE_HEADSET OFF)
+endif()
+
+# ---------- Optional PJSIP ----------
 if(PkgConfig_FOUND)
     pkg_check_modules(PJSIP IMPORTED_TARGET libpjproject)
 endif()

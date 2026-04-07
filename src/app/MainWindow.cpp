@@ -7,6 +7,9 @@
 #include "dialogs/AccountDialog.h"
 #include "dialogs/RingingDialog.h"
 #include "models/Settings.h"
+#include "utils/CallHistoryStore.h"
+#include "utils/ContactStore.h"
+#include "headset/HeadsetManager.h"
 #include <QTabWidget>
 #include <QStatusBar>
 #include <QMenuBar>
@@ -16,6 +19,8 @@
 #include <QApplication>
 #include <QMessageBox>
 #include <QVBoxLayout>
+#include <QFileDialog>
+#include <QUuid>
 
 namespace macrosip {
 
@@ -25,17 +30,24 @@ MainWindow::MainWindow(QWidget *parent)
     setupUi();
     setupMenuBar();
     setupTrayIcon();
+    setupPersistence();
     setupSip();
+    setupHeadset();
     connectSignals();
 }
 
 MainWindow::~MainWindow()
 {
+    saveCallHistory();
+    saveContacts();
+
     if (m_sipManager != nullptr) {
         m_sipManager->shutdown();
     }
     delete m_trayMenu;
     delete m_messagesDialog;
+    delete m_callStore;
+    delete m_contactStore;
 }
 
 SipManager *MainWindow::sipManager() const
@@ -89,6 +101,17 @@ void MainWindow::onAccountSettings()
     if (dialog.exec() == QDialog::Accepted) {
         AppSettings::instance().account = dialog.account();
         AppSettings::instance().save();
+
+        // Re-register with new account settings by restarting SIP
+        if (m_sipManager != nullptr) {
+            m_sipManager->shutdown();
+            m_sipManager->initialize();
+
+            const Account &acct = AppSettings::instance().account;
+            if (acct.isValid()) {
+                m_sipManager->addAccount(acct);
+            }
+        }
     }
 }
 
@@ -138,6 +161,11 @@ void MainWindow::onIncomingCall(int callId, const QString &from,
                                 const QString &name)
 {
     showRingingDialog(callId, name, from);
+
+    // Signal headset: ring LED on
+    if (m_headset != nullptr) {
+        m_headset->setRing(true);
+    }
 }
 
 void MainWindow::onCallStateChanged(int callId, CallState state)
@@ -147,12 +175,62 @@ void MainWindow::onCallStateChanged(int callId, CallState state)
     switch (state) {
     case CallState::Confirmed:
         updateStatusBar(tr("Call active"));
+        if (m_headset != nullptr) {
+            m_headset->setOffhook(true);
+            m_headset->setRing(false);
+        }
         break;
-    case CallState::Disconnected:
+    case CallState::Disconnected: {
         updateStatusBar(tr("Call ended"));
+        if (m_headset != nullptr) {
+            m_headset->setOffhook(false);
+            m_headset->setRing(false);
+        }
+
+        // Record the completed call in history
+        SipCall *call = m_sipManager != nullptr ? m_sipManager->findCall(callId) : nullptr;
+        if (call != nullptr) {
+            CallRecord rec;
+            rec.id = QUuid::createUuid().toString(QUuid::WithoutBraces);
+            const CallUserData &ud = call->userData();
+            rec.name = ud.name;
+            rec.number = ud.number;
+            rec.time = QDateTime::currentDateTime();
+
+            // Compute call duration from Confirmed → Disconnected
+            const QDateTime confirmed = call->confirmedTime();
+            if (confirmed.isValid()) {
+                const qint64 secs = confirmed.secsTo(rec.time);
+                rec.duration = static_cast<int>(qMax(qint64(0), secs));
+            } else {
+                rec.duration = 0;
+            }
+
+            // Determine call type from direction and whether media was active
+            if (ud.direction == CallDirection::Incoming) {
+                // If media was never active, the call was missed/rejected
+                rec.type = (call->mediaStatus() == MediaStatus::None)
+                               ? CallType::Missed
+                               : CallType::Incoming;
+            } else {
+                rec.type = CallType::Outgoing;
+            }
+
+            m_callRecords.prepend(rec);
+            if (m_calls != nullptr) {
+                m_calls->addCall(rec);
+            }
+            if (m_callStore != nullptr) {
+                m_callStore->append(rec);
+            }
+        }
         break;
+    }
     case CallState::Calling:
         updateStatusBar(tr("Calling..."));
+        if (m_headset != nullptr) {
+            m_headset->setOffhook(true);
+        }
         break;
     case CallState::Incoming:
         updateStatusBar(tr("Incoming call"));
@@ -217,10 +295,7 @@ void MainWindow::onHangupRequested()
         return;
     }
 
-    // Hang up all active calls via the dialer's current number context
-    // The SIP manager manages call lifecycle
-    const QString currentNumber = m_dialer != nullptr ? m_dialer->currentNumber() : QString();
-    Q_UNUSED(currentNumber)
+    m_sipManager->hangupAllCalls();
 }
 
 void MainWindow::setupUi()
@@ -239,8 +314,8 @@ void MainWindow::setupUi()
     m_calls = new CallsWidget(m_tabWidget);
 
     m_tabWidget->addTab(m_dialer, tr("Dialer"));
+    m_tabWidget->addTab(m_calls, tr("Logs"));
     m_tabWidget->addTab(m_contacts, tr("Contacts"));
-    m_tabWidget->addTab(m_calls, tr("Calls"));
 
     layout->addWidget(m_tabWidget);
     setCentralWidget(centralWidget);
@@ -258,6 +333,14 @@ void MainWindow::setupMenuBar()
 
     QAction *settingsAction = fileMenu->addAction(tr("&Settings..."));
     connect(settingsAction, &QAction::triggered, this, &MainWindow::onSettings);
+
+    fileMenu->addSeparator();
+
+    QAction *importAction = fileMenu->addAction(tr("&Import Contacts..."));
+    connect(importAction, &QAction::triggered, this, &MainWindow::onImportContacts);
+
+    QAction *exportAction = fileMenu->addAction(tr("&Export Contacts..."));
+    connect(exportAction, &QAction::triggered, this, &MainWindow::onExportContacts);
 
     fileMenu->addSeparator();
 
@@ -319,6 +402,74 @@ void MainWindow::setupSip()
             this, &MainWindow::onCallStateChanged);
     connect(m_sipManager, &SipManager::registrationStateChanged,
             this, &MainWindow::onRegistrationStateChanged);
+
+    // Initialize the SIP engine and register the configured account
+    m_sipManager->initialize();
+
+    const Account &acct = AppSettings::instance().account;
+    if (acct.isValid()) {
+        m_sipManager->addAccount(acct);
+    }
+}
+
+void MainWindow::setupHeadset()
+{
+    if (!AppSettings::instance().headsetSupport) {
+        return;
+    }
+
+    m_headset = new HeadsetManager(this);
+
+    // Hook switch on → answer incoming or initiate call
+    connect(m_headset, &HeadsetManager::hookSwitchOn, this, [this]() {
+        if (m_sipManager == nullptr) {
+            return;
+        }
+        // If there is a ringing incoming call, answer it
+        // Otherwise initiate a call with the dialer's current number
+        if (m_dialer != nullptr) {
+            const QString num = m_dialer->currentNumber();
+            if (!num.isEmpty()) {
+                makeCall(num);
+            }
+        }
+    });
+
+    // Hook switch off → hang up all active calls
+    connect(m_headset, &HeadsetManager::hookSwitchOff, this, [this]() {
+        if (m_sipManager != nullptr) {
+            m_sipManager->hangupAllCalls();
+        }
+        if (m_headset != nullptr) {
+            m_headset->setOffhook(false);
+        }
+    });
+
+    // Mute toggled from headset → mirror to SIP
+    connect(m_headset, &HeadsetManager::muteToggled, this, [this](bool muted) {
+        if (m_sipManager != nullptr) {
+            m_sipManager->setMuteInput(muted);
+        }
+    });
+
+    // Redial → call the last dialed number (first outgoing in history)
+    connect(m_headset, &HeadsetManager::redialPressed, this, [this]() {
+        for (const CallRecord &rec : std::as_const(m_callRecords)) {
+            if (rec.type == CallType::Outgoing && !rec.number.isEmpty()) {
+                makeCall(rec.number);
+                break;
+            }
+        }
+    });
+
+    // Device disconnected
+    connect(m_headset, &HeadsetManager::deviceLost, this, [this]() {
+        updateStatusBar(tr("Headset disconnected"));
+    });
+
+    if (m_headset->openDevice()) {
+        updateStatusBar(tr("Headset connected"));
+    }
 }
 
 void MainWindow::connectSignals()
@@ -333,6 +484,17 @@ void MainWindow::connectSignals()
     if (m_contacts != nullptr) {
         connect(m_contacts, &ContactsWidget::callContact,
                 this, &MainWindow::onCallRequested);
+        connect(m_contacts, &ContactsWidget::deleteContact,
+                this, [this](const QString &number) {
+                    m_contactList.erase(
+                        std::remove_if(m_contactList.begin(), m_contactList.end(),
+                                       [&number](const Contact &c) {
+                                           return c.number == number;
+                                       }),
+                        m_contactList.end());
+                    m_contacts->removeContact(number);
+                    saveContacts();
+                });
     }
 
     if (m_calls != nullptr) {
@@ -367,6 +529,108 @@ void MainWindow::updateTrayIcon(RegistrationState state)
     case RegistrationState::Error:
         m_trayIcon->setToolTip(QStringLiteral("MacroSIP - Error"));
         break;
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Persistence
+// ---------------------------------------------------------------------------
+
+void MainWindow::setupPersistence()
+{
+    const AppSettings &settings = AppSettings::instance();
+
+    m_callStore = new CallHistoryStore(settings.callsFile());
+    m_contactStore = new ContactStore(settings.contactsFile());
+
+    // Load saved data
+    m_callRecords = m_callStore->load();
+    m_contactList = m_contactStore->load();
+
+    // Populate widgets
+    if (m_calls != nullptr) {
+        m_calls->loadCalls(m_callRecords);
+    }
+    if (m_contacts != nullptr) {
+        m_contacts->loadContacts(m_contactList);
+    }
+}
+
+void MainWindow::saveCallHistory()
+{
+    if (m_callStore != nullptr) {
+        m_callStore->save(m_callRecords);
+    }
+}
+
+void MainWindow::saveContacts()
+{
+    if (m_contactStore != nullptr) {
+        m_contactStore->save(m_contactList);
+    }
+}
+
+void MainWindow::onImportContacts()
+{
+    const QString path = QFileDialog::getOpenFileName(
+        this, tr("Import Contacts"), QString(),
+        tr("CSV Files (*.csv);;All Files (*)"));
+
+    if (path.isEmpty()) {
+        return;
+    }
+
+    QList<Contact> imported = ContactStore::importCsv(path);
+    if (imported.isEmpty()) {
+        QMessageBox::information(this, tr("Import"),
+                                 tr("No contacts found in the file."));
+        return;
+    }
+
+    // Merge: add contacts that don't already exist by number
+    int added = 0;
+    for (const Contact &c : std::as_const(imported)) {
+        bool exists = false;
+        for (const Contact &existing : std::as_const(m_contactList)) {
+            if (existing.number == c.number) {
+                exists = true;
+                break;
+            }
+        }
+        if (!exists) {
+            m_contactList.append(c);
+            if (m_contacts != nullptr) {
+                m_contacts->addContact(c);
+            }
+            ++added;
+        }
+    }
+
+    saveContacts();
+
+    QMessageBox::information(this, tr("Import"),
+                             tr("Imported %1 new contact(s) (%2 total in file).")
+                                 .arg(added)
+                                 .arg(imported.size()));
+}
+
+void MainWindow::onExportContacts()
+{
+    const QString path = QFileDialog::getSaveFileName(
+        this, tr("Export Contacts"), QStringLiteral("contacts.csv"),
+        tr("CSV Files (*.csv);;All Files (*)"));
+
+    if (path.isEmpty()) {
+        return;
+    }
+
+    if (ContactStore::exportCsv(path, m_contactList)) {
+        QMessageBox::information(this, tr("Export"),
+                                 tr("Exported %1 contact(s).")
+                                     .arg(m_contactList.size()));
+    } else {
+        QMessageBox::warning(this, tr("Export"),
+                             tr("Failed to export contacts."));
     }
 }
 

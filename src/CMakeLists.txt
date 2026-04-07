@@ -36,6 +36,11 @@ set(MACROSIP_SOURCES
     utils/Crypto.cpp
     utils/CsvFile.cpp
     utils/LangPack.cpp
+    utils/CallHistoryStore.cpp
+    utils/ContactStore.cpp
+
+    # Headset HID
+    headset/HeadsetManager.cpp
 
     # Resources
     resources/resources.qrc
@@ -74,6 +79,10 @@ set(MACROSIP_HEADERS
     utils/Crypto.h
     utils/CsvFile.h
     utils/LangPack.h
+    utils/CallHistoryStore.h
+    utils/ContactStore.h
+
+    headset/HeadsetManager.h
 )
 
 add_executable(macrosip ${MACROSIP_SOURCES} ${MACROSIP_HEADERS})
@@ -86,6 +95,12 @@ target_include_directories(macrosip PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/dialogs
     ${CMAKE_CURRENT_SOURCE_DIR}/widgets
     ${CMAKE_CURRENT_SOURCE_DIR}/utils
+    ${CMAKE_CURRENT_SOURCE_DIR}/headset
+)
+
+# Force-include the forbidden-API header in every translation unit
+target_compile_options(macrosip PRIVATE
+    -include ${CMAKE_CURRENT_SOURCE_DIR}/security/forbidden.h
 )
 
 target_link_libraries(macrosip PRIVATE ${QT_LIBS})
@@ -96,6 +111,10 @@ endif()
 
 if(OpenSSL_FOUND)
     target_link_libraries(macrosip PRIVATE OpenSSL::SSL OpenSSL::Crypto)
+endif()
+
+if(ENABLE_HEADSET AND HIDAPI_FOUND)
+    target_link_libraries(macrosip PRIVATE PkgConfig::HIDAPI)
 endif()
 
 install(TARGETS macrosip RUNTIME DESTINATION bin)

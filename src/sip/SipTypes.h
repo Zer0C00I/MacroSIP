@@ -53,6 +53,7 @@ struct CallUserData {
     QString userAgent;
     QString diversion;
     QString callerID;
+    CallDirection direction = CallDirection::Outgoing;
     bool inConference = false;
     bool autoAnswer = false;
     bool forwarding = false;

@@ -37,6 +37,8 @@ public:
     bool micAmplification = false;
     bool swLevelAdjustment = false;
     bool localDTMF = true;
+    bool soundEvents = true;
+    int volumeRing = 100;
 
     // Network
     QString stun;
@@ -51,11 +53,14 @@ public:
     // Call Features
     bool autoAnswer = false;
     int autoAnswerDelay = 0;
+    QString autoAnswerMode;          // "" / "button" / "header" / "all"
     bool dnd = false;
     bool callWaiting = true;
     QString forwardingNumber;
     int forwardingDelay = 0;
     QString denyIncoming;
+    QString directoryOfUsers;
+    QString defaultListAction;       // "" / "call" / "video" / "message"
 
     // Feature Codes
     QString featureCodeCP;
@@ -68,6 +73,10 @@ public:
     // Recording
     QString recordingPath;
     bool autoRecording = false;
+    QString recordingFormat = QStringLiteral("mp3");  // "mp3" / "wav"
+
+    // DTMF
+    QString dtmfMethod;              // "" (auto) / "inband" / "rfc2833" / "sipinfo"
 
     // UI
     int mainX = 0;
@@ -78,10 +87,29 @@ public:
     bool alwaysOnTop = false;
     bool bringToFrontOnIncoming = true;
     QString langPack;
+    bool randomPopupPosition = false;
+    bool multiMonitor = false;
+    bool disableNameLookup = false;
 
-    // Diagnostics
+    // Diagnostics / Advanced
     bool enableLog = false;
     bool crashReport = false;
+    bool enableLocalAccount = false;
+    bool disableMessaging = false;
+    bool handleIpChanges = false;
+    bool handleMediaButtons = false;
+    bool runAtStartup = false;
+    QString updatesInterval;         // "" (weekly) / "daily" / "monthly" / "quarterly" / "never"
+
+    // Video (stub — real PJSIP video is not implemented)
+    bool videoEnabled = true;
+    QString videoCodec;
+    int videoBitrate = 0;
+    bool videoH264 = false;
+    bool videoH263 = false;
+    bool videoVP8 = false;
+    bool videoVP9 = false;
+    QString cameraDevice;
 
     // Shortcuts
     QList<Shortcut> shortcuts;
@@ -93,6 +121,9 @@ public:
     QString configDir() const;
     QString contactsFile() const;
     QString callsFile() const;
+
+    // Desktop integration (Linux)
+    static void setRunAtStartup(bool enable);
 
 private:
     AppSettings() = default;
