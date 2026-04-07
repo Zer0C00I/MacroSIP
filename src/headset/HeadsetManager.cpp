@@ -221,11 +221,10 @@ void HeadsetManager::pollDevice()
     }
 
     // Redial — edge-triggered (fire once on press, not on release)
-    static bool lastRedial = false;
-    if (redial && !lastRedial) {
+    if (redial && !m_lastRedial) {
         emit redialPressed();
     }
-    lastRedial = redial;
+    m_lastRedial = redial;
 }
 
 #else // !HEADSET_ENABLED  — stub implementation
