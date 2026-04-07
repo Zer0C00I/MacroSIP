@@ -200,7 +200,8 @@ void MainWindow::onCallStateChanged(int callId, CallState state)
             // Compute call duration from Confirmed → Disconnected
             const QDateTime confirmed = call->confirmedTime();
             if (confirmed.isValid()) {
-                rec.duration = static_cast<int>(confirmed.secsTo(rec.time));
+                const qint64 secs = confirmed.secsTo(rec.time);
+                rec.duration = static_cast<int>(qMax(qint64(0), secs));
             } else {
                 rec.duration = 0;
             }

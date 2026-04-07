@@ -56,7 +56,7 @@ void SipCall::setUserData(const CallUserData &data)
 
 void SipCall::handleStateChange(CallState newState)
 {
-    if (newState == CallState::Confirmed && m_confirmedTime.isNull()) {
+    if (newState == CallState::Confirmed && !m_confirmedTime.isValid()) {
         m_confirmedTime = QDateTime::currentDateTime();
     }
     m_state = newState;
