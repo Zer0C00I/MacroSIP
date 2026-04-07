@@ -217,12 +217,13 @@ void TestSipManager::testAudioDevices()
     SipManager mgr;
     mgr.initialize();
 
-    // In stub mode these may return empty lists, but should not crash
+    // In stub mode these return one entry each
     QStringList inputs = mgr.audioInputDevices();
     QStringList outputs = mgr.audioOutputDevices();
-    // In stub mode these return empty lists; we only verify no crash
-    QVERIFY(inputs.isEmpty() || !inputs.isEmpty());
-    QVERIFY(outputs.isEmpty() || !outputs.isEmpty());
+    QVERIFY(!inputs.isEmpty());
+    QCOMPARE(inputs.first(), QStringLiteral("Default Input (stub)"));
+    QVERIFY(!outputs.isEmpty());
+    QCOMPARE(outputs.first(), QStringLiteral("Default Output (stub)"));
 
     mgr.shutdown();
 }
@@ -233,8 +234,11 @@ void TestSipManager::testCodecs()
     mgr.initialize();
 
     QStringList codecs = mgr.availableCodecs();
-    // In stub mode this returns an empty list; verify no crash
-    QVERIFY(codecs.isEmpty() || !codecs.isEmpty());
+    // In stub mode returns 4 codecs
+    QCOMPARE(codecs.size(), 4);
+    QVERIFY(codecs.contains(QStringLiteral("PCMA/8000/1")));
+    QVERIFY(codecs.contains(QStringLiteral("PCMU/8000/1")));
+    QVERIFY(codecs.contains(QStringLiteral("opus/48000/2")));
 
     mgr.setCodecPriority(QStringLiteral("PCMA/8000/1"), 200);
 

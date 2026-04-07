@@ -99,11 +99,17 @@ void TestRingingDialog::testSetAutoCloseTimeout()
     dlg.setAutoCloseTimeout(0);
     dlg.setAutoCloseTimeout(-1);
 
-    // Setting positive is also fine
+    // Setting positive starts the timer
     dlg.setAutoCloseTimeout(30);
 
-    // Timer is running but we don't wait for it; just verify no crash
-    QVERIFY(true);
+    // Verify the timer is active
+    auto *timer = dlg.findChild<QTimer *>();
+    QVERIFY(timer != nullptr);
+    QVERIFY(timer->isActive());
+
+    // Setting zero again should stop it
+    dlg.setAutoCloseTimeout(0);
+    QVERIFY(!timer->isActive());
 }
 
 QTEST_MAIN(TestRingingDialog)
